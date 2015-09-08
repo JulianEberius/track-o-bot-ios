@@ -12,7 +12,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var tokenField: UITextField!
-    
+
     let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
             self.tokenField.text = token
         }
     }
-    
+
     func textFieldDidEndEditing(textField: UITextField) {
         if (textField == self.usernameField) {
             let username = textField.text
