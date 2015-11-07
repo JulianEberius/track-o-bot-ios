@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401D4B51BE2D90A007B5F39 /* TrackOBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */; };
+		0416A05E1BA1780800F930FC /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */; };
+		0446F0741BA1B26C00B73014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */; };
 		045096441B9E0E150059BB7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096431B9E0E150059BB7A /* AppDelegate.swift */; };
 		045096461B9E0E150059BB7A /* AddGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096451B9E0E150059BB7A /* AddGameViewController.swift */; };
 		045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096471B9E0E150059BB7A /* AccountViewController.swift */; };
 		0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045096491B9E0E150059BB7A /* Main.storyboard */; };
 		0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0450964C1B9E0E150059BB7A /* Images.xcassets */; };
-		045096501B9E0E150059BB7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0450964E1B9E0E150059BB7A /* LaunchScreen.xib */; };
 		0450965C1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450965B1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift */; };
 		045096661B9E32370059BB7A /* TrackOBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096651B9E32370059BB7A /* TrackOBot.swift */; };
+		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
+		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
+		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
+		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBotViewController.swift; sourceTree = "<group>"; };
+		0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0450963E1B9E0E140059BB7A /* Track-o-Bot Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Track-o-Bot Companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		045096421B9E0E150059BB7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		045096431B9E0E150059BB7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,11 +44,14 @@
 		045096471B9E0E150059BB7A /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0450964A1B9E0E150059BB7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0450964C1B9E0E150059BB7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0450964F1B9E0E150059BB7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		045096551B9E0E150059BB7A /* Track-o-Bot CompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Track-o-Bot CompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0450965A1B9E0E150059BB7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0450965B1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track_o_Bot_CompanionTests.swift; sourceTree = "<group>"; };
 		045096651B9E32370059BB7A /* TrackOBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBot.swift; sourceTree = "<group>"; };
+		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-golden.png"; path = "Images.xcassets/logo-golden.imageset/logo-golden.png"; sourceTree = "<group>"; };
+		04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		04C41A011BA2E87600A01261 /* HeroPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPickerItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +96,16 @@
 				045096431B9E0E150059BB7A /* AppDelegate.swift */,
 				045096451B9E0E150059BB7A /* AddGameViewController.swift */,
 				045096471B9E0E150059BB7A /* AccountViewController.swift */,
+				04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */,
 				045096491B9E0E150059BB7A /* Main.storyboard */,
 				0450964C1B9E0E150059BB7A /* Images.xcassets */,
-				0450964E1B9E0E150059BB7A /* LaunchScreen.xib */,
 				045096411B9E0E140059BB7A /* Supporting Files */,
 				045096651B9E32370059BB7A /* TrackOBot.swift */,
+				0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */,
+				0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */,
+				04C41A011BA2E87600A01261 /* HeroPickerItem.swift */,
+				0493A8C71BE03417006A5281 /* LoginViewController.swift */,
+				0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */,
 			);
 			path = "Track-o-Bot Companion";
 			sourceTree = "<group>";
@@ -96,6 +113,7 @@
 		045096411B9E0E140059BB7A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */,
 				045096421B9E0E150059BB7A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -162,7 +180,8 @@
 		045096361B9E0E140059BB7A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Julian Eberius";
 				TargetAttributes = {
 					0450963D1B9E0E140059BB7A = {
@@ -199,7 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */,
-				045096501B9E0E150059BB7A /* LaunchScreen.xib in Resources */,
+				04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */,
+				0446F0741BA1B26C00B73014 /* LaunchScreen.storyboard in Resources */,
 				0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,9 +238,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0401D4B51BE2D90A007B5F39 /* TrackOBotViewController.swift in Sources */,
 				045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */,
+				04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */,
 				045096441B9E0E150059BB7A /* AppDelegate.swift in Sources */,
 				045096461B9E0E150059BB7A /* AddGameViewController.swift in Sources */,
+				0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */,
+				04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */,
+				0416A05E1BA1780800F930FC /* ResultTableViewCell.swift in Sources */,
 				045096661B9E32370059BB7A /* TrackOBot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,14 +277,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0450964E1B9E0E150059BB7A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0450964F1B9E0E150059BB7A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -280,10 +297,12 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -325,6 +344,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -350,9 +370,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -360,26 +385,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		045096631B9E0E150059BB7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Track-o-Bot CompanionTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Track-o-Bot Companion.app/Track-o-Bot Companion";
 			};
@@ -388,13 +414,9 @@
 		045096641B9E0E150059BB7A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = "Track-o-Bot CompanionTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Track-o-Bot Companion.app/Track-o-Bot Companion";
 			};
@@ -419,6 +441,7 @@
 				045096611B9E0E150059BB7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		045096621B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "Track-o-Bot CompanionTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +450,7 @@
 				045096641B9E0E150059BB7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

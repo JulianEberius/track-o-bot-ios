@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        application.windows.first
         // Override point for customization after application launch.
+        self.window?.tintColor = UIColor(red:0.52, green:0.35, blue:0.28, alpha:1.0)
         return true
     }
 
@@ -40,7 +42,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        guard let user = TrackOBot.instance.readTrackOBotAccountDataFile(url) else {
+            let viewController = app.topViewController() as! TrackOBotViewController
 
+            let alert = UIAlertController.init(title: "Importing credentials failed", message: "The selected credentials file could not be imported.", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            alert.addAction(okAction)
+            viewController.presentViewController(alert, animated: true, completion:
+                nil)
+            return false
+        }
+        
+        TrackOBot.instance.storeUser(user)
+        
+        TrackOBot.instance.getResults({
+            (result) -> Void in
+            let viewController = app.topViewController() as! TrackOBotViewController
+            switch result {
+            case .Success(_):
+                let alert = UIAlertController.init(title: "NIIICE", message: "Login, like, totally worked", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: {
+                    (a:UIAlertAction) -> Void in
+                    viewController.newCredentialsAdded(user)
+                })
+                alert.addAction(okAction)
+                viewController.presentViewController(alert, animated: true, completion: nil)
+                
+                break
+            case .Failure(let err):
+                switch err {
+                case .LoginFaild(_):
+                    let alert = UIAlertController.init(title: "Login failed", message: "Login failed: \(err)", preferredStyle: UIAlertControllerStyle.Alert)
+                    let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                    alert.addAction(okAction)
+                    viewController.presentViewController(alert, animated: true, completion: nil)
+                    break
+                default:
+                    print("what!!")
+                }
+            }
+        })
+        return true
+    }
+    
+}
 
+extension UIApplication {
+    func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(presented)
+        }
+        return base
+    }
 }
 
