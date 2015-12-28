@@ -13,13 +13,15 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 
     @IBOutlet weak var heroPicker: UIPickerView!
 
-    @IBOutlet weak var wonSwitch: UISwitch!
-    @IBOutlet weak var coinSwitch: UISwitch!
+    @IBOutlet weak var opponentPicker: UIPickerView!
+    @IBOutlet weak var modeSwitch: UISegmentedControl!
+    @IBOutlet weak var coinSwitch: UISegmentedControl!
 
-    @IBOutlet weak var addGameButton: UIButton!
+    @IBOutlet weak var wonGameButton: UIButton!
+    @IBOutlet weak var lostGameButton: UIButton!
 
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var sucessCheckmark: UILabel!
+    @IBOutlet weak var wonSucessCheckmark: UILabel!
+    @IBOutlet weak var lostSucessCheckmark: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     let heroes = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
@@ -30,38 +32,46 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     let SELECTED_OPPONENTS_HERO = "selected_opponents_hero"
     let DEFAULT_HERO = "Hunter" // its the center one, i'm sorry
 
+    @IBAction func wonGameButtonTouchUp(sender: UIButton) {
+        saveGame(true);
+    }
 
-    @IBAction func addGameButtonTouchUp(sender: UIButton) {
+    @IBAction func lostGameButtonTouchUp(sender: UIButton) {
+        saveGame(false);
+    }
+    
+    func saveGame(won: Bool) {
         let yourHero = self.heroes[self.heroPicker.selectedRowInComponent(HERO_PICKER)]
         let opponentsHero = self.heroes[self.heroPicker.selectedRowInComponent(OPPONENTS_HERO_PICKER)]
 
-        let won = self.wonSwitch.on
-        let coin = self.coinSwitch.on
+        let coin = self.coinSwitch.selectedSegmentIndex == 0
+        let ranked = self.modeSwitch.selectedSegmentIndex == 0
 
-        self.addGameButton.enabled = false
-        self.activityIndicator.startAnimating()
-        self.errorLabel.alpha = 0.0
+        self.wonGameButton.enabled = false
+        self.lostGameButton.enabled = false
+        // self.activityIndicator.startAnimating()
 
         let game = Game(hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
-            self.activityIndicator.stopAnimating()
-            self.addGameButton.enabled = true
-
+            // self.activityIndicator.stopAnimating()
+            self.wonGameButton.enabled = true
+            self.lostGameButton.enabled = true
+            let successCheckmark = won ? self.wonSucessCheckmark : self.lostSucessCheckmark
             switch result {
             case .Success:
                 UIView.animateWithDuration(0.25, delay: 0.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
-                    self.sucessCheckmark.alpha = 1.0
+                    successCheckmark.alpha = 1.0
                     }, completion:nil)
                 UIView.animateWithDuration(1.0, delay: 2.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
-                    self.sucessCheckmark.alpha = 0.0
+                    successCheckmark.alpha = 0.0
                     }, completion:nil)
-            case .Failure(let error):
-                print("finished request with ERROR: \(error)")
-                UIView.animateWithDuration(0.25, delay: 0.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
-                    self.errorLabel.alpha = 1.0
-                    }, completion:nil)
+            case .Failure(let err):
+                let alert = UIAlertController.init(title: "Saving failed", message: "Could not save the game: \(err)", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                alert.addAction(okAction)
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         })
     }
@@ -113,10 +123,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.addGameButton.enabled = true
-        self.sucessCheckmark.alpha = 0
-        self.errorLabel.alpha = 0
-
+//        self.addGameButton.enabled = true
+//        self.sucessCheckmark.alpha = 0
+//        self.errorLabel.alpha = 0
+//
         let selectedHero = defaults.stringForKey(SELECTED_HERO) ?? DEFAULT_HERO
         let selectedOpponentsHero = defaults.stringForKey(SELECTED_OPPONENTS_HERO) ?? DEFAULT_HERO
         let selectedHeroRow = self.heroes.indexOf(selectedHero) ?? 0
@@ -124,24 +134,25 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 
         self.heroPicker.selectRow(selectedHeroRow, inComponent: HERO_PICKER, animated: false)
         self.heroPicker.selectRow(selectedOpponentsHeroRow, inComponent: OPPONENTS_HERO_PICKER, animated: false)
+        
     }
 
     override func viewDidAppear(animated: Bool) {
         // check login
-        TrackOBot.instance.getResults({
-            (result) -> Void in
-            switch result {
-            case .Success(_):
-                break
-            case .Failure(let err):
-                switch err {
-                case .CredentialsMissing, .LoginFaild(_):
-                    self.performSegueWithIdentifier("to_login", sender: self)
-                default:
-                    print("what")
-                }
-            }
-        })
+//        TrackOBot.instance.getResults({
+//            (result) -> Void in
+//            switch result {
+//            case .Success(_):
+//                break
+//            case .Failure(let err):
+//                switch err {
+//                case .CredentialsMissing, .LoginFaild(_):
+//                    self.performSegueWithIdentifier("to_login", sender: self)
+//                default:
+//                    print("what")
+//                }
+//            }
+//        })
     }
 
     override func didReceiveMemoryWarning() {
