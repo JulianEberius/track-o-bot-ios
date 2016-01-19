@@ -12,8 +12,8 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 
 
     @IBOutlet weak var heroPicker: UIPickerView!
-
     @IBOutlet weak var opponentPicker: UIPickerView!
+    
     @IBOutlet weak var modeSwitch: UISegmentedControl!
     @IBOutlet weak var coinSwitch: UISegmentedControl!
 
@@ -25,11 +25,15 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     let heroes = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
+    var decks: [Deck] = []
 
     let HERO_PICKER = 0
-    let OPPONENTS_HERO_PICKER = 1
+    let DECK_PICKER = 1
+//    let OPPONENTS_HERO_PICKER = 1
     let SELECTED_HERO = "selected_hero"
+    let SELECTED_DECK = "selected_deck"
     let SELECTED_OPPONENTS_HERO = "selected_opponents_hero"
+    let SELECTED_OPPONENTS_DECK = "selected_opponents_deck"
     let DEFAULT_HERO = "Hunter" // its the center one, i'm sorry
 
     @IBAction func wonGameButtonTouchUp(sender: UIButton) {
@@ -42,7 +46,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     
     func saveGame(won: Bool) {
         let yourHero = self.heroes[self.heroPicker.selectedRowInComponent(HERO_PICKER)]
-        let opponentsHero = self.heroes[self.heroPicker.selectedRowInComponent(OPPONENTS_HERO_PICKER)]
+        let opponentsHero = self.heroes[self.opponentPicker.selectedRowInComponent(HERO_PICKER)]
 
         let coin = self.coinSwitch.selectedSegmentIndex == 0
         let ranked = self.modeSwitch.selectedSegmentIndex == 0
@@ -81,7 +85,12 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     }
 
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 9
+        if component == HERO_PICKER {
+            return 9
+        }
+        else {
+            return 1
+        }
     }
 
 // TODO: customize height and width for size classes
@@ -94,25 +103,49 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 //    }
 
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        let hero = self.heroes[row]
-        if let v = view as? HeroPickerItem {
-            v.imageView.image = UIImage(named:hero)
-            return v
-        } else {
-            let v = HeroPickerItem(frame: CGRectMake(0, 0, 120, 32))
-            v.label.text = hero
-            v.imageView.image = UIImage(named:hero)
-            return v
+        if (component == HERO_PICKER) {
+            let hero = self.heroes[row]
+            if let v = view as? HeroPickerItem {
+                v.imageView.image = UIImage(named:hero)
+                return v
+            } else {
+                let v = HeroPickerItem(frame: CGRectMake(0, 0, 120, 32))
+                v.label.text = hero
+                v.imageView.image = UIImage(named:hero)
+                return v
+            }
+        }
+        else
+        {
+            if let v = view as? UILabel {
+                v.text = "Generic"
+                return v
+            } else {
+                let v = UILabel(frame: CGRectMake(0, 0, 120, 32))
+                v.text = "Generic"
+                return v
+            }
         }
     }
 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             let hero = self.heroes[row]
-            defaults.setObject(hero, forKey: SELECTED_HERO)
-        }else if component == 1{
-            let hero = self.heroes[row]
-            defaults.setObject(hero, forKey: SELECTED_OPPONENTS_HERO)
+            if pickerView == heroPicker {
+                defaults.setObject(hero, forKey: SELECTED_HERO)
+            }
+            else {
+                defaults.setObject(hero, forKey: SELECTED_OPPONENTS_HERO)
+            }
+        }else if component == 1 {
+            // let deck = self.decks[row]
+            let deck = "Generic"
+            if pickerView == heroPicker {
+                defaults.setObject(deck, forKey: SELECTED_DECK)
+            }
+            else {
+                defaults.setObject(deck, forKey: SELECTED_OPPONENTS_DECK)
+            }
         }
     }
 
@@ -123,36 +156,45 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.wonSucessCheckmark.alpha = 0
+        self.lostSucessCheckmark.alpha = 0
 //        self.addGameButton.enabled = true
-//        self.sucessCheckmark.alpha = 0
 //        self.errorLabel.alpha = 0
-//
+
         let selectedHero = defaults.stringForKey(SELECTED_HERO) ?? DEFAULT_HERO
+        let selectedDeck = defaults.stringForKey(SELECTED_DECK) ?? "Generic"
         let selectedOpponentsHero = defaults.stringForKey(SELECTED_OPPONENTS_HERO) ?? DEFAULT_HERO
+        let selectedOpponentsDeck = defaults.stringForKey(SELECTED_OPPONENTS_DECK) ?? "Generic"
+
         let selectedHeroRow = self.heroes.indexOf(selectedHero) ?? 0
+        let selectedDeckRow = 0
         let selectedOpponentsHeroRow = self.heroes.indexOf(selectedOpponentsHero) ?? 0
+        let selectedOpponentsDeckRow = 0
 
         self.heroPicker.selectRow(selectedHeroRow, inComponent: HERO_PICKER, animated: false)
-        self.heroPicker.selectRow(selectedOpponentsHeroRow, inComponent: OPPONENTS_HERO_PICKER, animated: false)
+        self.heroPicker.selectRow(selectedDeckRow, inComponent: DECK_PICKER, animated: false)
+        self.opponentPicker.selectRow(selectedOpponentsHeroRow, inComponent: HERO_PICKER, animated: false)
+        self.opponentPicker.selectRow(selectedOpponentsDeckRow, inComponent: DECK_PICKER, animated: false)
         
     }
 
     override func viewDidAppear(animated: Bool) {
         // check login
-//        TrackOBot.instance.getResults({
-//            (result) -> Void in
-//            switch result {
-//            case .Success(_):
-//                break
-//            case .Failure(let err):
-//                switch err {
-//                case .CredentialsMissing, .LoginFaild(_):
-//                    self.performSegueWithIdentifier("to_login", sender: self)
-//                default:
-//                    print("what")
-//                }
-//            }
-//        })
+        TrackOBot.instance.getDecks({
+            (result) -> Void in
+            switch result {
+            case .Success(let decks):
+                self.decks = decks
+                break
+            case .Failure(let err):
+                switch err {
+                case .CredentialsMissing, .LoginFaild(_):
+                    self.performSegueWithIdentifier("to_login", sender: self)
+                default:
+                    print("what")
+                }
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {

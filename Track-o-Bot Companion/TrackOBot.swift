@@ -8,15 +8,14 @@
 
 import Foundation
 
-
-class Game {
+class DateFormattingModel {
 
     static var inputDateFormatter:NSDateFormatter {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
         return formatter
     }
-
+    
     static var outputDateFormatter:NSDateFormatter {
         let formatter = NSDateFormatter()
         formatter.timeStyle = NSDateFormatterStyle.MediumStyle
@@ -24,6 +23,11 @@ class Game {
         formatter.doesRelativeDateFormatting = true
         return formatter
     }
+
+}
+
+
+class Game : DateFormattingModel {
 
     let hero: String!
     let opponentsHero: String!
@@ -61,6 +65,27 @@ class Game {
     }
 }
 
+class Deck : DateFormattingModel {
+
+    let hero: String!
+    let name: String!
+
+    init(hero: String?, name: String?) {
+        self.hero = hero
+        self.name = name
+    }
+
+    /**
+     - parameters:
+     - dict: as returned by parsing the Track-O-Bot API response using NSJSONSerialization
+     */
+    convenience init(dict:NSDictionary) {
+        let name = dict["name"] as? String
+        let hero = dict["hero"] as? String
+        self.init(hero: hero, name: name)
+    }
+}
+
 class User : NSObject, NSCoding {
     let username: String!
     let password: String!
@@ -71,7 +96,6 @@ class User : NSObject, NSCoding {
         self.password = password
         self.domain = domain
     }
-
 
     /**
      - parameters:
@@ -121,17 +145,16 @@ class TrackOBot : NSObject {
     let TOKEN = "token"
     let DEFAULT_DOMAIN = "https://trackobot.com"
 
-//    let resultsUrl = "https://trackobot.com/profile/results.json?username=%@&token=%@"
-    let resultsUrl = "https://trackobot.com/profile/results.json"
-//    let profileUrl = "https://trackobot.com/profile.json?username=%@&token=%@"
-    let profileUrl = "https://trackobot.com/profile.json"
-//    let oneTimeAuthTokenUrl = "https://trackobot.com/one_time_auth.json?username=%@&token=%@"
-    let oneTimeAuthTokenUrl = "https://trackobot.com/one_time_auth.json"
-    let createUserUrl = "https://trackobot.com/users"
-//    let createUserUrl = "https://localhost:3001/users"
-//    let resultsUrl = "https://localhost:3001/profile/results.json?username=%@&token=%@"
-//    let profileUrl = "https://localhost:3001/profile.json?username=%@&token=%@"
-//    let oneTimeAuthTokenUrl = "https://localhost:3001/one_time_auth.json?username=%@&token=%@"
+//    let resultsUrl = "https://trackobot.com/profile/results.json"
+//    let profileUrl = "https://trackobot.com/profile.json"
+//    let oneTimeAuthTokenUrl = "https://trackobot.com/one_time_auth.json"
+//    let createUserUrl = "https://trackobot.com/users"
+    
+    let createUserUrl = "https://localhost:3001/users"
+    let resultsUrl = "https://localhost:3001/profile/results.json"
+    let profileUrl = "https://localhost:3001/profile.json"
+    let decksUrl = "https://localhost:3001/profile/settings/decks.json"
+    let oneTimeAuthTokenUrl = "https://localhost:3001/one_time_auth.json"
 
     func storeUser(user:User) -> Void {
         let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
@@ -160,80 +183,8 @@ class TrackOBot : NSObject {
         }
 
         postRequest(resultsUrl, data: json, onComplete: onComplete)
-
     }
-
-    func getOneTimeAuthToken(onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
-        postRequest(oneTimeAuthTokenUrl, data: nil, onComplete: onComplete)
-    }
-
-
-    func createUser(onComplete: (Result<User, TrackOBotAPIError>) -> Void) -> Void {
-        postRequest(createUserUrl, data: nil, onComplete: {
-            (result) -> Void in
-            switch result {
-            case .Success(let dict):
-                guard let username = dict["username"] as? String, password = dict["password"] as? String else {
-                    onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: "Unexpected response to create user call: \(result)")))
-                    return
-                }
-                let user = User(username: username, password: password, domain: self.DEFAULT_DOMAIN)
-                onComplete(Result.Success(user))
-                break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
-                break
-            }
-        })
-    }
-
-    func postRequest(url: String, data: NSData?, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
-        guard let user = self.loadUser() else {
-            onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
-            return
-        }
-
-        let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url)
-        urlRequest.HTTPMethod = "POST"
-        if let d = data {
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.HTTPBody = d
-        }
-
-        let task = session.dataTaskWithRequest(urlRequest){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-
-            guard error == nil else {
-                onComplete(Result.Failure(TrackOBotAPIError.NetworkError(error: error!)))
-                return
-            }
-
-            guard let result = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) else {
-                onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                return
-            }
-
-            guard let dict = result as? NSDictionary else {
-                onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                return
-            }
-
-            if let apiError = dict["error"] as? String {
-                if apiError == "You need to sign in or sign up before continuing." {
-                    onComplete(Result.Failure(TrackOBotAPIError.LoginFaild(error: apiError)))
-                }
-                else {
-                    onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: apiError)))
-                }
-                return
-            }
-
-            // everything worked out
-            onComplete(Result.Success(dict))
-        }
-        task.resume()
-    }
-
+    
     func getResults(onComplete: (Result<[Game], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(profileUrl, onComplete: {
             (result) -> Void in
@@ -252,8 +203,117 @@ class TrackOBot : NSObject {
             }
         })
     }
+    
+    func getDecks(onComplete: (Result<[Deck], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest(decksUrl, onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let history = dict["decks"] as? [NSDictionary] else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                let decks = history.map { d in Deck(dict:d) }
+                onComplete(Result.Success(decks))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
 
-    func getRequest(url: String, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+    func getOneTimeAuthToken(onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+        postRequest(oneTimeAuthTokenUrl, data: nil, onComplete: onComplete)
+    }
+
+
+    func createUser(onComplete: (Result<User, TrackOBotAPIError>) -> Void) -> Void {
+        
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let urlRequest = NSMutableURLRequest(URL: NSURL(string: createUserUrl)!)
+        urlRequest.HTTPMethod = "POST"
+
+        let session = NSURLSession(configuration: config,
+            delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
+        
+        let task = session.dataTaskWithRequest(urlRequest){
+            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            
+            let result = self.checkErrors(data, error: error)
+            switch result {
+            case .Success(let dict):
+                guard let username = dict["username"] as? String, password = dict["password"] as? String else {
+                    onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: "Unexpected response to create user call: \(result)")))
+                    return
+                }
+                let user = User(username: username, password: password, domain: self.DEFAULT_DOMAIN)
+                onComplete(Result.Success(user))
+
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        }
+        
+        task.resume()
+    }
+
+    private func checkErrors(data: NSData?, error: NSError?) -> Result<NSDictionary, TrackOBotAPIError> {
+        guard error == nil else {
+            return Result.Failure(TrackOBotAPIError.NetworkError(error: error!))
+        }
+        
+        guard let result = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) else {
+            return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
+        }
+        
+        guard let dict = result as? NSDictionary else {
+            return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
+        }
+        
+        if let apiError = dict["error"] as? String {
+            if apiError == "You need to sign in or sign up before continuing." {
+                return Result.Failure(TrackOBotAPIError.LoginFaild(error: apiError))
+            }
+            else {
+                return Result.Failure(TrackOBotAPIError.RequestFaild(error: apiError))
+            }
+        }
+        return Result.Success(dict)
+    }
+    
+    private func postRequest(url: String, data: NSData?, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+        guard let user = self.loadUser() else {
+            onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
+            return
+        }
+
+        let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url)
+        urlRequest.HTTPMethod = "POST"
+        if let d = data {
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.HTTPBody = d
+        }
+
+        let task = session.dataTaskWithRequest(urlRequest){
+            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+
+            let result = self.checkErrors(data, error: error)
+            switch result {
+            case .Success(let dict):
+                onComplete(Result.Success(dict))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        }
+        task.resume()
+    }
+
+    private func getRequest(url: String, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
             return
@@ -263,39 +323,21 @@ class TrackOBot : NSObject {
         let task = session.dataTaskWithRequest(urlRequest){
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
 
-
-            guard error == nil else {
-                onComplete(Result.Failure(TrackOBotAPIError.NetworkError(error: error!)))
-                return
+            let result = self.checkErrors(data, error: error)
+            switch result {
+            case .Success(let dict):
+                onComplete(Result.Success(dict))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
             }
-
-            guard let result = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) else {
-                onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                return
-            }
-
-            guard let dict = result as? NSDictionary else {
-                onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                return
-            }
-
-            if let apiError = dict["error"] as? String {
-                if apiError == "You need to sign in or sign up before continuing." {
-                    onComplete(Result.Failure(TrackOBotAPIError.LoginFaild(error: apiError)))
-                }
-                else {
-                    onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: apiError)))
-                }
-                return
-            }
-
-            onComplete(Result.Success(dict))
         }
         task.resume()
 
     }
 
-    func configureAuthenticatedSessionAndRequest(user:User, url:String) -> (NSURLSession, NSMutableURLRequest) {
+    private func configureAuthenticatedSessionAndRequest(user:User, url:String) -> (NSURLSession, NSMutableURLRequest) {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let userPasswordString = "\(user.username):\(user.password)"
         let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
