@@ -57,19 +57,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TrackOBot.instance.storeUser(user)
         
-        TrackOBot.instance.getResults({
+        TrackOBot.instance.getResults(0, onComplete: {
             (result) -> Void in
             let viewController = app.topViewController() as! TrackOBotViewController
             switch result {
             case .Success(_):
-                let alert = UIAlertController.init(title: "NIIICE", message: "Login, like, totally worked", preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: {
-                    (a:UIAlertAction) -> Void in
-                    viewController.newCredentialsAdded(user)
-                })
-                alert.addAction(okAction)
-                viewController.presentViewController(alert, animated: true, completion: nil)
-                
+//                let alert = UIAlertController.init(title: "NIIICE", message: "Login, like, totally worked", preferredStyle: UIAlertControllerStyle.Alert)
+//                let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: {
+//                    (a:UIAlertAction) -> Void in
+//                    viewController.newCredentialsAdded(user)
+//                })
+//                alert.addAction(okAction)
+//                viewController.presentViewController(alert, animated: true, completion: nil)
+                viewController.newCredentialsAdded(user)
                 break
             case .Failure(let err):
                 switch err {
@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     viewController.presentViewController(alert, animated: true, completion: nil)
                     break
                 default:
-                    print("what!!")
+                    print("what!! \(err)" )
                 }
             }
         })
