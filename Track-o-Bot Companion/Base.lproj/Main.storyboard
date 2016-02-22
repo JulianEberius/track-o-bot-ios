@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -10,43 +10,40 @@
         <!--Track Games-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="AddGameViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="AddGameViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j41-Ux-ngS"/>
                         <viewControllerLayoutGuide type="bottom" id="ueQ-13-3c2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yR2-hV-EgY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
-                                <rect key="frame" x="20" y="0.0" width="560" height="551"/>
+                                <rect key="frame" x="0.0" y="8" width="600" height="479"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-gi-fJA">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="492"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-gi-fJA">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="544"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ztj-db-xR4">
-                                                <rect key="frame" x="0.0" y="0.0" width="560" height="402"/>
+                                                <rect key="frame" x="140" y="0.0" width="320" height="474"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kj6-eH-wig">
-                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="201"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="237"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kj-Z8-KSt">
-                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=compact" ambiguous="YES">
                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="21"/>
                                                                 </variation>
                                                             </label>
                                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abs-cU-JG5">
-                                                                <rect key="frame" x="0.0" y="21" width="560" height="180"/>
+                                                                <rect key="frame" x="0.0" y="21" width="320" height="216"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="180" id="Z0O-1l-ak0"/>
-                                                                </constraints>
                                                                 <variation key="heightClass=compact" ambiguous="YES">
                                                                     <rect key="frame" x="0.0" y="21" width="240" height="180"/>
                                                                 </variation>
@@ -62,22 +59,19 @@
                                                         </variation>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4VQ-sT-3Rk">
-                                                        <rect key="frame" x="0.0" y="201" width="560" height="201"/>
+                                                        <rect key="frame" x="0.0" y="237" width="320" height="237"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgc-do-QOW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=compact" ambiguous="YES">
                                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                                                                 </variation>
                                                             </label>
                                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCl-HM-LuY">
-                                                                <rect key="frame" x="0.0" y="21" width="560" height="180"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="180" id="En8-E7-rYA"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="0.0" y="21" width="320" height="216"/>
                                                                 <variation key="heightClass=compact" ambiguous="YES">
                                                                     <rect key="frame" x="0.0" y="21" width="320" height="180"/>
                                                                 </variation>
@@ -93,34 +87,36 @@
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <variation key="heightClass=compact" axis="horizontal" misplaced="YES">
+                                                <variation key="heightClass=compact" misplaced="YES">
                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="201"/>
                                                 </variation>
+                                                <variation key="heightClass=compact-widthClass=regular" axis="horizontal"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DRI-j5-Ybn">
-                                                <rect key="frame" x="0.0" y="416" width="560" height="28"/>
+                                                <rect key="frame" x="0.0" y="478" width="600" height="28"/>
                                                 <subviews>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xNT-zt-sno">
-                                                        <rect key="frame" x="0.0" y="0.0" width="276" height="29"/>
+                                                        <rect key="frame" x="8" y="0.0" width="288" height="29"/>
                                                         <segments>
                                                             <segment title="Coin"/>
                                                             <segment title="No Coin"/>
                                                         </segments>
                                                     </segmentedControl>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EEU-Ro-Ewo">
-                                                        <rect key="frame" x="284" y="0.0" width="276" height="29"/>
+                                                        <rect key="frame" x="304" y="0.0" width="288" height="29"/>
                                                         <segments>
                                                             <segment title="Ranked"/>
                                                             <segment title="Casual"/>
                                                         </segments>
                                                     </segmentedControl>
                                                 </subviews>
+                                                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0gp-Di-wTy">
-                                                <rect key="frame" x="0.0" y="458" width="560" height="34"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0gp-Di-wTy">
+                                                <rect key="frame" x="0.0" y="510" width="600" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUF-HH-W8J">
-                                                        <rect key="frame" x="0.0" y="0.0" width="288" height="34"/>
+                                                        <rect key="frame" x="8" y="0.0" width="288" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <state key="normal" title="Won"/>
                                                         <connections>
@@ -128,7 +124,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJu-YW-TIW">
-                                                        <rect key="frame" x="288" y="0.0" width="272" height="34"/>
+                                                        <rect key="frame" x="304" y="0.0" width="288" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <state key="normal" title="Lost"/>
                                                         <connections>
@@ -136,28 +132,32 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="0gp-Di-wTy" firstAttribute="width" secondItem="5KU-gi-fJA" secondAttribute="width" id="hLV-wF-wu1"/>
+                                            <constraint firstItem="DRI-j5-Ybn" firstAttribute="width" secondItem="5KU-gi-fJA" secondAttribute="width" id="s3U-0s-45U"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="5KU-gi-fJA" firstAttribute="width" secondItem="eeD-Qv-VPn" secondAttribute="width" id="4lv-9B-xPM"/>
-                                    <constraint firstAttribute="trailing" secondItem="5KU-gi-fJA" secondAttribute="trailing" id="QRY-Mr-Mm7"/>
-                                    <constraint firstAttribute="bottom" secondItem="5KU-gi-fJA" secondAttribute="bottom" id="a6S-Pd-QRa"/>
-                                    <constraint firstAttribute="top" secondItem="5KU-gi-fJA" secondAttribute="top" id="daH-TM-xhJ"/>
-                                    <constraint firstAttribute="leading" secondItem="5KU-gi-fJA" secondAttribute="leading" id="iZQ-EA-Y05"/>
+                                    <constraint firstItem="5KU-gi-fJA" firstAttribute="leading" secondItem="eeD-Qv-VPn" secondAttribute="leading" id="Sf0-pu-Xd2"/>
+                                    <constraint firstAttribute="trailing" secondItem="5KU-gi-fJA" secondAttribute="trailing" id="c6O-VN-8fX"/>
+                                    <constraint firstItem="5KU-gi-fJA" firstAttribute="top" secondItem="eeD-Qv-VPn" secondAttribute="top" id="ijz-AQ-kTL"/>
+                                    <constraint firstAttribute="bottom" secondItem="5KU-gi-fJA" secondAttribute="bottom" id="qBW-G1-Vdd"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
-                                <rect key="frame" x="201" y="526" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
+                                <rect key="frame" x="285" y="514" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
-                                <rect key="frame" x="0.0" y="0.0" width="21" height="27"/>
+                                <rect key="frame" x="356" y="514" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -165,36 +165,39 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerY" secondItem="TUF-HH-W8J" secondAttribute="centerY" id="6Sv-5a-T2b"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="bottom" secondItem="yR2-hV-EgY" secondAttribute="bottomMargin" id="6oa-j1-N9T"/>
-                            <constraint firstItem="2gP-4o-R1J" firstAttribute="centerY" secondItem="WJu-YW-TIW" secondAttribute="centerY" id="Qs8-BD-HxO"/>
-                            <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerX" secondItem="TUF-HH-W8J" secondAttribute="centerX" constant="48" id="SyF-75-B5y"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="trailing" secondItem="yR2-hV-EgY" secondAttribute="trailingMargin" id="VlB-QY-KFu"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="top" secondItem="yR2-hV-EgY" secondAttribute="topMargin" id="a1s-el-p22"/>
-                            <constraint firstItem="2gP-4o-R1J" firstAttribute="centerX" secondItem="WJu-YW-TIW" secondAttribute="centerX" constant="48" id="fGt-FK-FGe"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="leading" secondItem="yR2-hV-EgY" secondAttribute="leadingMargin" id="vjn-G2-4jh"/>
+                            <constraint firstItem="2gP-4o-R1J" firstAttribute="centerY" secondItem="WJu-YW-TIW" secondAttribute="centerY" id="ADe-se-qMq"/>
+                            <constraint firstItem="2gP-4o-R1J" firstAttribute="centerX" secondItem="WJu-YW-TIW" secondAttribute="centerX" constant="30" id="Z3O-rv-yHe"/>
+                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="leading" secondItem="yR2-hV-EgY" secondAttribute="leading" id="aRu-cJ-BQK"/>
+                            <constraint firstItem="ueQ-13-3c2" firstAttribute="top" secondItem="eeD-Qv-VPn" secondAttribute="bottom" id="aXN-iR-4dn"/>
+                            <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerY" secondItem="TUF-HH-W8J" secondAttribute="centerY" id="eHz-ep-QGv"/>
+                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="top" secondItem="j41-Ux-ngS" secondAttribute="bottom" constant="8" id="eey-mE-zPw"/>
+                            <constraint firstItem="5KU-gi-fJA" firstAttribute="width" secondItem="yR2-hV-EgY" secondAttribute="width" id="g5u-lM-aZc"/>
+                            <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerX" secondItem="TUF-HH-W8J" secondAttribute="centerX" constant="30" id="qKT-20-Q9T"/>
+                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="trailing" secondItem="yR2-hV-EgY" secondAttribute="trailing" id="r3b-fY-90e"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Track Games" id="OUP-se-SId">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="L0n-mo-0ol">
                             <connections>
                                 <action selector="logoutButtonTouchUp:" destination="9pv-A4-QxB" id="gbU-3K-xAM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Open Profile" id="Ehg-k8-ddN">
+                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="Ehg-k8-ddN">
                             <connections>
-                                <action selector="openProfileTouchUp:" destination="9pv-A4-QxB" id="7KR-xp-5qi"/>
+                                <action selector="openProfileTouchUp:" destination="9pv-A4-QxB" id="aYT-Nl-dzX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="coinSwitch" destination="xNT-zt-sno" id="P2g-c0-DQG"/>
+                        <outlet property="contentView" destination="5KU-gi-fJA" id="xDL-9W-Fu2"/>
                         <outlet property="heroPicker" destination="Abs-cU-JG5" id="hMI-Ze-X6I"/>
                         <outlet property="lostGameButton" destination="WJu-YW-TIW" id="49J-t0-q7o"/>
                         <outlet property="lostSucessCheckmark" destination="2gP-4o-R1J" id="ZFA-c1-Yvq"/>
                         <outlet property="modeSwitch" destination="EEU-Ro-Ewo" id="6jV-Z9-zah"/>
                         <outlet property="opponentPicker" destination="RCl-HM-LuY" id="s3l-v1-uDQ"/>
+                        <outlet property="scrollView" destination="eeD-Qv-VPn" id="Vd5-IL-Hza"/>
                         <outlet property="wonGameButton" destination="TUF-HH-W8J" id="StI-cb-6Aj"/>
                         <outlet property="wonSucessCheckmark" destination="vDT-FQ-1fU" id="t6v-K5-RPL"/>
                         <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="LfB-NZ-Ouo"/>
@@ -305,7 +308,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
                 <exit id="8fr-Cn-D3v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2414" y="1489"/>
+            <point key="canvasLocation" x="4414" y="1569"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -320,11 +323,12 @@
                     <connections>
                         <segue destination="puQ-cC-psw" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="xIM-zo-b8l" kind="relationship" relationship="viewControllers" id="ldX-4L-K2g"/>
+                        <segue destination="sZ0-GR-qtQ" kind="relationship" relationship="viewControllers" id="7kW-bF-Cgt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="-752"/>
+            <point key="canvasLocation" x="2589" y="-1864"/>
         </scene>
         <!--History-->
         <scene sceneID="omW-7a-fb6">
@@ -442,7 +446,7 @@
                                 <action selector="logoutButtonTouchUp:" destination="K1g-di-RFl" id="zHO-1C-4PH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Open Profile" id="EZO-4A-IIV">
+                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="EZO-4A-IIV">
                             <connections>
                                 <action selector="openProfileTouchUp:" destination="K1g-di-RFl" id="GBk-hd-7dU"/>
                             </connections>
@@ -457,11 +461,44 @@
             </objects>
             <point key="canvasLocation" x="2365" y="205"/>
         </scene>
+        <!--Stats-->
+        <scene sceneID="gZj-dB-RcR">
+            <objects>
+                <viewController title="Stats" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tud-ph-Z5d"/>
+                        <viewControllerLayoutGuide type="bottom" id="cEM-Ca-fck"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zbl-Dg-dek">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Stats" id="ORK-4f-d4r">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="HWq-o3-z13">
+                            <connections>
+                                <action selector="logoutButtonTouchUp:" destination="ba2-k2-aum" id="M9Z-DL-Df5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="osP-V9-6ah">
+                            <connections>
+                                <action selector="openProfileTouchUp:" destination="ba2-k2-aum" id="cAH-sn-vOg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="nL8-kv-anp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8f-1k-phS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3483" y="223"/>
+        </scene>
         <!--History Navigation-->
         <scene sceneID="fo0-fQ-ac5">
             <objects>
                 <navigationController title="HIstory" automaticallyAdjustsScrollViewInsets="NO" id="xIM-zo-b8l" userLabel="History Navigation" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="History" image="second" id="OQT-eG-V1P"/>
+                    <tabBarItem key="tabBarItem" title="History" image="list" id="OQT-eG-V1P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DRh-6M-EtE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -575,13 +612,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeC-ki-0qm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Vgo-br-zYs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="1453"/>
+            <point key="canvasLocation" x="3511" y="1533"/>
         </scene>
         <!--Track Game Navigation-->
         <scene sceneID="HeQ-DN-GII">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="puQ-cC-psw" userLabel="Track Game Navigation" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add Game" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Add Game" image="add" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gb2-FV-8ON">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -594,7 +631,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrR-qL-Cuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="155" y="123"/>
+            <point key="canvasLocation" x="1131" y="-605"/>
         </scene>
         <!--Login Navigation Controller-->
         <scene sceneID="fCq-XI-CYq">
@@ -612,13 +649,84 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGN-8V-XJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="1301"/>
+            <point key="canvasLocation" x="2469" y="1381"/>
+        </scene>
+        <!--Stats Navigation Controller-->
+        <scene sceneID="4yh-JH-jYD">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mJr-Iz-LmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="Stats Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="sZ0-GR-qtQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Stats" image="barChart" id="k9U-Uj-mDA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qYA-os-SzP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ba2-k2-aum" kind="relationship" relationship="rootViewController" id="yeP-Yz-teg"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="3503" y="-659"/>
+        </scene>
+        <!--ProfileMenuController-->
+        <scene sceneID="pDH-46-i1L">
+            <objects>
+                <viewController storyboardIdentifier="profileMenuController" title="ProfileMenuController" modalPresentationStyle="pageSheet" id="dMW-we-2xd" customClass="TrackOBotViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2aC-gK-hcI"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Lq-50-yCo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kdL-06-YpY">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="110"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6c-F4-QkY">
+                                <rect key="frame" x="27" y="8" width="103" height="51"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment>
+                                            <string key="content">View on
+trackobot.com</string>
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="viewOnTrackOBotComTouchUp:" destination="dMW-we-2xd" eventType="touchUpInside" id="cyv-Zl-Frm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHb-mq-a65">
+                                <rect key="frame" x="55" y="67" width="46" height="30"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="exportProfileTouchUp:" destination="dMW-we-2xd" eventType="touchUpInside" id="Arc-vh-y79"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="110"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="150" height="110"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RpS-Dm-8OG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1313" y="1256"/>
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="add" width="25" height="25"/>
+        <image name="barChart" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
         <image name="logo-golden" width="334" height="334"/>
-        <image name="second" width="30" height="30"/>
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
