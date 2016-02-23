@@ -99,9 +99,9 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
             // "loading" cell
             cell.heroImageView.image = nil
             cell.opponentsHeroImageView.image = nil
-            cell.heroLabel.text = ""
-            cell.opponentsHeroLabel.text = ""
-            cell.winLabel.text = "Loading"
+            cell.heroLabel.text = "Loading"
+            cell.opponentsHeroLabel.text = "Loading"
+            cell.winLabel.text = ""
             cell.timeLabel.text = ""
             return cell
         }

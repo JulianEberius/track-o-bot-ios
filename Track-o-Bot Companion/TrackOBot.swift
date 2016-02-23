@@ -40,6 +40,14 @@ class HistoryPage {
     }
 }
 
+enum GameMode : String {
+    case Ranked = "ranked"
+    case Casual = "casual"
+    case Practice = "practice"
+    case Arena = "arena"
+    case Friendly = "friendly"
+}
+
 class Game : DateFormattingModel {
 
     let id: Int!
@@ -48,13 +56,15 @@ class Game : DateFormattingModel {
     let won: Bool!
     let coin: Bool!
     let timeLabel: String!
+    let mode: GameMode!
 
-    init(id: Int?, hero: String?, opponentsHero: String?, won:Bool?, coin:Bool?, added:NSDate? = nil) {
+    init(id: Int?, hero: String?, opponentsHero: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
         self.won = won
         self.coin = coin
+        self.mode = mode
         if let d = added {
             self.timeLabel = Game.outputDateFormatter.stringFromDate(d)
         } else {
@@ -120,7 +130,7 @@ class User : NSObject, NSCoding {
     convenience init(dict:NSDictionary) {
         let username = dict["username"] as! String
         let password = dict["password"] as! String
-        self.init(username: username, password: password, domain: TrackOBot.instance.DEFAULT_DOMAIN)
+        self.init(username: username, password: password, domain: TrackOBot.DOMAIN)
     }
 
     required init(coder decoder: NSCoder) {
@@ -156,33 +166,20 @@ let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlo
 
 class TrackOBot : NSObject, NSURLSessionDelegate {
     static let instance = TrackOBot()
+    static let DOMAIN = "trackobot.com"
 
-
-
-    let defaults = NSUserDefaults.standardUserDefaults()
     let USER = "user"
     let USERNAME = "username"
     let TOKEN = "token"
-    let DEFAULT_DOMAIN = "https://trackobot.com"
 
-//    let resultsUrl = "https://trackobot.com/profile/results.json"
-//    let profileUrl = "https://trackobot.com/profile.json"
-//    let oneTimeAuthTokenUrl = "https://trackobot.com/one_time_auth.json"
-//    let createUserUrl = "https://trackobot.com/users"
+    let defaults = NSUserDefaults.standardUserDefaults()
     
-//    let createUserUrl = "https://localhost:3001/users"
-//    let resultsUrl = "https://localhost:3001/profile/results.json"
-//    let profileUrl = "https://localhost:3001/profile.json"
-//    let decksUrl = "https://localhost:3001/profile/settings/decks.json"
-//    let oneTimeAuthTokenUrl = "https://localhost:3001/one_time_auth.json"
-
-    let createUserUrl = "https://192.168.0.87:3001/users"
-    let resultsUrl = "https://192.168.0.87:3001/profile/results.json"
-    let resultDeleteUrl = "https://192.168.0.87:3001/profile/results/bulk_delete"
-    let profileUrl = "https://192.168.0.87:3001/profile.json"
-    let decksUrl = "https://192.168.0.87:3001/profile/settings/decks.json"
-    let oneTimeAuthTokenUrl = "https://192.168.0.87:3001/one_time_auth.json"
-
+    let createUserUrl = "https://\(DOMAIN)/users"
+    let resultsUrl = "https://\(DOMAIN)/profile/results.json"
+    let resultDeleteUrl = "https://\(DOMAIN)/profile/results/bulk_delete"
+    let profileUrl = "https://\(DOMAIN)/profile.json"
+    let decksUrl = "https://\(DOMAIN)/profile/settings/decks.json"
+    let oneTimeAuthTokenUrl = "https://\(DOMAIN)/one_time_auth.json"
     
     func storeUser(user:User) -> Void {
         let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
@@ -203,7 +200,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
     func postResult(game:Game, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         let data = ["result":
-            ["hero": game.hero, "opponent": game.opponentsHero, "win": game.won, "coin": game.coin, "mode": "ranked"]]
+            ["hero": game.hero, "opponent": game.opponentsHero, "win": game.won, "coin": game.coin, "mode": game.mode.rawValue]]
 
         guard let json = try? NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.init(rawValue: 0)) else {
             onComplete(Result.Failure(TrackOBotAPIError.JsonFormattingFailed))
@@ -292,7 +289,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: "Unexpected response to create user call: \(result)")))
                     return
                 }
-                let user = User(username: username, password: password, domain: self.DEFAULT_DOMAIN)
+                let user = User(username: username, password: password, domain: TrackOBot.DOMAIN)
                 onComplete(Result.Success(user))
 
                 break

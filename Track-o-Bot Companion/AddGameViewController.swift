@@ -178,13 +178,13 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let opponentsHero = HEROES[self.opponentPicker.selectedRowInComponent(HERO_PICKER)]
 
         let coin = self.coinSwitch.selectedSegmentIndex == 0
-        //let ranked = self.modeSwitch.selectedSegmentIndex == 0
+        let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : GameMode.Casual;
 
         self.wonGameButton.enabled = false
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
 
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin)
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin, mode: mode)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
@@ -290,7 +290,6 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
             case .Success(let decks):
                 self.decks = decks
                 self.deckNames = decks.map { hd in hd.map { d in d.name } }
-                self.updateUI()
                 break
             case .Failure(let err):
                 switch err {
@@ -300,6 +299,8 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
                     print("what")
                 }
             }
+
+            self.updateUI()
         })
     }
     
