@@ -12,7 +12,7 @@ class DateFormattingModel {
 
     static var inputDateFormatter:NSDateFormatter {
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSZ"
         return formatter
     }
     

@@ -93,17 +93,17 @@
                                                 <variation key="heightClass=compact-widthClass=regular" axis="horizontal"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DRI-j5-Ybn">
-                                                <rect key="frame" x="0.0" y="478" width="600" height="28"/>
+                                                <rect key="frame" x="140" y="478" width="320" height="28"/>
                                                 <subviews>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xNT-zt-sno">
-                                                        <rect key="frame" x="8" y="0.0" width="288" height="29"/>
+                                                        <rect key="frame" x="8" y="0.0" width="148" height="29"/>
                                                         <segments>
                                                             <segment title="Coin"/>
                                                             <segment title="No Coin"/>
                                                         </segments>
                                                     </segmentedControl>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EEU-Ro-Ewo">
-                                                        <rect key="frame" x="304" y="0.0" width="288" height="29"/>
+                                                        <rect key="frame" x="164" y="0.0" width="148" height="29"/>
                                                         <segments>
                                                             <segment title="Ranked"/>
                                                             <segment title="Casual"/>
@@ -113,10 +113,10 @@
                                                 <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0gp-Di-wTy">
-                                                <rect key="frame" x="0.0" y="510" width="600" height="34"/>
+                                                <rect key="frame" x="140" y="510" width="320" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUF-HH-W8J">
-                                                        <rect key="frame" x="8" y="0.0" width="288" height="34"/>
+                                                        <rect key="frame" x="8" y="0.0" width="148" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <state key="normal" title="Won"/>
                                                         <connections>
@@ -124,7 +124,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJu-YW-TIW">
-                                                        <rect key="frame" x="304" y="0.0" width="288" height="34"/>
+                                                        <rect key="frame" x="164" y="0.0" width="148" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <state key="normal" title="Lost"/>
                                                         <connections>
@@ -137,8 +137,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="0gp-Di-wTy" firstAttribute="width" secondItem="5KU-gi-fJA" secondAttribute="width" id="hLV-wF-wu1"/>
-                                            <constraint firstItem="DRI-j5-Ybn" firstAttribute="width" secondItem="5KU-gi-fJA" secondAttribute="width" id="s3U-0s-45U"/>
+                                            <constraint firstItem="0gp-Di-wTy" firstAttribute="width" secondItem="ztj-db-xR4" secondAttribute="width" id="11Y-Nh-Px9"/>
+                                            <constraint firstItem="DRI-j5-Ybn" firstAttribute="width" secondItem="ztj-db-xR4" secondAttribute="width" id="Hvx-KN-53C"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -150,14 +150,14 @@
                                     <constraint firstAttribute="bottom" secondItem="5KU-gi-fJA" secondAttribute="bottom" id="qBW-G1-Vdd"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
-                                <rect key="frame" x="285" y="514" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
+                                <rect key="frame" x="242" y="522" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
-                                <rect key="frame" x="356" y="514" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
+                                <rect key="frame" x="398" y="522" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -318,7 +318,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="puQ-cC-psw" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
@@ -623,6 +622,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gb2-FV-8ON">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -654,7 +654,6 @@
         <!--Stats Navigation Controller-->
         <scene sceneID="4yh-JH-jYD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mJr-Iz-LmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Stats Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="sZ0-GR-qtQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Stats" image="barChart" id="k9U-Uj-mDA"/>
                     <toolbarItems/>
@@ -667,6 +666,7 @@
                         <segue destination="ba2-k2-aum" kind="relationship" relationship="rootViewController" id="yeP-Yz-teg"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mJr-Iz-LmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3503" y="-659"/>
         </scene>
