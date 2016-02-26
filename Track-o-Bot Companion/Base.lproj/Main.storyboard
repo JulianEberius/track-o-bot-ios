@@ -16,11 +16,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ueQ-13-3c2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yR2-hV-EgY">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
-                                <rect key="frame" x="0.0" y="8" width="600" height="479"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-gi-fJA">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="544"/>
@@ -150,14 +150,14 @@
                                     <constraint firstAttribute="bottom" secondItem="5KU-gi-fJA" secondAttribute="bottom" id="qBW-G1-Vdd"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
-                                <rect key="frame" x="242" y="522" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
+                                <rect key="frame" x="242" y="642" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
-                                <rect key="frame" x="398" y="522" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
+                                <rect key="frame" x="398" y="642" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -170,13 +170,12 @@
                             <constraint firstItem="eeD-Qv-VPn" firstAttribute="leading" secondItem="yR2-hV-EgY" secondAttribute="leading" id="aRu-cJ-BQK"/>
                             <constraint firstItem="ueQ-13-3c2" firstAttribute="top" secondItem="eeD-Qv-VPn" secondAttribute="bottom" id="aXN-iR-4dn"/>
                             <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerY" secondItem="TUF-HH-W8J" secondAttribute="centerY" id="eHz-ep-QGv"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="top" secondItem="j41-Ux-ngS" secondAttribute="bottom" constant="8" id="eey-mE-zPw"/>
+                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="top" secondItem="j41-Ux-ngS" secondAttribute="bottom" id="eey-mE-zPw"/>
                             <constraint firstItem="5KU-gi-fJA" firstAttribute="width" secondItem="yR2-hV-EgY" secondAttribute="width" id="g5u-lM-aZc"/>
                             <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerX" secondItem="TUF-HH-W8J" secondAttribute="centerX" constant="30" id="qKT-20-Q9T"/>
                             <constraint firstItem="eeD-Qv-VPn" firstAttribute="trailing" secondItem="yR2-hV-EgY" secondAttribute="trailing" id="r3b-fY-90e"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Track Games" id="OUP-se-SId">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="L0n-mo-0ol">
                             <connections>
