@@ -15,13 +15,15 @@
 		045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096471B9E0E150059BB7A /* AccountViewController.swift */; };
 		0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045096491B9E0E150059BB7A /* Main.storyboard */; };
 		0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0450964C1B9E0E150059BB7A /* Images.xcassets */; };
-		0450965C1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450965B1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift */; };
 		045096661B9E32370059BB7A /* TrackOBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096651B9E32370059BB7A /* TrackOBot.swift */; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
 		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
+		04FCCBB01C835AF5003D9E26 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAD1C835AF5003D9E26 /* Chart.swift */; };
+		04FCCBB11C835AF5003D9E26 /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */; };
+		04FCCBB21C835AF5003D9E26 /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,14 +48,15 @@
 		0450964A1B9E0E150059BB7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0450964C1B9E0E150059BB7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		045096551B9E0E150059BB7A /* Track-o-Bot CompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Track-o-Bot CompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0450965A1B9E0E150059BB7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0450965B1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track_o_Bot_CompanionTests.swift; sourceTree = "<group>"; };
 		045096651B9E32370059BB7A /* TrackOBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBot.swift; sourceTree = "<group>"; };
 		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		049826EC1C775E4900591C68 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-golden.png"; path = "Images.xcassets/logo-golden.imageset/logo-golden.png"; sourceTree = "<group>"; };
 		04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		04C41A011BA2E87600A01261 /* HeroPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPickerItem.swift; sourceTree = "<group>"; };
+		04FCCBAD1C835AF5003D9E26 /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
+		04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				045096401B9E0E140059BB7A /* Track-o-Bot Companion */,
-				045096581B9E0E150059BB7A /* Track-o-Bot CompanionTests */,
 				0450963F1B9E0E140059BB7A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +97,7 @@
 		045096401B9E0E140059BB7A /* Track-o-Bot Companion */ = {
 			isa = PBXGroup;
 			children = (
+				04FCCBAC1C835AE6003D9E26 /* SwiftChart */,
 				045096431B9E0E150059BB7A /* AppDelegate.swift */,
 				045096451B9E0E150059BB7A /* AddGameViewController.swift */,
 				045096471B9E0E150059BB7A /* AccountViewController.swift */,
@@ -122,21 +125,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		045096581B9E0E150059BB7A /* Track-o-Bot CompanionTests */ = {
+		04FCCBAC1C835AE6003D9E26 /* SwiftChart */ = {
 			isa = PBXGroup;
 			children = (
-				0450965B1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift */,
-				045096591B9E0E150059BB7A /* Supporting Files */,
+				04FCCBAD1C835AF5003D9E26 /* Chart.swift */,
+				04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */,
+				04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */,
 			);
-			path = "Track-o-Bot CompanionTests";
-			sourceTree = "<group>";
-		};
-		045096591B9E0E150059BB7A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0450965A1B9E0E150059BB7A /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = SwiftChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,11 +240,14 @@
 				0401D4B51BE2D90A007B5F39 /* TrackOBotViewController.swift in Sources */,
 				045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */,
 				04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */,
+				04FCCBB01C835AF5003D9E26 /* Chart.swift in Sources */,
 				049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */,
 				045096441B9E0E150059BB7A /* AppDelegate.swift in Sources */,
 				045096461B9E0E150059BB7A /* AddGameViewController.swift in Sources */,
 				0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */,
+				04FCCBB11C835AF5003D9E26 /* ChartColors.swift in Sources */,
 				04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */,
+				04FCCBB21C835AF5003D9E26 /* ChartSeries.swift in Sources */,
 				0416A05E1BA1780800F930FC /* ResultTableViewCell.swift in Sources */,
 				045096661B9E32370059BB7A /* TrackOBot.swift in Sources */,
 			);
@@ -258,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0450965C1B9E0E150059BB7A /* Track_o_Bot_CompanionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
