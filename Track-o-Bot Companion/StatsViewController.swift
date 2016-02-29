@@ -27,6 +27,18 @@ class StatsViewController: TrackOBotViewController {
                     return BarChartDataEntry(value: val, xIndex: HEROES.indexOf(d.hero)!)
                 }
                 let ds = BarChartDataSet(yVals: data, label: "Win %")
+                ds.setColors(
+                    [
+                        UIColor(red: 167/255.0, green: 57.0/255.0, blue: 45.0/255.0, alpha: 1.0),
+                        UIColor(red: 48/255.0, green: 60.0/255.0, blue: 108.0/255.0, alpha: 1.0),
+                        UIColor(red: 37/255.0, green: 32.0/255.0, blue: 24.0/255.0, alpha: 1.0),
+                        UIColor(red: 235/255.0, green: 154.0/255.0, blue: 68.0/255.0, alpha: 1.0),
+                        UIColor(red: 35.0/255.0, green: 70.0/255.0, blue: 30.0/255.0, alpha: 1.0),
+                        UIColor(red: 108/255.0, green: 68.0/255.0, blue: 30.0/255.0, alpha: 1.0),
+                        UIColor(red: 88/255.0, green: 50.0/255.0, blue: 68.0/255.0, alpha: 1.0),
+                        UIColor(red: 45/255.0, green: 83.0/255.0, blue: 125.0/255.0, alpha: 1.0),
+                        UIColor(red: 250/255.0, green: 244/255.0, blue: 220.0/255.0, alpha: 1.0)
+                    ], alpha: 0.95)
                 let d = BarChartData(xVals: HEROES, dataSet: ds)
 
                 self.chart.xAxis.labelRotationAngle = 90
