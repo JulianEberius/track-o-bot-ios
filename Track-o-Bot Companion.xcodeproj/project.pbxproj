@@ -102,12 +102,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042931691C84F8D0005E2236 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */,
+				04C41A011BA2E87600A01261 /* HeroPickerItem.swift */,
+			);
+			name = UIComponents;
+			sourceTree = "<group>";
+		};
+		0429316A1C84F916005E2236 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				045096651B9E32370059BB7A /* TrackOBot.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		045096351B9E0E140059BB7A = {
 			isa = PBXGroup;
 			children = (
 				0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */,
 				045096401B9E0E140059BB7A /* Track-o-Bot Companion */,
-				0450963F1B9E0E140059BB7A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,26 +133,21 @@
 				0450963E1B9E0E140059BB7A /* Track-o-Bot Companion.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		045096401B9E0E140059BB7A /* Track-o-Bot Companion */ = {
 			isa = PBXGroup;
 			children = (
+				0429316A1C84F916005E2236 /* API */,
+				042931691C84F8D0005E2236 /* UIComponents */,
 				0462BE561C84F4D800D0F3C4 /* ViewController */,
 				045096431B9E0E150059BB7A /* AppDelegate.swift */,
-				045096451B9E0E150059BB7A /* AddGameViewController.swift */,
-				045096471B9E0E150059BB7A /* AccountViewController.swift */,
-				04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */,
 				045096491B9E0E150059BB7A /* Main.storyboard */,
+				0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */,
 				0450964C1B9E0E150059BB7A /* Images.xcassets */,
 				045096411B9E0E140059BB7A /* Supporting Files */,
-				045096651B9E32370059BB7A /* TrackOBot.swift */,
-				0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */,
-				0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */,
-				04C41A011BA2E87600A01261 /* HeroPickerItem.swift */,
-				0493A8C71BE03417006A5281 /* LoginViewController.swift */,
-				0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */,
-				049826EC1C775E4900591C68 /* StatsViewController.swift */,
+				0450963F1B9E0E140059BB7A /* Products */,
 			);
 			path = "Track-o-Bot Companion";
 			sourceTree = "<group>";
@@ -163,6 +174,12 @@
 		0462BE561C84F4D800D0F3C4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				045096451B9E0E150059BB7A /* AddGameViewController.swift */,
+				045096471B9E0E150059BB7A /* AccountViewController.swift */,
+				04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */,
+				0493A8C71BE03417006A5281 /* LoginViewController.swift */,
+				0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */,
+				049826EC1C775E4900591C68 /* StatsViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
