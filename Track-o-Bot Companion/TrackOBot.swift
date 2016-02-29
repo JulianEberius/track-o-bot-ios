@@ -148,6 +148,18 @@ class User : NSObject, NSCoding {
 
 }
 
+class ByClassStats {
+    let hero: String!
+    let wins: Int!
+    let losses: Int!
+    
+    init(hero: String?, wins: Int?, losses: Int?) {
+        self.hero = hero
+        self.wins = wins
+        self.losses = losses
+    }
+}
+
 enum Result<T: Any, U: ErrorType> {
     case Success(T)
     case Failure(U)
@@ -180,6 +192,9 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     let profileUrl = "https://\(DOMAIN)/profile.json"
     let decksUrl = "https://\(DOMAIN)/profile/settings/decks.json"
     let oneTimeAuthTokenUrl = "https://\(DOMAIN)/one_time_auth.json"
+    
+    let byClassResultsUrl = "https://\(DOMAIN)/profile/stats/classes.json"
+
     
     func storeUser(user:User) -> Void {
         let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
@@ -264,6 +279,30 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             }
         })
     }
+    
+    func getByClassStats(onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest(byClassResultsUrl, onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let stats = dict["stats"]?["as_class"] as? NSDictionary else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                let byClassStats = HEROES.map { (hero) -> ByClassStats in
+                    let heroStats = stats[hero] as! NSDictionary
+                    return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
+                }
+                
+                onComplete(Result.Success(byClassStats))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+
 
     func getOneTimeAuthToken(onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         postRequest(oneTimeAuthTokenUrl, data: nil, onComplete: onComplete)
