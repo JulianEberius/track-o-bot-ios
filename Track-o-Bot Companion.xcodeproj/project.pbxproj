@@ -16,25 +16,59 @@
 		0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045096491B9E0E150059BB7A /* Main.storyboard */; };
 		0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0450964C1B9E0E150059BB7A /* Images.xcassets */; };
 		045096661B9E32370059BB7A /* TrackOBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096651B9E32370059BB7A /* TrackOBot.swift */; };
+		0462BE511C84F4C000D0F3C4 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0462BE4C1C84F48700D0F3C4 /* Charts.framework */; };
+		0462BE521C84F4C000D0F3C4 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0462BE4C1C84F48700D0F3C4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
 		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
-		04FCCBB01C835AF5003D9E26 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAD1C835AF5003D9E26 /* Chart.swift */; };
-		04FCCBB11C835AF5003D9E26 /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */; };
-		04FCCBB21C835AF5003D9E26 /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		045096561B9E0E150059BB7A /* PBXContainerItemProxy */ = {
+		0462BE4B1C84F48700D0F3C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 045096361B9E0E140059BB7A /* Project object */;
+			containerPortal = 0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
+		0462BE4D1C84F48700D0F3C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
+			remoteInfo = "Charts-TV";
+		};
+		0462BE4F1C84F48700D0F3C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
+			remoteInfo = ChartsTests;
+		};
+		0462BE531C84F4C000D0F3C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 0450963D1B9E0E140059BB7A;
-			remoteInfo = "Track-o-Bot Companion";
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0462BE551C84F4C000D0F3C4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0462BE521C84F4C000D0F3C4 /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBotViewController.swift; sourceTree = "<group>"; };
@@ -47,16 +81,13 @@
 		045096471B9E0E150059BB7A /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0450964A1B9E0E150059BB7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0450964C1B9E0E150059BB7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		045096551B9E0E150059BB7A /* Track-o-Bot CompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Track-o-Bot CompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		045096651B9E32370059BB7A /* TrackOBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBot.swift; sourceTree = "<group>"; };
+		0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "iOS-Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		049826EC1C775E4900591C68 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-golden.png"; path = "Images.xcassets/logo-golden.imageset/logo-golden.png"; sourceTree = "<group>"; };
 		04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		04C41A011BA2E87600A01261 /* HeroPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPickerItem.swift; sourceTree = "<group>"; };
-		04FCCBAD1C835AF5003D9E26 /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
-		04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
-		04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		045096521B9E0E150059BB7A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				0462BE511C84F4C000D0F3C4 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +105,7 @@
 		045096351B9E0E140059BB7A = {
 			isa = PBXGroup;
 			children = (
+				0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */,
 				045096401B9E0E140059BB7A /* Track-o-Bot Companion */,
 				0450963F1B9E0E140059BB7A /* Products */,
 			);
@@ -89,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				0450963E1B9E0E140059BB7A /* Track-o-Bot Companion.app */,
-				045096551B9E0E150059BB7A /* Track-o-Bot CompanionTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,7 +122,7 @@
 		045096401B9E0E140059BB7A /* Track-o-Bot Companion */ = {
 			isa = PBXGroup;
 			children = (
-				04FCCBAC1C835AE6003D9E26 /* SwiftChart */,
+				0462BE561C84F4D800D0F3C4 /* ViewController */,
 				045096431B9E0E150059BB7A /* AppDelegate.swift */,
 				045096451B9E0E150059BB7A /* AddGameViewController.swift */,
 				045096471B9E0E150059BB7A /* AccountViewController.swift */,
@@ -125,14 +150,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		04FCCBAC1C835AE6003D9E26 /* SwiftChart */ = {
+		0462BE461C84F48700D0F3C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04FCCBAD1C835AF5003D9E26 /* Chart.swift */,
-				04FCCBAE1C835AF5003D9E26 /* ChartColors.swift */,
-				04FCCBAF1C835AF5003D9E26 /* ChartSeries.swift */,
+				0462BE4C1C84F48700D0F3C4 /* Charts.framework */,
+				0462BE4E1C84F48700D0F3C4 /* Charts.framework */,
+				0462BE501C84F48700D0F3C4 /* ChartsTests.xctest */,
 			);
-			name = SwiftChart;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0462BE561C84F4D800D0F3C4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,33 +177,17 @@
 				0450963A1B9E0E140059BB7A /* Sources */,
 				0450963B1B9E0E140059BB7A /* Frameworks */,
 				0450963C1B9E0E140059BB7A /* Resources */,
+				0462BE551C84F4C000D0F3C4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0462BE541C84F4C000D0F3C4 /* PBXTargetDependency */,
 			);
 			name = "Track-o-Bot Companion";
 			productName = "Track-o-Bot Companion";
 			productReference = 0450963E1B9E0E140059BB7A /* Track-o-Bot Companion.app */;
 			productType = "com.apple.product-type.application";
-		};
-		045096541B9E0E150059BB7A /* Track-o-Bot CompanionTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 045096621B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "Track-o-Bot CompanionTests" */;
-			buildPhases = (
-				045096511B9E0E150059BB7A /* Sources */,
-				045096521B9E0E150059BB7A /* Frameworks */,
-				045096531B9E0E150059BB7A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				045096571B9E0E150059BB7A /* PBXTargetDependency */,
-			);
-			name = "Track-o-Bot CompanionTests";
-			productName = "Track-o-Bot CompanionTests";
-			productReference = 045096551B9E0E150059BB7A /* Track-o-Bot CompanionTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -186,10 +202,6 @@
 					0450963D1B9E0E140059BB7A = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					045096541B9E0E150059BB7A = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 0450963D1B9E0E140059BB7A;
-					};
 				};
 			};
 			buildConfigurationList = 045096391B9E0E140059BB7A /* Build configuration list for PBXProject "Track-o-Bot Companion" */;
@@ -203,13 +215,42 @@
 			mainGroup = 045096351B9E0E140059BB7A;
 			productRefGroup = 0450963F1B9E0E140059BB7A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0462BE461C84F48700D0F3C4 /* Products */;
+					ProjectRef = 0462BE451C84F48700D0F3C4 /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0450963D1B9E0E140059BB7A /* Track-o-Bot Companion */,
-				045096541B9E0E150059BB7A /* Track-o-Bot CompanionTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0462BE4C1C84F48700D0F3C4 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 0462BE4B1C84F48700D0F3C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0462BE4E1C84F48700D0F3C4 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 0462BE4D1C84F48700D0F3C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0462BE501C84F48700D0F3C4 /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 0462BE4F1C84F48700D0F3C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0450963C1B9E0E140059BB7A /* Resources */ = {
@@ -223,13 +264,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		045096531B9E0E150059BB7A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -240,33 +274,23 @@
 				0401D4B51BE2D90A007B5F39 /* TrackOBotViewController.swift in Sources */,
 				045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */,
 				04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */,
-				04FCCBB01C835AF5003D9E26 /* Chart.swift in Sources */,
 				049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */,
 				045096441B9E0E150059BB7A /* AppDelegate.swift in Sources */,
 				045096461B9E0E150059BB7A /* AddGameViewController.swift in Sources */,
 				0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */,
-				04FCCBB11C835AF5003D9E26 /* ChartColors.swift in Sources */,
 				04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */,
-				04FCCBB21C835AF5003D9E26 /* ChartSeries.swift in Sources */,
 				0416A05E1BA1780800F930FC /* ResultTableViewCell.swift in Sources */,
 				045096661B9E32370059BB7A /* TrackOBot.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		045096511B9E0E150059BB7A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		045096571B9E0E150059BB7A /* PBXTargetDependency */ = {
+		0462BE541C84F4C000D0F3C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0450963D1B9E0E140059BB7A /* Track-o-Bot Companion */;
-			targetProxy = 045096561B9E0E150059BB7A /* PBXContainerItemProxy */;
+			name = "Charts-iOS";
+			targetProxy = 0462BE531C84F4C000D0F3C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -374,6 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -389,38 +414,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		045096631B9E0E150059BB7A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Track-o-Bot CompanionTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Track-o-Bot Companion.app/Track-o-Bot Companion";
-			};
-			name = Debug;
-		};
-		045096641B9E0E150059BB7A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Track-o-Bot CompanionTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.julianeberius.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Track-o-Bot Companion.app/Track-o-Bot Companion";
 			};
 			name = Release;
 		};
@@ -441,15 +441,6 @@
 			buildConfigurations = (
 				045096601B9E0E150059BB7A /* Debug */,
 				045096611B9E0E150059BB7A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		045096621B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "Track-o-Bot CompanionTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				045096631B9E0E150059BB7A /* Debug */,
-				045096641B9E0E150059BB7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

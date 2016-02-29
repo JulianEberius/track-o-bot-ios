@@ -19,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
-                                <rect key="frame" x="0.0" y="-40" width="600" height="0.0"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-gi-fJA">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
@@ -84,9 +84,6 @@
                                                                 <variation key="heightClass=compact" ambiguous="YES">
                                                                     <rect key="frame" x="0.0" y="21" width="320" height="180"/>
                                                                 </variation>
-                                                                <variation key="widthClass=regular" misplaced="YES">
-                                                                    <rect key="frame" x="0.0" y="15" width="320" height="216"/>
-                                                                </variation>
                                                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                                                     <rect key="frame" x="0.0" y="21" width="320" height="216"/>
                                                                 </variation>
@@ -99,9 +96,6 @@
                                                         <variation key="heightClass=compact" ambiguous="YES">
                                                             <rect key="frame" x="240" y="0.0" width="320" height="201"/>
                                                         </variation>
-                                                        <variation key="widthClass=regular" misplaced="YES">
-                                                            <rect key="frame" x="0.0" y="231" width="320" height="231"/>
-                                                        </variation>
                                                         <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                                             <rect key="frame" x="0.0" y="237" width="320" height="237"/>
                                                         </variation>
@@ -111,16 +105,10 @@
                                                 <variation key="heightClass=compact" misplaced="YES">
                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="201"/>
                                                 </variation>
-                                                <variation key="widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="240" y="0.0" width="320" height="462"/>
-                                                </variation>
                                                 <variation key="heightClass=compact-widthClass=regular" axis="horizontal"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <variation key="widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="800" height="462"/>
-                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,8 +135,8 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="DSd-Er-Mg9">
-                                <rect key="frame" x="140" y="-32" width="320" height="66"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="DSd-Er-Mg9">
+                                <rect key="frame" x="140" y="8" width="320" height="66"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DRI-j5-Ybn">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
@@ -197,14 +185,14 @@
                                     <rect key="frame" x="20" y="751" width="560" height="62"/>
                                 </variation>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
-                                <rect key="frame" x="252" y="4" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
+                                <rect key="frame" x="252" y="44" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
-                                <rect key="frame" x="408" y="4" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
+                                <rect key="frame" x="408" y="44" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -531,7 +519,7 @@
         <!--Stats-->
         <scene sceneID="gZj-dB-RcR">
             <objects>
-                <viewController title="Stats" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tud-ph-Z5d"/>
                         <viewControllerLayoutGuide type="bottom" id="cEM-Ca-fck"/>
@@ -539,7 +527,19 @@
                     <view key="view" contentMode="scaleToFill" id="Zbl-Dg-dek">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="72" width="560" height="479"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6UP-jN-lJM" firstAttribute="top" secondItem="Tud-ph-Z5d" secondAttribute="bottom" constant="8" symbolic="YES" id="Y9h-c8-TRf"/>
+                            <constraint firstItem="cEM-Ca-fck" firstAttribute="top" secondItem="6UP-jN-lJM" secondAttribute="bottom" id="g8U-cP-Dlb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6UP-jN-lJM" secondAttribute="trailing" id="iRk-rh-FBA"/>
+                            <constraint firstItem="6UP-jN-lJM" firstAttribute="leading" secondItem="Zbl-Dg-dek" secondAttribute="leadingMargin" id="tmq-bY-hB6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stats" id="ORK-4f-d4r">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="HWq-o3-z13">
@@ -554,6 +554,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="chart" destination="6UP-jN-lJM" id="FA8-UG-2Zh"/>
                         <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="nL8-kv-anp"/>
                     </connections>
                 </viewController>
