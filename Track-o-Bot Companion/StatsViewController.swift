@@ -47,7 +47,10 @@ class StatsViewController: TrackOBotViewController {
                 self.chart.xAxis.spaceBetweenLabels = 0
                 self.chart.legend.position = ChartLegend.ChartLegendPosition.AboveChartLeft
                 self.chart.descriptionText = ""
+                self.chart.leftAxis.labelCount = 5
+                self.chart.leftAxis.forceLabelsEnabled = true
                 self.chart.data = d
+                self.chart.setNeedsDisplay()
                 break
             case .Failure(let err):
                 switch err {

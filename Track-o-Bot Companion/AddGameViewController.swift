@@ -16,6 +16,7 @@ let SELECTED_HERO = "selected_hero"
 let SELECTED_DECK = "selected_deck"
 let SELECTED_OPPONENTS_HERO = "selected_opponents_hero"
 let SELECTED_OPPONENTS_DECK = "selected_opponents_deck"
+let SELECTED_RANK = "selected_rank"
     
 let DEFAULT_HERO = "Hunter" // its the center one, i'm sorry
  
@@ -121,9 +122,12 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var heroPicker: UIPickerView!
     @IBOutlet weak var opponentPicker: UIPickerView!
     
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var rankSteper: UIStepper!
+    
     @IBOutlet weak var modeSwitch: UISegmentedControl!
-    @IBOutlet weak var coinSwitch: UISegmentedControl!
-
+    @IBOutlet weak var coinSwitch: UISwitch!
+    
     @IBOutlet weak var wonGameButton: UIButton!
     @IBOutlet weak var lostGameButton: UIButton!
 
@@ -134,7 +138,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
     
-    // TODO: move to TrackOBot
+    @IBOutlet weak var youLabel: UILabel!
+    @IBOutlet weak var opponentLabel: UILabel!
+    
+    // TODO: move to TrackOBot class
     var decks = Array(count: HEROES.count, repeatedValue: [Deck]())
     var deckNames = Array(count: HEROES.count, repeatedValue: [String]())
 
@@ -149,19 +156,6 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         lostGameButton.layer.cornerRadius = 5
         lostGameButton.layer.borderWidth = 1
         lostGameButton.layer.borderColor = UIColor.brownColor().CGColor
-        
-        if (contentView.bounds.height < scrollView.bounds.height) {
-            let scrollViewBounds = scrollView.bounds
-            
-            var scrollViewInsets = UIEdgeInsetsZero
-            scrollViewInsets.top = scrollViewBounds.size.height/2.0;
-            scrollViewInsets.top -= contentView.bounds.size.height/2.0;
-            
-            scrollViewInsets.bottom = scrollViewBounds.size.height/2.0
-            scrollViewInsets.bottom -= contentView.bounds.size.height/2.0;
-            
-            scrollView.contentInset = scrollViewInsets
-        }
     }
 
 
@@ -177,8 +171,8 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let yourHero = HEROES[self.heroPicker.selectedRowInComponent(HERO_PICKER)]
         let opponentsHero = HEROES[self.opponentPicker.selectedRowInComponent(HERO_PICKER)]
 
-        let coin = self.coinSwitch.selectedSegmentIndex == 0
-        let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : GameMode.Casual;
+        let coin = self.coinSwitch.on
+        let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
 
         self.wonGameButton.enabled = false
         self.lostGameButton.enabled = false
@@ -269,16 +263,39 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         controllers[pickerView]?.didSelectRow(row, inComponent: component)
+
     }
 
+    @IBAction func rankStepperValueChanged(sender: UIStepper) {
+        let val = Int(sender.value)
+        if (val == 0){
+            rankLabel.text = "L"
+        } else {
+            rankLabel.text = "\(val)"
+        }
+        
+        defaults.setInteger(val, forKey: SELECTED_RANK)
+    }
+    
     @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.wonSucessCheckmark.alpha = 0
+        self.lostSucessCheckmark.alpha = 0
+        
+//        self.youLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+//        self.opponentLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+
         controllers[heroPicker] = HeroAndDeckPickerViewController(viewController: self, pickerView: heroPicker, player: Player.You)
         controllers[opponentPicker] = HeroAndDeckPickerViewController(viewController: self, pickerView: opponentPicker, player: Player.Opponent)
+        
+        let selectedRank = defaults.hasKey(SELECTED_RANK) ? defaults.integerForKey(SELECTED_RANK) : 25
+        rankSteper.value = Double(selectedRank)
+        rankStepperValueChanged(rankSteper)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -305,9 +322,6 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     }
     
     private func updateUI() {
-        self.wonSucessCheckmark.alpha = 0
-        self.lostSucessCheckmark.alpha = 0
-        
         controllers[heroPicker]?.update()
         controllers[opponentPicker]?.update()
     }
@@ -316,7 +330,13 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
+    
+extension NSUserDefaults {
+    func hasKey(key: String) -> Bool {
+        return objectForKey(key) != nil
+    }
+}
+
+
 
