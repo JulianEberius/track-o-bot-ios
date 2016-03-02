@@ -62,25 +62,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = app.topViewController() as! TrackOBotViewController
             switch result {
             case .Success(_):
-//                let alert = UIAlertController.init(title: "NIIICE", message: "Login, like, totally worked", preferredStyle: UIAlertControllerStyle.Alert)
-//                let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: {
-//                    (a:UIAlertAction) -> Void in
-//                    viewController.newCredentialsAdded(user)
-//                })
-//                alert.addAction(okAction)
-//                viewController.presentViewController(alert, animated: true, completion: nil)
                 viewController.newCredentialsAdded(user)
                 break
             case .Failure(let err):
                 switch err {
-                case .LoginFaild(_):
-                    let alert = UIAlertController.init(title: "Login failed", message: "Login failed: \(err)", preferredStyle: UIAlertControllerStyle.Alert)
+                case .NetworkError(_):
+                    let alert = UIAlertController.init(title: "Login failed", message: "Could not connect to TrackOBot.com", preferredStyle: UIAlertControllerStyle.Alert)
+                    let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                    alert.addAction(okAction)
+                    viewController.presentViewController(alert, animated: true, completion: nil)
+                    break
+                case .LoginFaild(let errMsg):
+                    let alert = UIAlertController.init(title: "Login failed", message: "Login failed: \(errMsg)", preferredStyle: UIAlertControllerStyle.Alert)
                     let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
                     alert.addAction(okAction)
                     viewController.presentViewController(alert, animated: true, completion: nil)
                     break
                 default:
-                    print("what!! \(err)" )
+                    print("Unexpected error: \(err)" )
                 }
             }
         })
