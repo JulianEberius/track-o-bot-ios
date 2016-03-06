@@ -19,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
-                                <rect key="frame" x="0.0" y="64" width="600" height="450"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eeD-Qv-VPn">
+                                <rect key="frame" x="0.0" y="64" width="600" height="372"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-12" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-gi-fJA">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="454"/>
@@ -154,7 +154,6 @@
                                         </variation>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.073978775597269619" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="5KU-gi-fJA" secondAttribute="bottom" id="FhJ-qq-3SK"/>
                                     <constraint firstItem="5KU-gi-fJA" firstAttribute="leading" secondItem="eeD-Qv-VPn" secondAttribute="leading" id="Sf0-pu-Xd2"/>
@@ -175,8 +174,8 @@
                                     <rect key="frame" x="0.0" y="72" width="800" height="359"/>
                                 </variation>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DSd-Er-Mg9">
-                                <rect key="frame" x="0.0" y="446" width="320" height="105"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DSd-Er-Mg9">
+                                <rect key="frame" x="140" y="444" width="320" height="105"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EEU-Ro-Ewo">
                                         <rect key="frame" x="8" y="0.0" width="304" height="27"/>
@@ -345,8 +344,8 @@
                                     <rect key="frame" x="140" y="436" width="800" height="105"/>
                                 </variation>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
-                                <rect key="frame" x="182" y="521" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-FQ-1fU">
+                                <rect key="frame" x="252" y="519" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -354,8 +353,8 @@
                                     <rect key="frame" x="152" y="513" width="21" height="27"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
-                                <rect key="frame" x="478" y="521" width="21" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-4o-R1J">
+                                <rect key="frame" x="408" y="519" width="21" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -370,7 +369,7 @@
                             <constraint firstItem="ueQ-13-3c2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eeD-Qv-VPn" secondAttribute="bottom" constant="115" id="J2P-lK-l3R"/>
                             <constraint firstItem="DSd-Er-Mg9" firstAttribute="top" secondItem="eeD-Qv-VPn" secondAttribute="bottom" constant="8" symbolic="YES" id="K1x-T1-1xn"/>
                             <constraint firstItem="vDT-FQ-1fU" firstAttribute="centerY" secondItem="TUF-HH-W8J" secondAttribute="centerY" id="Ryp-Sx-E5B"/>
-                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="centerY" secondItem="yR2-hV-EgY" secondAttribute="centerY" priority="250" id="SU5-DC-qo4"/>
+                            <constraint firstItem="eeD-Qv-VPn" firstAttribute="centerY" secondItem="yR2-hV-EgY" secondAttribute="centerY" priority="250" constant="-55" id="SU5-DC-qo4"/>
                             <constraint firstItem="DSd-Er-Mg9" firstAttribute="trailing" secondItem="4VQ-sT-3Rk" secondAttribute="trailing" id="XNd-yE-Y9Z"/>
                             <constraint firstItem="eeD-Qv-VPn" firstAttribute="leading" secondItem="yR2-hV-EgY" secondAttribute="leading" id="aRu-cJ-BQK"/>
                             <constraint firstItem="2gP-4o-R1J" firstAttribute="centerY" secondItem="WJu-YW-TIW" secondAttribute="centerY" id="fIV-in-Ynq"/>
@@ -680,17 +679,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="20" y="72" width="560" height="479"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
+                                <rect key="frame" x="20" y="64" width="560" height="487"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="244"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="244" width="560" height="243"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6UP-jN-lJM" firstAttribute="top" secondItem="Tud-ph-Z5d" secondAttribute="bottom" constant="8" symbolic="YES" id="Y9h-c8-TRf"/>
-                            <constraint firstItem="cEM-Ca-fck" firstAttribute="top" secondItem="6UP-jN-lJM" secondAttribute="bottom" id="g8U-cP-Dlb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6UP-jN-lJM" secondAttribute="trailing" id="iRk-rh-FBA"/>
-                            <constraint firstItem="6UP-jN-lJM" firstAttribute="leading" secondItem="Zbl-Dg-dek" secondAttribute="leadingMargin" id="tmq-bY-hB6"/>
+                            <constraint firstItem="cEM-Ca-fck" firstAttribute="top" secondItem="YvT-Br-f74" secondAttribute="bottom" id="R8S-PZ-t89"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YvT-Br-f74" secondAttribute="trailing" id="agG-Yb-ztt"/>
+                            <constraint firstItem="YvT-Br-f74" firstAttribute="top" secondItem="Tud-ph-Z5d" secondAttribute="bottom" id="c9E-oU-qug"/>
+                            <constraint firstItem="YvT-Br-f74" firstAttribute="leading" secondItem="Zbl-Dg-dek" secondAttribute="leadingMargin" id="j5m-8h-OqY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stats" id="ORK-4f-d4r">
@@ -707,6 +715,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chart" destination="6UP-jN-lJM" id="FA8-UG-2Zh"/>
+                        <outlet property="deckChart" destination="FRg-9B-vmd" id="bPl-yJ-I0p"/>
                         <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="nL8-kv-anp"/>
                     </connections>
                 </viewController>
@@ -951,7 +960,7 @@ trackobot.com</string>
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LfB-NZ-Ouo"/>
+        <segue reference="nL8-kv-anp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.51764705879999995" green="0.34901960780000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
 </document>

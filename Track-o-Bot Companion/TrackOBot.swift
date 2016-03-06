@@ -160,6 +160,19 @@ class ByClassStats {
     }
 }
 
+class ByDeckStats {
+    let deck: String!
+    let wins: Int!
+    let losses: Int!
+    
+    init(deck: String?, wins: Int?, losses: Int?) {
+        self.deck = deck
+        self.wins = wins
+        self.losses = losses
+    }
+}
+
+
 enum Result<T: Any, U: ErrorType> {
     case Success(T)
     case Failure(U)
@@ -194,6 +207,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     let oneTimeAuthTokenUrl = "https://\(DOMAIN)/one_time_auth.json"
     
     let byClassResultsUrl = "https://\(DOMAIN)/profile/stats/classes.json"
+    let byDeckResultsUrl = "https://\(DOMAIN)/profile/stats/decks.json"
 
     
     func storeUser(user:User) -> Void {
@@ -257,7 +271,46 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         deleteRequest(url, onComplete: onComplete)
     }
     
+    func getDeckNames(onComplete: (Result<[String], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest(byDeckResultsUrl, onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let stats = dict["stats"]?["as_deck"] as? NSDictionary else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                guard let deckNames = stats.keyEnumerator().allObjects as? [String] else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                onComplete(Result.Success(deckNames))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+    
     func getDecks(onComplete: (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
+        getDeckNames({
+        (result) -> Void in
+            switch result {
+            case .Success(let deckNames):
+                let decks = HEROES.map {
+                    (h) in deckNames.map { dn in Deck(hero: h, name: dn)}
+                }
+                onComplete(Result.Success(decks))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+    
+    func internalGetDecks(onComplete: (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(decksUrl, onComplete: {
             (result) -> Void in
             switch result {
@@ -295,6 +348,27 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                 }
                 
                 onComplete(Result.Success(byClassStats))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+    
+    func getByDeckStats(onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest(byDeckResultsUrl, onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let stats = dict["stats"]?["as_deck"] as? [String: NSDictionary] else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
+                    deck: d, wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
+            
+                onComplete(Result.Success(byDeckStats))
                 break
             case .Failure(let err):
                 onComplete(Result.Failure(err))

@@ -315,7 +315,7 @@ public class BarChartRenderer: ChartDataRendererBase
                     for (var j = 0, count = Int(ceil(CGFloat(dataSet.entryCount) * animator.phaseX)); j < count; j++)
                     {
                         guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
-                        
+                    
                         let valuePoint = trans.getTransformedValueBarChart(
                             entry: e,
                             xIndex: e.xIndex,
