@@ -57,14 +57,18 @@ class Game : DateFormattingModel {
     let coin: Bool!
     let timeLabel: String!
     let mode: GameMode!
+    let rank: Int?
+    let legend: Int?
 
-    init(id: Int?, hero: String?, opponentsHero: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked) {
+    init(id: Int?, hero: String?, opponentsHero: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
         self.won = won
         self.coin = coin
         self.mode = mode
+        self.rank = rank
+        self.legend = legend
         if let d = added {
             self.timeLabel = Game.outputDateFormatter.stringFromDate(d)
         } else {
@@ -148,27 +152,31 @@ class User : NSObject, NSCoding {
 
 }
 
-class ByClassStats {
-    let hero: String!
+class Stats {
     let wins: Int!
     let losses: Int!
     
-    init(hero: String?, wins: Int?, losses: Int?) {
-        self.hero = hero
+    init(wins: Int?, losses: Int?) {
         self.wins = wins
         self.losses = losses
     }
 }
 
-class ByDeckStats {
+class ByClassStats : Stats {
+    let hero: String!
+    
+    init(hero: String?, wins: Int?, losses: Int?) {
+        self.hero = hero
+        super.init(wins: wins, losses: losses)
+    }
+}
+
+class ByDeckStats : Stats {
     let deck: String!
-    let wins: Int!
-    let losses: Int!
     
     init(deck: String?, wins: Int?, losses: Int?) {
         self.deck = deck
-        self.wins = wins
-        self.losses = losses
+        super.init(wins: wins, losses: losses)
     }
 }
 
@@ -188,6 +196,8 @@ enum TrackOBotAPIError : ErrorType {
 }
 
 let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
+let RANK_UNKNOWN = 0 // as defined in the original TrackOBot
+let LEGEND_UNKNOWN = 0 // as defined in the original TrackOBot
 
 class TrackOBot : NSObject, NSURLSessionDelegate {
     static let instance = TrackOBot()
@@ -228,14 +238,21 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
 
     func postResult(game:Game, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
-        let data = ["result":
-            ["hero": game.hero, "opponent": game.opponentsHero, "win": game.won, "coin": game.coin, "mode": game.mode.rawValue]]
-
+        var gameData = ["hero": game.hero, "opponent": game.opponentsHero, "win": game.won, "coin": game.coin,
+            "mode": game.mode.rawValue] as [String: AnyObject]
+        if let rnk = game.rank {
+            gameData["rank"] = rnk
+        }
+        if let legend = game.legend {
+            gameData["legend"] = legend
+        }
+        
+        let data = ["result": gameData]
         guard let json = try? NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.init(rawValue: 0)) else {
             onComplete(Result.Failure(TrackOBotAPIError.JsonFormattingFailed))
             return
         }
-
+        print("Sending: \(NSString(data: json, encoding: NSUTF8StringEncoding))")
         postRequest(resultsUrl, data: json, onComplete: onComplete)
     }
     

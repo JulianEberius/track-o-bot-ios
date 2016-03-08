@@ -96,6 +96,7 @@ public class ChartData: NSObject
     }
     
     // calculates the average length (in characters) across all x-value strings
+    // HACK: changed for TrackOBot-iOS to return max(), not avg()
     internal func calcXValAverageLength()
     {
         if (_xVals.count == 0)
@@ -105,13 +106,18 @@ public class ChartData: NSObject
         }
         
         var sum = 1
-        
+        var max = 0
         for (var i = 0; i < _xVals.count; i++)
         {
-            sum += _xVals[i] == nil ? 0 : (_xVals[i]!).characters.count
+            let cnt = _xVals[i] == nil ? 0 : (_xVals[i]!).characters.count
+            sum += cnt
+            if (cnt > max) {
+                max = cnt
+            }
         }
         
-        _xValAverageLength = Double(sum) / Double(_xVals.count)
+        //_xValAverageLength = Double(sum) / Double(_xVals.count)
+        _xValAverageLength = Double(max)
     }
     
     // Checks if the combination of x-values array and DataSet array is legal or not.

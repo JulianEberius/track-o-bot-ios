@@ -122,8 +122,9 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var heroPicker: UIPickerView!
     @IBOutlet weak var opponentPicker: UIPickerView!
     
+    @IBOutlet weak var literalRankLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var rankSteper: UIStepper!
+    @IBOutlet weak var rankStepper: UIStepper!
     
     @IBOutlet weak var modeSwitch: UISegmentedControl!
     @IBOutlet weak var coinSwitch: UISwitch!
@@ -167,6 +168,24 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         saveGame(false);
     }
     
+
+    @IBAction func modeChanged(sender: UISegmentedControl) {
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.rankStepper.enabled = true
+            self.rankStepper.tintColor = self.view.tintColor
+            self.literalRankLabel.textColor = self.view.tintColor
+            self.rankLabel.textColor = self.view.tintColor
+            break;
+        default:
+            self.rankStepper.enabled = false
+            self.rankStepper.tintColor = UIColor.grayColor()
+            self.literalRankLabel.textColor = UIColor.grayColor()
+            self.rankLabel.textColor = UIColor.grayColor()
+            break;
+        }
+    }
+    
     func saveGame(won: Bool) {
         let yourHero = HEROES[self.heroPicker.selectedRowInComponent(HERO_PICKER)]
         let opponentsHero = HEROES[self.opponentPicker.selectedRowInComponent(HERO_PICKER)]
@@ -174,11 +193,16 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let coin = self.coinSwitch.on
         let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
 
+        let rankStepperValue = Int(self.rankStepper.value)
+        let rank: Int? = (mode == GameMode.Ranked && rankStepperValue > 0) ? rankStepperValue : nil
+        // unsupported for now, as manual entry to cumbersome
+        let legend: Int? = (mode == GameMode.Ranked && Int(self.rankStepper.value) == 0) ?  0 : nil
+
         self.wonGameButton.enabled = false
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
 
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin, mode: mode)
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
@@ -294,8 +318,8 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         controllers[opponentPicker] = HeroAndDeckPickerViewController(viewController: self, pickerView: opponentPicker, player: Player.Opponent)
         
         let selectedRank = defaults.hasKey(SELECTED_RANK) ? defaults.integerForKey(SELECTED_RANK) : 25
-        rankSteper.value = Double(selectedRank)
-        rankStepperValueChanged(rankSteper)
+        rankStepper.value = Double(selectedRank)
+        rankStepperValueChanged(rankStepper)
     }
 
     override func viewDidAppear(animated: Bool) {
