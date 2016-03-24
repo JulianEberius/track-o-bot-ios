@@ -79,7 +79,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
         ds.setColors(self.heroColors, alpha: 0.95)
-
+        ds.drawValuesEnabled = false
         let d = BarChartData(xVals: HEROES, dataSet: ds)
         return d
     }
@@ -96,6 +96,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
         ds.setColors(ChartColorTemplates.liberty(), alpha: 1.0)
+        ds.drawValuesEnabled = false
         let d = BarChartData(xVals: decks, dataSet: ds)
         return d
     }
@@ -150,7 +151,8 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
         {
             let s = stats[entry.xIndex]
-            strVal = "W: \(s.wins) / L: \(s.losses)"
+            let percentStr = String(format: "%.1f", entry.value)
+            strVal = "\(percentStr)% (W: \(s.wins) / L: \(s.losses))"
         }
         
         override var size: CGSize {
@@ -159,12 +161,17 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     }
     
     func updateChart(chart: BarLineChartViewBase, data: ChartData, stats: [Stats]) {
-        chart.xAxis.labelRotationAngle = 90
+        if (self.view.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.Compact) {
+            chart.xAxis.labelRotationAngle = 90
+        } else {
+            chart.xAxis.labelRotationAngle = 0
+        }
+        
         chart.xAxis.labelPosition = ChartXAxis.XAxisLabelPosition.Bottom
         chart.xAxis.setLabelsToSkip(0)
         chart.xAxis.spaceBetweenLabels = 0
+
         //chart.xAxis.valueFormatter = CustomXAxisValueFormatter(stats: stats)
-        
         chart.rightAxis.enabled = false
         chart.leftAxis.customAxisMax = 100
         chart.leftAxis.customAxisMin = 0

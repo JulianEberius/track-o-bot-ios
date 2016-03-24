@@ -692,15 +692,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
-                                <rect key="frame" x="20" y="64" width="560" height="487"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
+                                <rect key="frame" x="24" y="68" width="552" height="479"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="244"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="552" height="238"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="244" width="560" height="243"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="242" width="552" height="237"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -708,10 +708,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cEM-Ca-fck" firstAttribute="top" secondItem="YvT-Br-f74" secondAttribute="bottom" id="R8S-PZ-t89"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YvT-Br-f74" secondAttribute="trailing" id="agG-Yb-ztt"/>
-                            <constraint firstItem="YvT-Br-f74" firstAttribute="top" secondItem="Tud-ph-Z5d" secondAttribute="bottom" id="c9E-oU-qug"/>
-                            <constraint firstItem="YvT-Br-f74" firstAttribute="leading" secondItem="Zbl-Dg-dek" secondAttribute="leadingMargin" id="j5m-8h-OqY"/>
+                            <constraint firstItem="cEM-Ca-fck" firstAttribute="top" secondItem="YvT-Br-f74" secondAttribute="bottom" constant="4" id="R8S-PZ-t89"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YvT-Br-f74" secondAttribute="trailing" constant="4" id="agG-Yb-ztt"/>
+                            <constraint firstItem="YvT-Br-f74" firstAttribute="top" secondItem="Tud-ph-Z5d" secondAttribute="bottom" constant="4" id="c9E-oU-qug"/>
+                            <constraint firstItem="YvT-Br-f74" firstAttribute="leading" secondItem="Zbl-Dg-dek" secondAttribute="leadingMargin" constant="4" id="j5m-8h-OqY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stats" id="ORK-4f-d4r">
