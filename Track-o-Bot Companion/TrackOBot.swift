@@ -350,6 +350,29 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         })
     }
     
+    func getVsClassStats(asClass: String, onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest("\(byClassResultsUrl)?as_hero=\(asClass.lowercaseString)", onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let stats = dict["stats"]?["vs_class"] as? NSDictionary else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                let byClassStats = HEROES.map { (hero) -> ByClassStats in
+                    let heroStats = stats[hero] as! NSDictionary
+                    return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
+                }
+                
+                onComplete(Result.Success(byClassStats))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+    
     func getByDeckStats(onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byDeckResultsUrl, onComplete: {
             (result) -> Void in
