@@ -327,29 +327,6 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         })
     }
     
-    func internalGetDecks(onComplete: (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
-        getRequest(decksUrl, onComplete: {
-            (result) -> Void in
-            switch result {
-            case .Success(let dict):
-                guard let history = dict["decks"] as? [NSDictionary] else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                    return
-                }
-                let allDecks = history.map { d in Deck(dict:d) }
-                var groupedDecks = Array(count: HEROES.count, repeatedValue: [Deck]())
-                for d in allDecks {
-                    groupedDecks[HEROES.indexOf(d.hero)!].append(d)
-                }
-                onComplete(Result.Success(groupedDecks))
-                break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
-                break
-            }
-        })
-    }
-    
     func getByClassStats(onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byClassResultsUrl, onComplete: {
             (result) -> Void in
