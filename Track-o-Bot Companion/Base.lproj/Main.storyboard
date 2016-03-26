@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -692,18 +692,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
                                 <rect key="frame" x="24" y="68" width="552" height="479"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="0.0" width="552" height="238"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall win rates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYL-Ip-hM9">
+                                        <rect key="frame" x="0.0" y="0.0" width="552" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="25" width="552" height="213"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="242" width="552" height="237"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win rates as X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN0-4w-CRM">
+                                        <rect key="frame" x="0.0" y="242" width="552" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="267" width="552" height="212"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="FRg-9B-vmd" firstAttribute="height" secondItem="6UP-jN-lJM" secondAttribute="height" id="594-kx-Wzd"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -727,8 +742,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="chart" destination="6UP-jN-lJM" id="FA8-UG-2Zh"/>
-                        <outlet property="deckChart" destination="FRg-9B-vmd" id="bPl-yJ-I0p"/>
+                        <outlet property="detailChart" destination="FRg-9B-vmd" id="hW8-o5-GgC"/>
+                        <outlet property="detailChartLabel" destination="MN0-4w-CRM" id="uxD-bA-ee5"/>
+                        <outlet property="mainChart" destination="6UP-jN-lJM" id="hv0-nX-Wod"/>
+                        <outlet property="mainChartLabel" destination="IYL-Ip-hM9" id="h5A-XV-Uom"/>
                         <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="nL8-kv-anp"/>
                     </connections>
                 </viewController>
@@ -973,7 +990,7 @@ trackobot.com</string>
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LfB-NZ-Ouo"/>
+        <segue reference="nL8-kv-anp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.51764705879999995" green="0.34901960780000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
 </document>
