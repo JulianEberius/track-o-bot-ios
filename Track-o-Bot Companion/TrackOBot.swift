@@ -53,6 +53,8 @@ class Game : DateFormattingModel {
     let id: Int!
     let hero: String!
     let opponentsHero: String!
+    let deck: String!
+    let opponentsDeck: String!
     let won: Bool!
     let coin: Bool!
     let timeLabel: String!
@@ -60,10 +62,12 @@ class Game : DateFormattingModel {
     let rank: Int?
     let legend: Int?
 
-    init(id: Int?, hero: String?, opponentsHero: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
+    init(id: Int?, hero: String?, opponentsHero: String?, deck: String?, opponentsDeck: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
+        self.deck = deck
+        self.opponentsDeck = opponentsDeck
         self.won = won
         self.coin = coin
         self.mode = mode
@@ -84,6 +88,8 @@ class Game : DateFormattingModel {
         let id = dict["id"] as? Int
         let hero = dict["hero"] as? String
         let opponentsHero = dict["opponent"] as? String
+        let deck = dict["hero_deck"] as? String
+        let opponentsDeck = dict["opponent_deck"] as? String
         let won = (dict["result"] as? String) == "win" ? true : false
         let coin = dict["coin"] as? Bool
 
@@ -91,16 +97,18 @@ class Game : DateFormattingModel {
         if let ds = dict["added"] as? String {
             added = Game.inputDateFormatter.dateFromString(ds)
         }
-        self.init(id: id, hero: hero, opponentsHero: opponentsHero, won: won, coin: coin, added: added)
+        self.init(id: id, hero: hero, opponentsHero: opponentsHero, deck: deck, opponentsDeck: opponentsDeck, won: won, coin: coin, added: added)
     }
 }
 
 class Deck : DateFormattingModel {
 
+    let id: Int!
     let hero: String!
     let name: String!
 
-    init(hero: String?, name: String?) {
+    init(id: Int?, hero: String?, name: String?) {
+        self.id = id
         self.hero = hero
         self.name = name
     }
@@ -110,9 +118,10 @@ class Deck : DateFormattingModel {
      - dict: as returned by parsing the Track-O-Bot API response using NSJSONSerialization
      */
     convenience init(dict:NSDictionary) {
+        let id = dict["id"] as? Int
         let name = dict["name"] as? String
         let hero = dict["hero"] as? String
-        self.init(hero: hero, name: name)
+        self.init(id: id, hero: hero, name: name)
     }
 }
 
@@ -202,6 +211,7 @@ let LEGEND_UNKNOWN = 0 // as defined in the original TrackOBot
 class TrackOBot : NSObject, NSURLSessionDelegate {
     static let instance = TrackOBot()
     static let DOMAIN = "trackobot.com"
+    //static let DOMAIN = "localhost:3001"
 
     let USER = "user"
     let USERNAME = "username"
@@ -238,8 +248,15 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
 
     func postResult(game:Game, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
-        var gameData = ["hero": game.hero, "opponent": game.opponentsHero, "win": game.won, "coin": game.coin,
-            "mode": game.mode.rawValue] as [String: AnyObject]
+        var gameData = ["hero": game.hero, "opponent": game.opponentsHero,
+                        "win": game.won, "coin": game.coin,
+                        "mode": game.mode.rawValue] as [String: AnyObject]
+        if let deck = game.deck {
+            gameData["deck_name"] = deck
+        }
+        if let opponentsDeck = game.opponentsDeck {
+            gameData["opponent_deck_name"] = opponentsDeck
+        }
         if let rnk = game.rank {
             gameData["rank"] = rnk
         }
@@ -287,37 +304,25 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         let url = "\(resultDeleteUrl)?result_ids[]=\(id)"
         deleteRequest(url, onComplete: onComplete)
     }
-    
-    func getDeckNames(onComplete: (Result<[String], TrackOBotAPIError>) -> Void) -> Void {
-        getRequest(byDeckResultsUrl, onComplete: {
-            (result) -> Void in
-            switch result {
-            case .Success(let dict):
-                guard let stats = dict["stats"]?["as_deck"] as? NSDictionary else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                    return
-                }
-                guard let deckNames = stats.keyEnumerator().allObjects as? [String] else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
-                    return
-                }
-                onComplete(Result.Success(deckNames))
-                break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
-                break
-            }
-        })
-    }
-    
+
     func getDecks(onComplete: (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
-        getDeckNames({
+        getRequest(decksUrl, onComplete: {
         (result) -> Void in
             switch result {
-            case .Success(let deckNames):
-                let decks = HEROES.map {
-                    (h) in deckNames.map { dn in Deck(hero: h, name: dn)}
+            case .Success(let dict):
+                guard let decksDicts = dict["decks"] as? [NSDictionary] else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
                 }
+                let decks  = HEROES.map {
+                    (hero) in
+                    decksDicts.filter { (d) in
+                        d["hero"] as? String == hero
+                    }.map { (d) in
+                        Deck(id: d["id"] as? Int, hero: d["hero"] as? String, name: d["name"] as? String)
+                    }
+                }
+
                 onComplete(Result.Success(decks))
                 break
             case .Failure(let err):
@@ -372,7 +377,8 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             }
         })
     }
-    
+
+    // TODO: abstract deck vs class stat functions (are basically copy-pasta now)
     func getByDeckStats(onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byDeckResultsUrl, onComplete: {
             (result) -> Void in
@@ -385,6 +391,28 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                 let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
                     deck: d, wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
             
+                onComplete(Result.Success(byDeckStats))
+                break
+            case .Failure(let err):
+                onComplete(Result.Failure(err))
+                break
+            }
+        })
+    }
+
+    func getVsDeckStats(asDeck: Int, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest("\(byDeckResultsUrl)?as_deck=\(asDeck)", onComplete: {
+            (result) -> Void in
+            switch result {
+            case .Success(let dict):
+                guard let stats = dict["stats"]?["vs_deck"] as? [String: NSDictionary]  else {
+                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    return
+                }
+                let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
+                        deck: d, wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int)
+                }
+
                 onComplete(Result.Success(byDeckStats))
                 break
             case .Failure(let err):
@@ -462,7 +490,11 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return
         }
 
-        let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url)
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url) else {
+            print("error creating request")
+            return
+        }
+
         urlRequest.HTTPMethod = "POST"
         if let d = data {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -490,7 +522,10 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
             return
         }
-        let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url)
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url) else {
+            print("error creating request")
+            return
+        }
         
         let task = session.dataTaskWithRequest(urlRequest){
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
@@ -515,7 +550,10 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return
         }
         // set delegate to prevent following redirects
-        let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url, delegate: self)
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url, delegate: self) else {
+                print("error creating request")
+                return
+        }
         
         urlRequest.HTTPMethod = "DELETE"
         
@@ -532,7 +570,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         task.resume()
     }
     
-    private func configureAuthenticatedSessionAndRequest(user:User, url:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest) {
+    private func configureAuthenticatedSessionAndRequest(user:User, url:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest)? {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let userPasswordString = "\(user.username):\(user.password)"
         let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -540,7 +578,11 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         let authString = "Basic \(base64EncodedCredential)"
         config.HTTPAdditionalHeaders = ["Authorization" : authString]
 
-        let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+        guard let encodedURLStr = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
+            print("could not parse URL: \(url)")
+            return nil
+        }
+        let urlRequest = NSMutableURLRequest(URL: NSURL(string: encodedURLStr)!)
         urlRequest.HTTPMethod = "GET"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
 

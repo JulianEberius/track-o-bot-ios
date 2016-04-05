@@ -9,14 +9,18 @@
 import UIKit
 import Charts
 
-
 class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     
     @IBOutlet weak var mainChartLabel: UILabel!
     @IBOutlet weak var mainChart: BarChartView!
     @IBOutlet weak var detailChartLabel: UILabel!
     @IBOutlet weak var detailChart: BarChartView!
-    
+    @IBOutlet weak var statTypeSegmentControl: UISegmentedControl!
+
+    var yNames: [String] = []
+    var decks: [Deck] = []
+    var barColors: [UIColor] = []
+
     var selectedIndexMainChart: Int? = nil
     
     let heroColors = [
@@ -36,16 +40,44 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         self.mainChart.noDataText = "Loading data ..."
         self.detailChart.noDataText = "Select a class ..."
     }
-    
+
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        resetCharts()
+    }
 
-        TrackOBot.instance.getByClassStats({
-            (result) -> Void in
+    func resetCharts() {
+        self.mainChart.highlightValue(nil)
+        self.selectedIndexMainChart = nil
+        self.detailChart.clear()
+        self.updateDescriptionLabel()
+
+        if (statTypeSegmentControl.selectedSegmentIndex == 0) {
+            self.detailChart.noDataText = "Select a class ..."
+            TrackOBot.instance.getByClassStats(statResultsCallback(self.createHeroBarChartData))
+        } else {
+            self.detailChart.noDataText = "Select a deck ..."
+            TrackOBot.instance.getByDeckStats(statResultsCallback(self.createDeckBarChartData))
+            TrackOBot.instance.getDecks({
+                (result) in
+                switch (result) {
+                case .Success(let decks):
+                    self.decks = decks.flatMap { $0 }
+                    break
+                case .Failure:
+                    // TODO handle
+                    return
+                }
+            })
+        }
+    }
+
+    private func statResultsCallback<T: Stats>(barChartMapper:([T]->BarChartData)) -> (Result<[T], TrackOBotAPIError> -> ()) {
+        return { (result:Result<[T], TrackOBotAPIError>) in
             switch result {
             case .Success(let stats):
-                let data = self.createHeroBarChartData(stats)
+                let data = barChartMapper(stats)
                 self.updateChart(self.mainChart, data: data, stats: stats)
                 break
             case .Failure(let err):
@@ -56,15 +88,18 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                     print("what")
                 }
             }
-        })
-        
-        self.mainChart.highlightValue(nil)
-        self.selectedIndexMainChart = nil
-        self.detailChart.clear()
-        self.updateDescriptionLabel()
+        }
+    }
+
+
+    @IBAction func statTypeSegmentControlValueChanged(sender: UISegmentedControl) {
+        resetCharts()
     }
     
     func createHeroBarChartData(stats: [ByClassStats]) -> BarChartData {
+        self.barColors = self.heroColors
+        self.yNames = HEROES
+
         let data = stats.map { (d) -> BarChartDataEntry in
             let sum = d.wins + d.losses
             guard sum > 0 else {
@@ -74,17 +109,23 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             return BarChartDataEntry(value: val, xIndex: HEROES.indexOf(d.hero)!)
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
-        ds.setColors(self.heroColors, alpha: 0.95)
+
+        ds.setColors(self.barColors, alpha: 0.95)
         ds.highlightAlpha = 0.0
         ds.highlightLineWidth = 5.0
         
         ds.drawValuesEnabled = false
         let d = BarChartData(xVals: HEROES, dataSet: ds)
+
+
         return d
     }
 
     func createDeckBarChartData(stats: [ByDeckStats]) -> BarChartData {
-        let decks = stats.map { d in d.deck as String}
+        let decks = stats.map { d in d.deck as String }
+        self.yNames = decks
+        self.barColors = ChartColorTemplates.liberty()
+
         let data = stats.map { (d) -> BarChartDataEntry in
             let sum = d.wins + d.losses
             guard sum > 0 else {
@@ -94,9 +135,15 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             return BarChartDataEntry(value: val, xIndex: decks.indexOf(d.deck)!)
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
-        ds.setColors(ChartColorTemplates.liberty(), alpha: 1.0)
+
+        ds.setColors(self.barColors, alpha: 1.0)
+        ds.highlightAlpha = 0.0
+        ds.highlightLineWidth = 5.0
+
         ds.drawValuesEnabled = false
         let d = BarChartData(xVals: decks, dataSet: ds)
+
+
         return d
     }
     
@@ -135,24 +182,38 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             return
         }
         if (self.selectedIndexMainChart != entry.xIndex) {
-            TrackOBot.instance.getVsClassStats(HEROES[entry.xIndex], onComplete: {
-                (result) -> Void in
-                switch result {
-                case .Success(let stats):
-                    let data = self.createHeroBarChartData(stats)
-                    self.updateChart(self.detailChart, data: data, stats: stats)
-                    self.selectedIndexMainChart = entry.xIndex
-                    self.updateDescriptionLabel()
-                    break
-                case .Failure(let err):
-                    switch err {
-                    case .CredentialsMissing, .LoginFaild(_):
-                        self.performSegueWithIdentifier("to_login", sender: self)
-                    default:
-                        print("what")
-                    }
+            self.selectedIndexMainChart = entry.xIndex
+            if (self.statTypeSegmentControl.selectedSegmentIndex == 0) {
+                TrackOBot.instance.getVsClassStats(self.yNames[entry.xIndex], onComplete: getVsStatsCallback(self.createHeroBarChartData))
+            } else {
+                let deckName = self.yNames[entry.xIndex]
+                let di = self.decks.filter { d in d.name == deckName }.first?.id
+                guard let deckId = di else {
+                    // TODO: handle
+                    return
                 }
-            })
+                TrackOBot.instance.getVsDeckStats(deckId, onComplete: getVsStatsCallback(self.createDeckBarChartData))
+            }
+        }
+    }
+
+    func getVsStatsCallback<T : Stats>(barChartMapper:([T]->BarChartData)) -> (Result<[T], TrackOBotAPIError>) -> () {
+        return {
+            (result: Result<[T], TrackOBotAPIError>) -> Void in
+            switch result {
+            case .Success(let stats):
+                let data = barChartMapper(stats)
+                self.updateChart(self.detailChart, data: data, stats: stats)
+                self.updateDescriptionLabel()
+                break
+            case .Failure(let err):
+                switch err {
+                case .CredentialsMissing, .LoginFaild(_):
+                    self.performSegueWithIdentifier("to_login", sender: self)
+                default:
+                    print("what")
+                }
+            }
         }
     }
     
@@ -166,10 +227,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             return
         }
         let attrString = NSMutableAttributedString(string: "Win rates as ")
-        let heroString = NSAttributedString(string: "\(HEROES[idx])",
-                                            attributes: [NSForegroundColorAttributeName: heroColors[idx],
+        let labelString = NSAttributedString(string: "\(self.yNames[idx])",
+                                            attributes: [NSForegroundColorAttributeName: self.barColors[idx],
                                                 NSFontAttributeName: UIFont.boldSystemFontOfSize(self.detailChartLabel.font.pointSize)])
-        attrString.appendAttributedString(heroString)
+        attrString.appendAttributedString(labelString)
         self.detailChartLabel.attributedText = attrString
     }
     

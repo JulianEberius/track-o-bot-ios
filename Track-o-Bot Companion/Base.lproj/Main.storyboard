@@ -695,24 +695,34 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-Br-f74">
                                 <rect key="frame" x="24" y="68" width="552" height="479"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall win rates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYL-Ip-hM9">
-                                        <rect key="frame" x="0.0" y="0.0" width="552" height="21"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W5l-mz-6AK">
+                                        <rect key="frame" x="0.0" y="0.0" width="552" height="28"/>
+                                        <segments>
+                                            <segment title="By Class"/>
+                                            <segment title="By Deck"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="statTypeSegmentControlValueChanged:" destination="ba2-k2-aum" eventType="valueChanged" id="Bu8-sD-fmN"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Overall win rates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYL-Ip-hM9">
+                                        <rect key="frame" x="0.0" y="31" width="552" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="25" width="552" height="213"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6UP-jN-lJM" userLabel="HeroStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="56" width="552" height="197"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win rates as X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN0-4w-CRM">
-                                        <rect key="frame" x="0.0" y="242" width="552" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Win rates as X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN0-4w-CRM">
+                                        <rect key="frame" x="0.0" y="257" width="552" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="267" width="552" height="212"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRg-9B-vmd" userLabel="DeckStatsChart" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="282" width="552" height="197"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -746,6 +756,7 @@
                         <outlet property="detailChartLabel" destination="MN0-4w-CRM" id="uxD-bA-ee5"/>
                         <outlet property="mainChart" destination="6UP-jN-lJM" id="hv0-nX-Wod"/>
                         <outlet property="mainChartLabel" destination="IYL-Ip-hM9" id="h5A-XV-Uom"/>
+                        <outlet property="statTypeSegmentControl" destination="W5l-mz-6AK" id="zNt-wd-VNS"/>
                         <segue destination="N7E-gs-6MW" kind="presentation" identifier="to_login" id="nL8-kv-anp"/>
                     </connections>
                 </viewController>

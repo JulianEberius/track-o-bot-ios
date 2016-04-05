@@ -100,18 +100,21 @@ class HeroAndDeckPickerViewController {
         
         let hero = HEROES[selectedHeroRow]
         let decks = viewController.deckNames[selectedHeroRow]
-        if decks.count == 0 {
+        if decks.count == 0 || selectedDeckRow == 0 {
             return nil
         }
         
-        return (hero, decks[selectedDeckRow])
+        return (hero, decks[selectedDeckRow - 1])
     }
     
     private func deckRowFor(selectedDeck: String?, andHeroRow heroRow: Int) -> Int? {
         guard let d = selectedDeck else {
             return nil
         }
-        return viewController.deckNames[heroRow].indexOf(d)
+        if let idx = viewController.deckNames[heroRow].indexOf(d) {
+            return idx + 1
+        }
+        return nil
     }
     
 }
@@ -187,8 +190,15 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     }
     
     func saveGame(won: Bool) {
-        let yourHero = HEROES[self.heroPicker.selectedRowInComponent(HERO_PICKER)]
-        let opponentsHero = HEROES[self.opponentPicker.selectedRowInComponent(HERO_PICKER)]
+        let yourHeroIdx = self.heroPicker.selectedRowInComponent(HERO_PICKER)
+        let yourHero = HEROES[yourHeroIdx]
+        let opponentsHeroIdx = self.opponentPicker.selectedRowInComponent(HERO_PICKER)
+        let opponentsHero = HEROES[opponentsHeroIdx]
+
+        let deckIdx = self.heroPicker.selectedRowInComponent(DECK_PICKER)
+        let yourDeck:String? = deckIdx > 0 ? self.deckNames[yourHeroIdx][deckIdx-1] : nil
+        let opponentsDeckIdx = self.opponentPicker.selectedRowInComponent(DECK_PICKER)
+        let opponentsDeck:String? = opponentsDeckIdx > 0 ? self.deckNames[opponentsHeroIdx][opponentsDeckIdx-1] : nil
 
         let coin = self.coinSwitch.on
         let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
@@ -202,7 +212,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
 
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: yourDeck, opponentsDeck:  opponentsDeck, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
@@ -243,7 +253,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
             }
             else
             {
-              return deckCount
+              return deckCount + 1
             }
         }
     }
@@ -273,7 +283,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         else
         {
             let deckNames = self.deckNames[pickerView.selectedRowInComponent(HERO_PICKER)]
-            let deckName = deckNames.count > 0 ? deckNames[row] : "..."
+            let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Undefined"
             if let v = view as? UILabel {
                 v.text = deckName
                 return v
