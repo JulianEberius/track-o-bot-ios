@@ -212,7 +212,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
 
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deckId: yourDeckId, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: nil, deckId: yourDeckId, opponentsDeck: nil, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in

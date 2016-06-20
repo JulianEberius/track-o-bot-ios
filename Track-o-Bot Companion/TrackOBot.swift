@@ -53,7 +53,9 @@ class Game : DateFormattingModel {
     let id: Int!
     let hero: String!
     let opponentsHero: String!
+    let deck: String!
     let deckId: Int!
+    let opponentsDeck: String!
     let opponentsDeckId: Int!
     let won: Bool!
     let coin: Bool!
@@ -62,10 +64,12 @@ class Game : DateFormattingModel {
     let rank: Int?
     let legend: Int?
 
-    init(id: Int?, hero: String?, opponentsHero: String?, deckId: Int?, opponentsDeckId: Int?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
+    init(id: Int?, hero: String?, opponentsHero: String?, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
+        self.deck = deck
+        self.opponentsDeck = opponentsDeck
         self.deckId = deckId
         self.opponentsDeckId = opponentsDeckId
         self.won = won
@@ -88,8 +92,8 @@ class Game : DateFormattingModel {
         let id = dict["id"] as? Int
         let hero = dict["hero"] as? String
         let opponentsHero = dict["opponent"] as? String
-        let deckId = dict["hero_deck"] as? Int
-        let opponentsDeckId = dict["opponent_deck"] as? Int
+        let deck = dict["hero_deck"] as? String
+        let opponentsDeck = dict["opponent_deck"] as? String
         let won = (dict["result"] as? String) == "win" ? true : false
         let coin = dict["coin"] as? Bool
 
@@ -97,7 +101,8 @@ class Game : DateFormattingModel {
         if let ds = dict["added"] as? String {
             added = Game.inputDateFormatter.dateFromString(ds)
         }
-        self.init(id: id, hero: hero, opponentsHero: opponentsHero, deckId: deckId, opponentsDeckId: opponentsDeckId, won: won, coin: coin, added: added)
+        self.init(id: id, hero: hero, opponentsHero: opponentsHero, deck: deck, deckId: nil,
+                  opponentsDeck: opponentsDeck, opponentsDeckId: nil, won: won, coin: coin, added: added)
     }
 }
 

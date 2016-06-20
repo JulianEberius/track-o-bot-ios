@@ -12,6 +12,7 @@ import UIKit
 class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UITableViewDelegate {
 
     var games = [Game]()
+
     var total_count: Int = 0
     var retrieved_pages: Int = 0
     var max_requested_idx : Int = 0
@@ -110,8 +111,16 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
             let match = self.games[indexPath.item]
             cell.heroImageView.image = UIImage(named: "\(match.hero)")
             cell.opponentsHeroImageView.image = UIImage(named: "\(match.opponentsHero)")
-            cell.heroLabel.text = match.hero
-            cell.opponentsHeroLabel.text = match.opponentsHero
+            if let deckName = match.deck {
+                cell.heroLabel.text = deckName
+            } else {
+                cell.heroLabel.text = match.hero
+            }
+            if let deckName = match.opponentsDeck {
+                cell.opponentsHeroLabel.text = deckName
+            } else {
+                cell.opponentsHeroLabel.text = match.opponentsHero
+            }
             if let won = match.won {
                 if (won) {
                     cell.winLabel.text = "Win"
