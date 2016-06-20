@@ -53,8 +53,8 @@ class Game : DateFormattingModel {
     let id: Int!
     let hero: String!
     let opponentsHero: String!
-    let deck: String!
-    let opponentsDeck: String!
+    let deckId: Int!
+    let opponentsDeckId: Int!
     let won: Bool!
     let coin: Bool!
     let timeLabel: String!
@@ -62,12 +62,12 @@ class Game : DateFormattingModel {
     let rank: Int?
     let legend: Int?
 
-    init(id: Int?, hero: String?, opponentsHero: String?, deck: String?, opponentsDeck: String?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
+    init(id: Int?, hero: String?, opponentsHero: String?, deckId: Int?, opponentsDeckId: Int?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
-        self.deck = deck
-        self.opponentsDeck = opponentsDeck
+        self.deckId = deckId
+        self.opponentsDeckId = opponentsDeckId
         self.won = won
         self.coin = coin
         self.mode = mode
@@ -88,8 +88,8 @@ class Game : DateFormattingModel {
         let id = dict["id"] as? Int
         let hero = dict["hero"] as? String
         let opponentsHero = dict["opponent"] as? String
-        let deck = dict["hero_deck"] as? String
-        let opponentsDeck = dict["opponent_deck"] as? String
+        let deckId = dict["hero_deck"] as? Int
+        let opponentsDeckId = dict["opponent_deck"] as? Int
         let won = (dict["result"] as? String) == "win" ? true : false
         let coin = dict["coin"] as? Bool
 
@@ -97,7 +97,7 @@ class Game : DateFormattingModel {
         if let ds = dict["added"] as? String {
             added = Game.inputDateFormatter.dateFromString(ds)
         }
-        self.init(id: id, hero: hero, opponentsHero: opponentsHero, deck: deck, opponentsDeck: opponentsDeck, won: won, coin: coin, added: added)
+        self.init(id: id, hero: hero, opponentsHero: opponentsHero, deckId: deckId, opponentsDeckId: opponentsDeckId, won: won, coin: coin, added: added)
     }
 }
 
@@ -182,9 +182,13 @@ class ByClassStats : Stats {
 
 class ByDeckStats : Stats {
     let deck: String!
+    let deckId: Int?
+    let heroId: Int?
     
-    init(deck: String?, wins: Int?, losses: Int?) {
-        self.deck = deck
+    init(deckName: String?, deckId: Int?, heroId: Int?, wins: Int?, losses: Int?) {
+        self.deck = deckName
+        self.deckId = deckId
+        self.heroId = heroId
         super.init(wins: wins, losses: losses)
     }
 }
@@ -205,6 +209,17 @@ enum TrackOBotAPIError : ErrorType {
 }
 
 let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
+let HEROES_BY_TRACKOBOT_ID = [
+    1: "Priest",
+    2: "Rogue",
+    3: "Mage",
+    4: "Paladin",
+    5: "Warrior",
+    6: "Warlock",
+    7: "Hunter",
+    8: "Shaman",
+    9: "Druid"
+]
 let RANK_UNKNOWN = 0 // as defined in the original TrackOBot
 let LEGEND_UNKNOWN = 0 // as defined in the original TrackOBot
 
@@ -251,11 +266,11 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         var gameData = ["hero": game.hero, "opponent": game.opponentsHero,
                         "win": game.won, "coin": game.coin,
                         "mode": game.mode.rawValue] as [String: AnyObject]
-        if let deck = game.deck {
-            gameData["deck_name"] = deck
+        if let deck = game.deckId {
+            gameData["deck_id"] = deck
         }
-        if let opponentsDeck = game.opponentsDeck {
-            gameData["opponent_deck_name"] = opponentsDeck
+        if let opponentsDeck = game.opponentsDeckId {
+            gameData["opponent_deck_id"] = opponentsDeck
         }
         if let rnk = game.rank {
             gameData["rank"] = rnk
@@ -389,8 +404,9 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     return
                 }
                 let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
-                    deck: d, wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
-            
+                    deckName: d, deckId: deckStats["deck_id"] as? Int, heroId: deckStats["hero_id"] as? Int,
+                    wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
+
                 onComplete(Result.Success(byDeckStats))
                 break
             case .Failure(let err):
@@ -400,7 +416,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         })
     }
 
-    func getVsDeckStats(asDeck: Int, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+    func getVsDeckStats(asDeck: Int?, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest("\(byDeckResultsUrl)?as_deck=\(asDeck)", onComplete: {
             (result) -> Void in
             switch result {
@@ -410,7 +426,8 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     return
                 }
                 let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
-                        deck: d, wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int)
+                        deckName: d, deckId: deckStats["deck_id"] as? Int, heroId: deckStats["hero_id"] as? Int,
+                        wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int)
                 }
 
                 onComplete(Result.Success(byDeckStats))
@@ -490,7 +507,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return
         }
 
-        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url) else {
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
             print("error creating request")
             return
         }
@@ -522,7 +539,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
             return
         }
-        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url) else {
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
             print("error creating request")
             return
         }
@@ -550,7 +567,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return
         }
         // set delegate to prevent following redirects
-        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, url: url, delegate: self) else {
+        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url, delegate: self) else {
                 print("error creating request")
                 return
         }
@@ -570,7 +587,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         task.resume()
     }
     
-    private func configureAuthenticatedSessionAndRequest(user:User, url:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest)? {
+    private func configureAuthenticatedSessionAndRequest(user:User, urlString:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest)? {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let userPasswordString = "\(user.username):\(user.password)"
         let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -578,11 +595,12 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         let authString = "Basic \(base64EncodedCredential)"
         config.HTTPAdditionalHeaders = ["Authorization" : authString]
 
-        guard let encodedURLStr = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) else {
-            print("could not parse URL: \(url)")
+        let urlComponents = NSURLComponents.init(string: urlString)
+        guard let url = urlComponents?.URL else {
+            print("could not parse URL: \(urlString)")
             return nil
         }
-        let urlRequest = NSMutableURLRequest(URL: NSURL(string: encodedURLStr)!)
+        let urlRequest = NSMutableURLRequest(URL: url)
         urlRequest.HTTPMethod = "GET"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
 

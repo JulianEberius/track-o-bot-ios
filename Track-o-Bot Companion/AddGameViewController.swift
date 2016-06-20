@@ -196,9 +196,9 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let opponentsHero = HEROES[opponentsHeroIdx]
 
         let deckIdx = self.heroPicker.selectedRowInComponent(DECK_PICKER)
-        let yourDeck:String? = deckIdx > 0 ? self.deckNames[yourHeroIdx][deckIdx-1] : nil
+        let yourDeckId:Int? = deckIdx > 0 ? self.decks[yourHeroIdx][deckIdx-1].id : nil
         let opponentsDeckIdx = self.opponentPicker.selectedRowInComponent(DECK_PICKER)
-        let opponentsDeck:String? = opponentsDeckIdx > 0 ? self.deckNames[opponentsHeroIdx][opponentsDeckIdx-1] : nil
+        let opponentsDeckId:Int? = opponentsDeckIdx > 0 ? self.decks[opponentsHeroIdx][opponentsDeckIdx-1].id : nil
 
         let coin = self.coinSwitch.on
         let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
@@ -212,7 +212,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
 
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: yourDeck, opponentsDeck:  opponentsDeck, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deckId: yourDeckId, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
@@ -282,8 +282,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         }
         else
         {
-            let deckNames = self.deckNames[pickerView.selectedRowInComponent(HERO_PICKER)]
-            let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Undefined"
+            let heroRow = pickerView.selectedRowInComponent(HERO_PICKER)
+            let heroName = HEROES[heroRow]
+            let deckNames = self.deckNames[heroRow]
+            let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Other \(heroName)"
             if let v = view as? UILabel {
                 v.text = deckName
                 return v
