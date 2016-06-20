@@ -154,17 +154,17 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             chart.xAxis.labelRotationAngle = 0
         }
         
-        chart.xAxis.labelPosition = ChartXAxis.XAxisLabelPosition.Bottom
+        chart.xAxis.labelPosition = ChartXAxis.LabelPosition.Bottom
         chart.xAxis.setLabelsToSkip(0)
         chart.xAxis.spaceBetweenLabels = 0
 
         chart.rightAxis.enabled = false
-        chart.leftAxis.customAxisMax = 100
-        chart.leftAxis.customAxisMin = 0
+        chart.leftAxis.axisMaxValue = 100
+        chart.leftAxis.axisMinValue = 0
         chart.leftAxis.labelCount = 5
         chart.leftAxis.forceLabelsEnabled = true
         chart.legend.enabled = false
-        chart.legend.position = ChartLegend.ChartLegendPosition.AboveChartLeft
+        chart.legend.position = ChartLegend.Position.AboveChartLeft
         chart.setScaleEnabled(false)
         chart.dragEnabled = false
         chart.descriptionText = ""
