@@ -303,7 +303,6 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             onComplete(Result.Failure(TrackOBotAPIError.JsonFormattingFailed))
             return
         }
-        print("Sending: \(NSString(data: json, encoding: NSUTF8StringEncoding))")
         postRequest(resultsUrl, data: json, onComplete: onComplete)
     }
     

@@ -63,10 +63,10 @@ class TrackOBotViewController: UIViewController, UIPopoverPresentationController
                     let url = NSURL(string: u)
                     UIApplication.sharedApplication().openURL(url!)
                 } else {
-                    print("?!?: \(dict)")
+                    print("error: \(dict)")
                 }
             case .Failure(let err):
-                print("ERROR \(err)")
+                print("error: \(err)")
                 // TODO: open Alert window
             }
         })

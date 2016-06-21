@@ -363,7 +363,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
                 case .CredentialsMissing, .LoginFaild(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("what")
+                    print("error: \(err)")
                 }
             }
 

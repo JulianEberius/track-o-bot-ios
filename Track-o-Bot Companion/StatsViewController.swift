@@ -108,7 +108,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                 case .CredentialsMissing, .LoginFaild(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("what")
+                    print("error: \(err)")
                 }
             }
         }
@@ -238,7 +238,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                 case .CredentialsMissing, .LoginFaild(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("what")
+                    print("error: \(err)")
                 }
             }
         }

@@ -67,15 +67,12 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
 
     func retrievePage(page: Int) {
         retrieving = true
-        print("retrieving paged \(page)")
         TrackOBot.instance.getResults(page, onComplete: {
             (result) -> Void in
             self.retrieving = false
             switch result {
             case .Success(let historyPage):
-                print("retrieved page \(page)")
                 if (historyPage.page == self.retrieved_pages+1) {
-                    print("adding games \(self.games.count) to \(self.games.count + historyPage.games.count) ")
                     self.games += historyPage.games
                     self.retrieved_pages = historyPage.page;
                 }
