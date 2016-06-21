@@ -15,3 +15,11 @@ This project is nearing beta, so it's not complete. However, some features are a
 - Open web profile
 
 That's it ;-) Obviously, it comes with no warranties, use at your own risk. However, if it uploads wrong game data, you can always delete games on your Track-o-Bot profile.
+
+## License
+
+This project is released under the GNU General Public License (LGPL) Version 2.
+
+See [LICENSE](LICENSE)
+
+This project further includes a copy of Daniel Cohen Gindi & Philipp Jahoda's project "Charts" (previously "iOS-Charts") from [https://github.com/danielgindi/Charts](https://github.com/danielgindi/Charts), which is released under the Apache License 2.0 (see [Charts](Charts)).

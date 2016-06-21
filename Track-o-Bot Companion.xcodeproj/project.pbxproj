@@ -21,6 +21,8 @@
 		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
+		04C862611D18B1840048D44E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; };
+		04C862621D18B1840048D44E /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,26 +33,12 @@
 			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
 		};
-		04BCEBB41D1877DF007558CE /* PBXContainerItemProxy */ = {
+		04C862631D18B1840048D44E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
-			remoteInfo = "Charts-TV";
-		};
-		04BCEBB61D1877DF007558CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65B3F5BF1C7370BE000983D0;
-			remoteInfo = "Charts-OSX";
-		};
-		04BCEBB81D1877DF007558CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
-			remoteInfo = ChartsTests;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -61,6 +49,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04C862621D18B1840048D44E /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C862611D18B1840048D44E /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,9 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				04BCEBB31D1877DF007558CE /* Charts.framework */,
-				04BCEBB51D1877DF007558CE /* Charts.framework */,
-				04BCEBB71D1877DF007558CE /* Charts.framework */,
-				04BCEBB91D1877DF007558CE /* ChartsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +183,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				04C862641D18B1840048D44E /* PBXTargetDependency */,
 			);
 			name = "Track-o-Bot Companion";
 			productName = "Track-o-Bot Companion";
@@ -249,27 +237,6 @@
 			remoteRef = 04BCEBB21D1877DF007558CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		04BCEBB51D1877DF007558CE /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 04BCEBB41D1877DF007558CE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		04BCEBB71D1877DF007558CE /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 04BCEBB61D1877DF007558CE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		04BCEBB91D1877DF007558CE /* ChartsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChartsTests.xctest;
-			remoteRef = 04BCEBB81D1877DF007558CE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -305,6 +272,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04C862641D18B1840048D44E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Charts-iOS";
+			targetProxy = 04C862631D18B1840048D44E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		045096491B9E0E150059BB7A /* Main.storyboard */ = {
