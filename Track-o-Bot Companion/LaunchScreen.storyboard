@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="Uk8-6U-Mtk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="Uk8-6U-Mtk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -17,11 +17,12 @@
                         <segue destination="mT9-pl-h9w" kind="relationship" relationship="viewControllers" id="aaY-mW-m6a"/>
                         <segue destination="FI9-I6-SVL" kind="relationship" relationship="viewControllers" id="1yW-zJ-InP"/>
                         <segue destination="8fv-5O-sxH" kind="relationship" relationship="viewControllers" id="vKc-Hr-Orm"/>
+                        <segue destination="al9-dM-jFe" kind="relationship" relationship="viewControllers" id="W0p-ST-HOE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeY-jg-pap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-619" y="483"/>
+            <point key="canvasLocation" x="-363" y="227"/>
         </scene>
         <!--Add Game-->
         <scene sceneID="A3Z-6g-dlh">
@@ -41,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coS-ug-sNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="1282"/>
+            <point key="canvasLocation" x="422" y="1418"/>
         </scene>
         <!--History-->
         <scene sceneID="ljD-e4-6sR">
@@ -60,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOS-j9-3YT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="454" y="-54"/>
+            <point key="canvasLocation" x="614" y="-454"/>
         </scene>
         <!--Stats-->
         <scene sceneID="XP7-wr-1DX">
@@ -79,12 +80,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbF-fj-jqs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="363" y="545"/>
+            <point key="canvasLocation" x="923" y="561"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="zrb-Dq-65G">
+            <objects>
+                <viewController title="Stats" id="al9-dM-jFe" userLabel="More" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XBF-AZ-bwY"/>
+                        <viewControllerLayoutGuide type="bottom" id="JNP-TQ-QGo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Axc-Fa-Kd0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="More" image="more" id="aeh-I2-4DP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2jK-fh-nw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-637" y="1281"/>
         </scene>
     </scenes>
     <resources>
         <image name="add" width="25" height="25"/>
         <image name="barChart" width="25" height="25"/>
         <image name="list" width="25" height="25"/>
+        <image name="more" width="25" height="25"/>
     </resources>
 </document>

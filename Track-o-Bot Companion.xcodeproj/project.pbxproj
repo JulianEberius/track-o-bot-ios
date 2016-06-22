@@ -16,6 +16,7 @@
 		0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045096491B9E0E150059BB7A /* Main.storyboard */; };
 		0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0450964C1B9E0E150059BB7A /* Images.xcassets */; };
 		045096661B9E32370059BB7A /* TrackOBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045096651B9E32370059BB7A /* TrackOBot.swift */; };
+		046B82701D1B275800130621 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B826F1D1B275800130621 /* MoreViewController.swift */; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
 		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
@@ -68,6 +69,7 @@
 		0450964A1B9E0E150059BB7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0450964C1B9E0E150059BB7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		045096651B9E32370059BB7A /* TrackOBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBot.swift; sourceTree = "<group>"; };
+		046B826F1D1B275800130621 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		049826EC1C775E4900591C68 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-golden.png"; path = "Images.xcassets/logo-golden.imageset/logo-golden.png"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				0493A8C71BE03417006A5281 /* LoginViewController.swift */,
 				0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */,
 				049826EC1C775E4900591C68 /* StatsViewController.swift */,
+				046B826F1D1B275800130621 /* MoreViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				045096481B9E0E150059BB7A /* AccountViewController.swift in Sources */,
 				04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */,
 				049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */,
+				046B82701D1B275800130621 /* MoreViewController.swift in Sources */,
 				045096441B9E0E150059BB7A /* AppDelegate.swift in Sources */,
 				045096461B9E0E150059BB7A /* AddGameViewController.swift in Sources */,
 				0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */,
