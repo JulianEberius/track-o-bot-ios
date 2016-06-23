@@ -194,7 +194,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         chart.leftAxis.labelCount = 5
         chart.leftAxis.forceLabelsEnabled = true
         chart.legend.enabled = false
-        chart.legend.position = ChartLegend.Position.AboveChartLeft
+        //chart.legend.position = ChartLegend.Position.AboveChartLeft
+        chart.legend.horizontalAlignment = .Left
+        chart.legend.verticalAlignment = .Top
+        chart.legend.orientation = .Horizontal
         chart.setScaleEnabled(false)
         chart.dragEnabled = false
         chart.descriptionText = ""
