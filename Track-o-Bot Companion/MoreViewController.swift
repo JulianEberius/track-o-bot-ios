@@ -31,7 +31,6 @@ class MoreViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("touched row \(indexPath.section) \(indexPath.row)")
         guard indexPath.section == 0 else {
             return
         }
@@ -43,7 +42,17 @@ class MoreViewController: UITableViewController {
             exportProfile(cell)
             break
         case 2:
-            logout()
+            guard let user = TrackOBot.instance.loadUser() else {
+                // reaching this scree nwith no valid user would be an illegal state
+                logout()
+                return
+            }
+            let alertController = UIAlertController(title: nil, message: "Do you really want to log out of the account \"\(user.username)\"?", preferredStyle: .ActionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+            alertController.addAction(cancelAction)
+            let OKAction = UIAlertAction(title: "Logout", style: .Destructive) { (action) in self.logout() }
+            alertController.addAction(OKAction)
+            self.presentViewController(alertController, animated: true) { }
             break
         default:
             break

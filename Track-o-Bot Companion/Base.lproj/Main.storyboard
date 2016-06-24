@@ -393,12 +393,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Track Games" id="OUP-se-SId">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="L0n-mo-0ol">
-                            <connections>
-                                <action selector="logoutButtonTouchUp:" destination="9pv-A4-QxB" id="gbU-3K-xAM"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="Ehg-k8-ddN">
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="Ehg-k8-ddN">
                             <connections>
                                 <action selector="openProfileTouchUp:" destination="9pv-A4-QxB" id="aYT-Nl-dzX"/>
                             </connections>
@@ -450,7 +445,7 @@
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -464,7 +459,7 @@
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment>
@@ -474,7 +469,7 @@
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                     <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment>
@@ -483,7 +478,7 @@
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                     <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="19.5" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="19.5" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                         <tabStops/>
                                                     </paragraphStyle>
                                                 </attributes>
@@ -596,8 +591,8 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="win" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO9-HW-w3G">
-                                            <rect key="frame" x="572" y="11" width="20" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO9-HW-w3G">
+                                            <rect key="frame" x="567" y="11" width="25" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" id="eu5-vw-yE1"/>
                                             </constraints>
@@ -661,12 +656,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History" id="NWg-Mo-gvG">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="zGw-fK-s8A">
-                            <connections>
-                                <action selector="logoutButtonTouchUp:" destination="K1g-di-RFl" id="zHO-1C-4PH"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="EZO-4A-IIV">
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="EZO-4A-IIV">
                             <connections>
                                 <action selector="openProfileTouchUp:" destination="K1g-di-RFl" id="GBk-hd-7dU"/>
                             </connections>
@@ -741,12 +731,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stats" id="ORK-4f-d4r">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="HWq-o3-z13">
-                            <connections>
-                                <action selector="logoutButtonTouchUp:" destination="ba2-k2-aum" id="M9Z-DL-Df5"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Your Profile" id="osP-V9-6ah">
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="osP-V9-6ah">
                             <connections>
                                 <action selector="openProfileTouchUp:" destination="ba2-k2-aum" id="cAH-sn-vOg"/>
                             </connections>
@@ -1035,7 +1020,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Open Source Attributions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kVV-0k-1yk">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Open Source / Attributions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kVV-0k-1yk">
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1055,7 +1040,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Imprint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gg7-tS-vub">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Imprint / Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gg7-tS-vub">
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1090,71 +1075,37 @@
         <scene sceneID="RCf-qB-MES">
             <objects>
                 <viewController id="XUE-aH-Z33" userLabel="Privacy Policy Controller" sceneMemberID="viewController">
-                    <textView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="privacy!!" textAlignment="natural" id="Cnh-wB-1hu">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mes-Bv-WmS"/>
+                        <viewControllerLayoutGuide type="bottom" id="lce-Jk-LiE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="666-jS-3X4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bBN-wb-mKv">
+                                <rect key="frame" x="60" y="60" width="480" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
+                        <constraints>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="centerX" secondItem="666-jS-3X4" secondAttribute="centerX" id="2US-et-5dv"/>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="width" secondItem="666-jS-3X4" secondAttribute="width" multiplier="0.8" id="3kv-QU-Qhw"/>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="height" secondItem="666-jS-3X4" secondAttribute="height" multiplier="0.8" id="YAa-Hu-A0g"/>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="centerY" secondItem="666-jS-3X4" secondAttribute="centerY" id="ZNr-rB-mYC"/>
+                        </constraints>
+                    </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Privacy Policy" id="8H0-45-cO1"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idw-Zb-iZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5218" y="-403"/>
-        </scene>
-        <!--ProfileMenuController-->
-        <scene sceneID="pDH-46-i1L">
-            <objects>
-                <viewController storyboardIdentifier="profileMenuController" title="ProfileMenuController" modalPresentationStyle="pageSheet" id="dMW-we-2xd" customClass="TrackOBotViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2aC-gK-hcI"/>
-                        <viewControllerLayoutGuide type="bottom" id="4Lq-50-yCo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kdL-06-YpY">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="110"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6c-F4-QkY">
-                                <rect key="frame" x="27" y="8" width="103" height="51"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment>
-                                            <string key="content">View on
-trackobot.com</string>
-                                            <attributes>
-                                                <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="viewOnTrackOBotComTouchUp:" destination="dMW-we-2xd" eventType="touchUpInside" id="cyv-Zl-Frm"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHb-mq-a65">
-                                <rect key="frame" x="55" y="67" width="46" height="30"/>
-                                <state key="normal" title="Export"/>
-                                <connections>
-                                    <action selector="exportProfileTouchUp:" destination="dMW-we-2xd" eventType="touchUpInside" id="Arc-vh-y79"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="150" height="110"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="150" height="110"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RpS-Dm-8OG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1313" y="1256"/>
+            <point key="canvasLocation" x="5770" y="-449"/>
         </scene>
         <!--More Navigation View Controller-->
         <scene sceneID="CT3-4C-RFy">
@@ -1179,37 +1130,95 @@ trackobot.com</string>
         <scene sceneID="Ne6-mv-fcK">
             <objects>
                 <viewController id="uNe-wp-kHv" userLabel="Open Source Attribution Controller" sceneMemberID="viewController">
-                    <textView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="mZo-aL-8ju">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9OR-6g-uXz"/>
+                        <viewControllerLayoutGuide type="bottom" id="4V6-Ta-VlI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VVH-mJ-Nem">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-CI-bpU">
+                                <rect key="frame" x="60" y="60" width="480" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
-                    <navigationItem key="navigationItem" title="Open Source Attributions" id="79n-yP-Vxd"/>
+                        <constraints>
+                            <constraint firstItem="d9b-CI-bpU" firstAttribute="centerX" secondItem="VVH-mJ-Nem" secondAttribute="centerX" id="gok-fI-MOb"/>
+                            <constraint firstItem="d9b-CI-bpU" firstAttribute="width" secondItem="VVH-mJ-Nem" secondAttribute="width" multiplier="0.8" id="i31-3d-Udf"/>
+                            <constraint firstItem="d9b-CI-bpU" firstAttribute="height" secondItem="VVH-mJ-Nem" secondAttribute="height" multiplier="0.8" id="nXV-o3-6KX"/>
+                            <constraint firstItem="d9b-CI-bpU" firstAttribute="centerY" secondItem="VVH-mJ-Nem" secondAttribute="centerY" id="qQg-zq-Pqc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Open Source / Attributions" id="79n-yP-Vxd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoY-el-mKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5218" y="249"/>
+            <point key="canvasLocation" x="5770" y="249"/>
         </scene>
         <!--Imprint Controller-->
         <scene sceneID="vbQ-MN-rZN">
             <objects>
                 <viewController id="AP8-zl-5um" userLabel="Imprint Controller" sceneMemberID="viewController">
-                    <textView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="vVv-TK-mRd">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Riu-L9-LPw"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nv4-TI-wWC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gHU-fC-T3z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="scV-SD-9Zi">
+                                <rect key="frame" x="60" y="60" width="480" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Imprint 
+Information according to § 5 TMG
+
+Julian Eberius
+Pestitzer Str. 11
+01187 Dresden Germany  Contact: 
+E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
-                    <navigationItem key="navigationItem" title="Imprint" id="fRp-j9-3kT"/>
+                        <constraints>
+                            <constraint firstItem="scV-SD-9Zi" firstAttribute="centerY" secondItem="gHU-fC-T3z" secondAttribute="centerY" id="FZE-Ar-usw"/>
+                            <constraint firstItem="scV-SD-9Zi" firstAttribute="width" secondItem="gHU-fC-T3z" secondAttribute="width" multiplier="0.8" id="LvV-j8-q7p"/>
+                            <constraint firstItem="scV-SD-9Zi" firstAttribute="centerX" secondItem="gHU-fC-T3z" secondAttribute="centerX" id="WNG-2U-sFr"/>
+                            <constraint firstItem="scV-SD-9Zi" firstAttribute="height" secondItem="gHU-fC-T3z" secondAttribute="height" multiplier="0.8" id="kP5-vy-DBu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Imprint / Contact" id="fRp-j9-3kT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yl4-jl-x6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="U7U-Fn-t03">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-nY-Bc5">
+                            <rect key="frame" x="60" y="60" width="480" height="480"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="width" secondItem="U7U-Fn-t03" secondAttribute="width" multiplier="0.8" id="Ak3-os-acg"/>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="centerX" secondItem="U7U-Fn-t03" secondAttribute="centerX" id="JFg-b7-Ub8"/>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="centerY" secondItem="U7U-Fn-t03" secondAttribute="centerY" id="u9O-WU-YQ3"/>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="height" secondItem="U7U-Fn-t03" secondAttribute="height" multiplier="0.8" id="zC2-tA-U5d"/>
+                    </constraints>
+                </view>
             </objects>
-            <point key="canvasLocation" x="5170" y="981"/>
+            <point key="canvasLocation" x="5770" y="1021"/>
         </scene>
     </scenes>
     <resources>
@@ -1221,7 +1230,7 @@ trackobot.com</string>
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U9A-7S-IQs"/>
+        <segue reference="LfB-NZ-Ouo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.51764705879999995" green="0.34901960780000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
 </document>
