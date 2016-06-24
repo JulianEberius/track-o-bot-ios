@@ -255,7 +255,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     
     let createUserUrl = "https://\(DOMAIN)/users"
     let resultsUrl = "https://\(DOMAIN)/profile/results.json"
-    let resultDeleteUrl = "https://\(DOMAIN)/profile/results/bulk_delete"
+    let resultDeleteUrl = "https://\(DOMAIN)/profile/results"
     let profileUrl = "https://\(DOMAIN)/profile.json"
     let decksUrl = "https://\(DOMAIN)/profile/settings/decks.json"
     let oneTimeAuthTokenUrl = "https://\(DOMAIN)/one_time_auth.json"
@@ -334,7 +334,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     }
 
     func deleteResult(id: Int, onComplete: (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
-        let url = "\(resultDeleteUrl)?result_ids[]=\(id)"
+        let url = "\(resultDeleteUrl)/\(id)"
         deleteRequest(url, onComplete: onComplete)
     }
 
