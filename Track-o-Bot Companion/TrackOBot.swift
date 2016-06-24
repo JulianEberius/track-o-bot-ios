@@ -62,23 +62,23 @@ enum GameMode : String {
     case Friendly = "friendly"
 }
 
-class Game : DateFormattingModel {
+class Game : DateFormattingModel, Equatable {
 
-    let id: Int!
-    let hero: String!
-    let opponentsHero: String!
-    let deck: String!
-    let deckId: Int!
-    let opponentsDeck: String!
-    let opponentsDeckId: Int!
-    let won: Bool!
-    let coin: Bool!
-    let timeLabel: String!
-    let mode: GameMode!
+    let id: Int?
+    let hero: String
+    let opponentsHero: String
+    let deck: String?
+    let deckId: Int?
+    let opponentsDeck: String?
+    let opponentsDeckId: Int?
+    let won: Bool
+    let coin: Bool?
+    let timeLabel: String?
+    let mode: GameMode
     let rank: Int?
     let legend: Int?
 
-    init(id: Int?, hero: String?, opponentsHero: String?, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool?, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
+    init(id: Int?, hero: String, opponentsHero: String, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
@@ -102,22 +102,38 @@ class Game : DateFormattingModel {
     - parameters:
         - dict: as returned by parsing the Track-O-Bot API response using NSJSONSerialization
     */
-    convenience init(dict:NSDictionary) {
-        let id = dict["id"] as? Int
-        let hero = dict["hero"] as? String
-        let opponentsHero = dict["opponent"] as? String
+    convenience init?(dict:NSDictionary) {
+        guard let id = dict["id"] as? Int,
+            hero = dict["hero"] as? String,
+            opponentsHero = dict["opponent"] as? String
+            else {
+                print("Could not read trackobot.com response!")
+                return nil
+        }
+        let won = (dict["result"] as? String) == "win" ? true : false
         let deck = dict["hero_deck"] as? String
         let opponentsDeck = dict["opponent_deck"] as? String
-        let won = (dict["result"] as? String) == "win" ? true : false
         let coin = dict["coin"] as? Bool
-
         var added: NSDate? = nil
         if let ds = dict["added"] as? String {
             added = Game.inputDateFormatter.dateFromString(ds)
         }
+
         self.init(id: id, hero: hero, opponentsHero: opponentsHero, deck: deck, deckId: nil,
                   opponentsDeck: opponentsDeck, opponentsDeckId: nil, won: won, coin: coin, added: added)
     }
+}
+
+func ==(lhs:Game, rhs:Game) -> Bool {
+    return lhs.hero == rhs.hero &&
+            lhs.opponentsHero == rhs.opponentsHero &&
+            lhs.deckId == rhs.deckId &&
+            lhs.opponentsDeckId == rhs.opponentsDeckId &&
+            lhs.coin == rhs.coin &&
+            lhs.won == rhs.won &&
+            lhs.mode == rhs.mode &&
+            lhs.rank == rhs.rank &&
+            lhs.legend == rhs.legend
 }
 
 class Deck : DateFormattingModel {
@@ -283,8 +299,11 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
     func postResult(game:Game, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         var gameData = ["hero": game.hero, "opponent": game.opponentsHero,
-                        "win": game.won, "coin": game.coin,
+                        "win": game.won,
                         "mode": game.mode.rawValue] as [String: AnyObject]
+        if let coin = game.coin {
+            gameData["coin"] = coin
+        }
         if let deck = game.deckId {
             gameData["deck_id"] = deck
         }
@@ -316,7 +335,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
                     return
                 }
-                let games = history.map { d in Game(dict:d) }
+                let games = history.flatMap { d in Game(dict:d) }
 
                 guard let meta = dict["meta"] as? NSDictionary else {
                     onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))

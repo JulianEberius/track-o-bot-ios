@@ -158,6 +158,8 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     
     @IBOutlet weak var youLabel: UILabel!
     @IBOutlet weak var opponentLabel: UILabel!
+
+    private var lastCommittedGame: (Game, NSDate)? = nil
     
     // TODO: move to TrackOBot class
     var decks = Array(count: HEROES.count, repeatedValue: [Deck]())
@@ -222,26 +224,46 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         // unsupported for now, as manual entry to cumbersome
         let legend: Int? = (mode == GameMode.Ranked && Int(self.rankStepper.value) == 0) ?  0 : nil
 
+        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: nil, deckId: yourDeckId, opponentsDeck: nil, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
+
+        if let (lastGame, lastGameTime) = self.lastCommittedGame where
+            game == lastGame && NSDate().timeIntervalSinceDate(lastGameTime) < NSTimeInterval(7) {
+
+            let alert = UIAlertController.init(title: "Possible duplicate game", message: "You saved the same result less than two minutes ago. Continue anyway?", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default) { (action) in
+                self.doSaveGame(game)
+            }
+            alert.addAction(okAction)
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            self.doSaveGame(game)
+        }
+    }
+
+    func doSaveGame(game:Game) {
         self.wonGameButton.enabled = false
         self.lostGameButton.enabled = false
         // self.activityIndicator.startAnimating()
-
-        let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: nil, deckId: yourDeckId, opponentsDeck: nil, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         TrackOBot.instance.postResult(game, onComplete:{
             (result) -> Void in
             // self.activityIndicator.stopAnimating()
             self.wonGameButton.enabled = true
             self.lostGameButton.enabled = true
-            let successCheckmark = won ? self.wonSucessCheckmark : self.lostSucessCheckmark
+            let successCheckmark = game.won == true ? self.wonSucessCheckmark : self.lostSucessCheckmark
             switch result {
             case .Success:
+                // update UI
                 UIView.animateWithDuration(0.25, delay: 0.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
                     successCheckmark.alpha = 1.0
                     }, completion:nil)
                 UIView.animateWithDuration(1.0, delay: 2.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
                     successCheckmark.alpha = 0.0
                     }, completion:nil)
+                // store the game to prevent accidental double commits
+                self.lastCommittedGame = (game, NSDate())
             case .Failure(let err):
                 let alert = UIAlertController.init(title: "Saving failed", message: "Could not save the game: \(err)", preferredStyle: UIAlertControllerStyle.Alert)
                 let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
@@ -249,6 +271,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         })
+
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

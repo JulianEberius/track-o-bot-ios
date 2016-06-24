@@ -132,16 +132,12 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
             } else {
                 cell.opponentsHeroLabel.text = match.opponentsHero
             }
-            if let won = match.won {
-                if (won) {
-                    cell.winLabel.text = "Win"
-                    cell.winLabel.textColor = WIN_COLOR
-                } else {
-                    cell.winLabel.text = "Loss"
-                    cell.winLabel.textColor = LOSS_COLOR
-                }
+            if (match.won) {
+                cell.winLabel.text = "Win"
+                cell.winLabel.textColor = WIN_COLOR
             } else {
-                cell.winLabel.text = ""
+                cell.winLabel.text = "Loss"
+                cell.winLabel.textColor = LOSS_COLOR
             }
             cell.timeLabel.text = match.timeLabel
             return cell
@@ -156,19 +152,32 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         switch editingStyle {
         case .Delete:
             let game = self.games[indexPath.row]
+            guard let gameId = game.id else {
+                return
+            }
+            let wonLost = game.won == true ? "won" : "lost"
+            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \(game.deck) against \(game.opponentsDeck) at \(game.timeLabel)?", preferredStyle: .ActionSheet)
 
-            TrackOBot.instance.deleteResult(game.id, onComplete: {
-                (result) -> Void in
-                switch result {
-                case .Success:
-                    self.games.removeAtIndex(indexPath.row)
-                    self.total_count -= 1
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                case .Failure(let err):
-                    print("ERROR \(err)")
-                }
-            })
-            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
+            alertController.addAction(cancelAction)
+
+            let OKAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+                TrackOBot.instance.deleteResult(gameId, onComplete: {
+                    (result) -> Void in
+                    switch result {
+                    case .Success:
+                        self.games.removeAtIndex(indexPath.row)
+                        self.total_count -= 1
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    case .Failure(let err):
+                        print("ERROR \(err)")
+                    }
+                })
+            }
+            alertController.addAction(OKAction)
+            self.presentViewController(alertController, animated: true) { }
         default:
             break
         }
