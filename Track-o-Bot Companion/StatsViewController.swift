@@ -178,7 +178,8 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     }
 
     func updateChart(chart: BarChartView, data: ChartData, stats: [Stats]) {
-        if (self.view.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.Compact) {
+        if (self.view.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.Compact
+            || stats.count > 9) {
             chart.xAxis.labelRotationAngle = 90
         } else {
             chart.xAxis.labelRotationAngle = 0
