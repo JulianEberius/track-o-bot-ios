@@ -767,7 +767,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5lZ-10-GbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2365" y="-659"/>
+            <point key="canvasLocation" x="2365" y="-641"/>
         </scene>
         <!--Login-->
         <scene sceneID="f1D-hK-RU9">
@@ -888,7 +888,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrR-qL-Cuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1131" y="-605"/>
+            <point key="canvasLocation" x="1109" y="-605"/>
         </scene>
         <!--Login Navigation Controller-->
         <scene sceneID="fCq-XI-CYq">
@@ -906,7 +906,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGN-8V-XJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2469" y="1381"/>
+            <point key="canvasLocation" x="2869" y="1277"/>
         </scene>
         <!--Stats Navigation Controller-->
         <scene sceneID="4yh-JH-jYD">
@@ -925,7 +925,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJr-Iz-LmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3503" y="-659"/>
+            <point key="canvasLocation" x="3483" y="-655"/>
         </scene>
         <!--More View Controller-->
         <scene sceneID="GdG-IE-FsA">
@@ -1083,11 +1083,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bBN-wb-mKv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBN-wb-mKv">
                                 <rect key="frame" x="60" y="60" width="480" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">The Track-o-Bot iOS companion does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted by logging out in the "More" tab. The game results are not stored  on the device, but are sent directly to the trackobot.com API. The data stored there can be viewed and downloaded in the user's profile on trackobot.com.   Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, and is only using its API to store game results at https://trackobot.com.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -1111,7 +1118,7 @@
         <scene sceneID="CT3-4C-RFy">
             <objects>
                 <navigationController title="More Navigation View Controller" automaticallyAdjustsScrollViewInsets="NO" id="k3s-XP-9FF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="More" image="more" id="R7U-E6-T7p"/>
+                    <tabBarItem key="tabBarItem" title="More" image="more" selectedImage="more" id="R7U-E6-T7p"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lxe-Jh-Vcu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1124,7 +1131,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zG-2n-65s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4341" y="-665"/>
+            <point key="canvasLocation" x="4253" y="-661"/>
         </scene>
         <!--Open Source Attribution Controller-->
         <scene sceneID="Ne6-mv-fcK">
@@ -1138,20 +1145,774 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-CI-bpU">
-                                <rect key="frame" x="60" y="60" width="480" height="480"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23A-Ev-01i">
+                                <rect key="frame" x="40" y="40" width="520" height="520"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-CI-bpU">
+                                        <rect key="frame" x="20" y="20" width="480" height="480"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="App Source Code">
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content"> 
+The Track-O-Bot for iOS app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.   </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">Attributions
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+The app includes the source code of the </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Charts">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Italic"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" library by Daniel Cohen Gindi &amp; Philipp Jahoda, which was acquired under the Apache License, Version 2.0 (">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="http://www.apache.org/licenses/LICENSE-2.0">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <url key="NSLink" string="http://www.apache.org/licenses/LICENSE-2.0"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=") from ">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="https://github.com/danielgindi/Charts">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <url key="NSLink" string="https://github.com/danielgindi/Charts"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">.
+
+The icons used in the app’s tab bar are part of the Themify Icon set, which was acquired under the OFL license (http://scripts.sil.org/OFL) from </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="http://themify.me/themify-icons">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <url key="NSLink" string="http://themify.me/themify-icons"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">.
+
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Copyright Notice - Hearthstone">
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+
+Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are display in this app for non-commercial purposes only (</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="http://eu.blizzard.com/de-de/company/about/legal-faq.html">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <url key="NSLink" string="http://eu.blizzard.com/de-de/company/about/legal-faq.html"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">). 
+ ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of Warcraft is a trademark, and Hearthstone is a registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other countries.</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="leading" secondItem="23A-Ev-01i" secondAttribute="leading" constant="20" id="2wl-Uf-bRN"/>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="centerX" secondItem="23A-Ev-01i" secondAttribute="centerX" id="VNl-M9-98N"/>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="centerY" secondItem="23A-Ev-01i" secondAttribute="centerY" id="ahp-xe-ijo"/>
+                                    <constraint firstAttribute="trailing" secondItem="d9b-CI-bpU" secondAttribute="trailing" constant="20" id="h7l-6C-Ddk"/>
+                                    <constraint firstAttribute="bottom" secondItem="d9b-CI-bpU" secondAttribute="bottom" constant="20" id="hVP-mH-aQD"/>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="top" secondItem="23A-Ev-01i" secondAttribute="top" constant="20" id="xU8-ub-j9a"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d9b-CI-bpU" firstAttribute="centerX" secondItem="VVH-mJ-Nem" secondAttribute="centerX" id="gok-fI-MOb"/>
-                            <constraint firstItem="d9b-CI-bpU" firstAttribute="width" secondItem="VVH-mJ-Nem" secondAttribute="width" multiplier="0.8" id="i31-3d-Udf"/>
-                            <constraint firstItem="d9b-CI-bpU" firstAttribute="height" secondItem="VVH-mJ-Nem" secondAttribute="height" multiplier="0.8" id="nXV-o3-6KX"/>
-                            <constraint firstItem="d9b-CI-bpU" firstAttribute="centerY" secondItem="VVH-mJ-Nem" secondAttribute="centerY" id="qQg-zq-Pqc"/>
+                            <constraint firstItem="4V6-Ta-VlI" firstAttribute="top" secondItem="23A-Ev-01i" secondAttribute="bottom" constant="-9" id="Sls-tJ-3R6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="23A-Ev-01i" secondAttribute="trailing" constant="20" id="T47-uM-1FA"/>
+                            <constraint firstItem="23A-Ev-01i" firstAttribute="leading" secondItem="VVH-mJ-Nem" secondAttribute="leadingMargin" constant="20" id="upf-OC-7P7"/>
+                            <constraint firstItem="23A-Ev-01i" firstAttribute="top" secondItem="9OR-6g-uXz" secondAttribute="bottom" constant="-24" id="x61-a7-1UQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Open Source / Attributions" id="79n-yP-Vxd"/>
@@ -1172,18 +1933,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="scV-SD-9Zi">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scV-SD-9Zi">
                                 <rect key="frame" x="60" y="60" width="480" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Imprint 
+                                <attributedString key="attributedText">
+                                    <fragment content="Imprint">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> 
 Information according to § 5 TMG
 
 Julian Eberius
 Pestitzer Str. 11
-01187 Dresden Germany  Contact: 
-E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have.</mutableString>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+01187 Dresden Germany  </string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Contact">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have concerning this app. Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, so direct any questions, remarks and feedback about Track-o-Bot in general to trackobot.com or https://reddit.com/r/trackobot.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1230,7 +2018,7 @@ E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LfB-NZ-Ouo"/>
+        <segue reference="U9A-7S-IQs"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.51764705879999995" green="0.34901960780000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
 </document>

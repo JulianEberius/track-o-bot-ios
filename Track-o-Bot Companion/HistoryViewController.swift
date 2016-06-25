@@ -152,11 +152,14 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         switch editingStyle {
         case .Delete:
             let game = self.games[indexPath.row]
-            guard let gameId = game.id else {
+            guard let gameId = game.id,
+                    deck = game.deck,
+                    opponentsDeck = game.opponentsDeck,
+                    timeLabel = game.timeLabel else {
                 return
             }
             let wonLost = game.won == true ? "won" : "lost"
-            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \(game.deck) against \(game.opponentsDeck) at \(game.timeLabel)?", preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \(deck) against \(opponentsDeck) at \(timeLabel)?", preferredStyle: .ActionSheet)
 
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
