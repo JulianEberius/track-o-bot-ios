@@ -80,7 +80,7 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
                 self.historyTableView.reloadData()
                 self.historyTableView.flashScrollIndicators()
             case .Failure(let err):
-                print("ERROR \(err)")
+                self.alert("Error", message: "Error retrieving game results: \(err)")
             }
         })
     }
@@ -153,13 +153,12 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         case .Delete:
             let game = self.games[indexPath.row]
             guard let gameId = game.id,
-                    deck = game.deck,
-                    opponentsDeck = game.opponentsDeck,
                     timeLabel = game.timeLabel else {
                 return
             }
+
             let wonLost = game.won == true ? "won" : "lost"
-            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \(deck) against \(opponentsDeck) at \(timeLabel)?", preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \"\(game.deckName)\" against \"\(game.opponentsDeckName)\" at \(timeLabel)?", preferredStyle: .ActionSheet)
 
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -175,9 +174,17 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
                         self.total_count -= 1
                         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     case .Failure(let err):
-                        print("ERROR \(err)")
+                        self.alert("Error", message: "Deleting game failed: \(err)")
                     }
                 })
+            }
+
+            if let popoverController = alertController.popoverPresentationController {
+                guard let cellView = tableView.cellForRowAtIndexPath(indexPath) else {
+                    return
+                }
+                popoverController.sourceView = cellView
+                popoverController.sourceRect = cellView.bounds
             }
             alertController.addAction(OKAction)
             self.presentViewController(alertController, animated: true) { }

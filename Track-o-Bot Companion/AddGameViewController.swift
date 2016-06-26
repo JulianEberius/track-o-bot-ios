@@ -383,10 +383,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
                 break
             case .Failure(let err):
                 switch err {
-                case .CredentialsMissing, .LoginFaild(_):
+                case .CredentialsMissing, .LoginFailed(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("error: \(err)")
+                    self.alert("Error retrieving decks", message: "Sorry, the list of available decks could not be retrieved from trackobot.com. If the error persists, please contact trackobot.ios@gmail.com.")
                 }
             }
 

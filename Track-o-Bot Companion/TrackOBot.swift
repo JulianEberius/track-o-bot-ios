@@ -78,6 +78,17 @@ class Game : DateFormattingModel, Equatable {
     let rank: Int?
     let legend: Int?
 
+    var deckName: String {
+        get {
+            return deck ?? "Other \(hero)"
+        }
+    }
+    var opponentsDeckName: String {
+        get {
+            return opponentsDeck ?? "Other \(opponentsHero)"
+        }
+    }
+
     init(id: Int?, hero: String, opponentsHero: String, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
@@ -107,7 +118,6 @@ class Game : DateFormattingModel, Equatable {
             hero = dict["hero"] as? String,
             opponentsHero = dict["opponent"] as? String
             else {
-                print("Could not read trackobot.com response!")
                 return nil
         }
         let won = (dict["result"] as? String) == "win" ? true : false
@@ -239,8 +249,9 @@ enum TrackOBotAPIError : ErrorType {
     case JsonFormattingFailed
     case JsonParsingFailed
     case NetworkError(error:NSError)
-    case LoginFaild(error:String)
-    case RequestFaild(error:String)
+    case LoginFailed(error:String)
+    case RequestFailed(error:String)
+    case InternalError
 }
 
 let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
@@ -498,7 +509,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             switch result {
             case .Success(let dict):
                 guard let username = dict["username"] as? String, password = dict["password"] as? String else {
-                    onComplete(Result.Failure(TrackOBotAPIError.RequestFaild(error: "Unexpected response to create user call: \(result)")))
+                    onComplete(Result.Failure(TrackOBotAPIError.RequestFailed(error: "Unexpected response to create user call: \(result)")))
                     return
                 }
                 let user = User(username: username, password: password, domain: TrackOBot.DOMAIN)
@@ -529,10 +540,10 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         
         if let apiError = dict["error"] as? String {
             if apiError == "You need to sign in or sign up before continuing." {
-                return Result.Failure(TrackOBotAPIError.LoginFaild(error: apiError))
+                return Result.Failure(TrackOBotAPIError.LoginFailed(error: apiError))
             }
             else {
-                return Result.Failure(TrackOBotAPIError.RequestFaild(error: apiError))
+                return Result.Failure(TrackOBotAPIError.RequestFailed(error: apiError))
             }
         }
         return Result.Success(dict)
@@ -545,7 +556,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         }
 
         guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
-            print("error creating request")
+            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
             return
         }
 
@@ -577,7 +588,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return
         }
         guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
-            print("error creating request")
+            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
             return
         }
         
@@ -605,8 +616,8 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         }
         // set delegate to prevent following redirects
         guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url, delegate: self) else {
-                print("error creating request")
-                return
+            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
+            return
         }
         
         urlRequest.HTTPMethod = "DELETE"
@@ -634,7 +645,6 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
         let urlComponents = NSURLComponents.init(string: urlString)
         guard let url = urlComponents?.URL else {
-            print("could not parse URL: \(urlString)")
             return nil
         }
         let urlRequest = NSMutableURLRequest(URL: url)

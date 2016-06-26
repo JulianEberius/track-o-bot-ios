@@ -451,8 +451,14 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trackOBotAccountSettings" translatesAutoresizingMaskIntoConstraints="NO" id="iVg-3H-y62">
+                                        <rect key="frame" x="119" y="94" width="322" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="C0q-af-mbL"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEi-It-d6G">
-                                        <rect key="frame" x="20" y="282" width="520" height="158"/>
+                                        <rect key="frame" x="20" y="282" width="520" height="263"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">This will allow your to save your account data to a file on your computer. To authenticate your iOS device with TrackOBot you need to open this file on the device. There are many ways to do that. For example you can: </string>
@@ -463,7 +469,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device.
+                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device. When asked about which app to open the file with, choose Track-O-Bot companion (you may have to scroll through various other apps).
 </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -473,7 +479,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with Track-O-Bot companion from the respective app.</string>
+                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with Track-O-Bot companion from the respective app. Note, that in some Apps such as Dropbox, you may have to use a "Share" button and then choose "Open with" to open the file in Track-O-Bot.   </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
@@ -486,12 +492,6 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trackOBotAccountSettings" translatesAutoresizingMaskIntoConstraints="NO" id="iVg-3H-y62">
-                                        <rect key="frame" x="119" y="94" width="322" height="180"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="C0q-af-mbL"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="AEi-It-d6G" firstAttribute="top" secondItem="iVg-3H-y62" secondAttribute="bottom" constant="8" symbolic="YES" id="EhI-KD-Igw"/>
@@ -934,7 +934,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Nk1-6H-Zc3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Track-O-Bot Profile" id="IrG-3Q-Nde">
                                 <cells>
@@ -949,7 +949,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -966,7 +966,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -983,7 +983,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1004,7 +1004,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1024,7 +1024,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1044,7 +1044,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1084,14 +1084,53 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBN-wb-mKv">
-                                <rect key="frame" x="60" y="60" width="480" height="480"/>
+                                <rect key="frame" x="30" y="30" width="540" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">The Track-o-Bot iOS companion does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted by logging out in the "More" tab. The game results are not stored  on the device, but are sent directly to the trackobot.com API. The data stored there can be viewed and downloaded in the user's profile on trackobot.com.   Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, and is only using its API to store game results at https://trackobot.com.</string>
+                                        <string key="content">The Track-o-Bot iOS companion does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted (by logging out) in the "More" tab. The game results are not stored on the device, but are sent directly to the trackobot.com API.  The user data retrieved from this API, such as result history and result statistics, are only used for the purpose of display in this app, and are never stored or used in any other context.  Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, and is only using its API to store and retrieve user data from https://trackobot.com.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="84">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="112">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="140">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="168">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="196">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="224">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="252">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="280">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="308">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="336">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -1101,8 +1140,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bBN-wb-mKv" firstAttribute="centerX" secondItem="666-jS-3X4" secondAttribute="centerX" id="2US-et-5dv"/>
-                            <constraint firstItem="bBN-wb-mKv" firstAttribute="width" secondItem="666-jS-3X4" secondAttribute="width" multiplier="0.8" id="3kv-QU-Qhw"/>
-                            <constraint firstItem="bBN-wb-mKv" firstAttribute="height" secondItem="666-jS-3X4" secondAttribute="height" multiplier="0.8" id="YAa-Hu-A0g"/>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="width" secondItem="666-jS-3X4" secondAttribute="width" multiplier="0.9" id="3kv-QU-Qhw"/>
+                            <constraint firstItem="bBN-wb-mKv" firstAttribute="height" secondItem="666-jS-3X4" secondAttribute="height" multiplier="0.9" id="YAa-Hu-A0g"/>
                             <constraint firstItem="bBN-wb-mKv" firstAttribute="centerY" secondItem="666-jS-3X4" secondAttribute="centerY" id="ZNr-rB-mYC"/>
                         </constraints>
                     </view>
@@ -1146,10 +1185,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23A-Ev-01i">
-                                <rect key="frame" x="40" y="40" width="520" height="520"/>
+                                <rect key="frame" x="30" y="40" width="540" height="520"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-CI-bpU">
-                                        <rect key="frame" x="20" y="20" width="480" height="480"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-CI-bpU">
+                                        <rect key="frame" x="0.0" y="0.0" width="540" height="520"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
                                             <fragment content="App Source Code">
@@ -1755,7 +1794,7 @@ The icons used in the app’s tab bar are part of the Themify Icon set, which wa
                                             <fragment>
                                                 <string key="content">
 
-Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are display in this app for non-commercial purposes only (</string>
+Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are displayed in this app for non-commercial purposes only (</string>
                                                 <attributes>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
@@ -1895,23 +1934,24 @@ Please note that the Hearthstone artwork and terms used in this app are Blizzard
                                             </fragment>
                                         </attributedString>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="leading" secondItem="23A-Ev-01i" secondAttribute="leading" constant="20" id="2wl-Uf-bRN"/>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="leading" secondItem="23A-Ev-01i" secondAttribute="leading" id="2wl-Uf-bRN"/>
                                     <constraint firstItem="d9b-CI-bpU" firstAttribute="centerX" secondItem="23A-Ev-01i" secondAttribute="centerX" id="VNl-M9-98N"/>
                                     <constraint firstItem="d9b-CI-bpU" firstAttribute="centerY" secondItem="23A-Ev-01i" secondAttribute="centerY" id="ahp-xe-ijo"/>
-                                    <constraint firstAttribute="trailing" secondItem="d9b-CI-bpU" secondAttribute="trailing" constant="20" id="h7l-6C-Ddk"/>
-                                    <constraint firstAttribute="bottom" secondItem="d9b-CI-bpU" secondAttribute="bottom" constant="20" id="hVP-mH-aQD"/>
-                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="top" secondItem="23A-Ev-01i" secondAttribute="top" constant="20" id="xU8-ub-j9a"/>
+                                    <constraint firstAttribute="trailing" secondItem="d9b-CI-bpU" secondAttribute="trailing" id="h7l-6C-Ddk"/>
+                                    <constraint firstAttribute="bottom" secondItem="d9b-CI-bpU" secondAttribute="bottom" id="hVP-mH-aQD"/>
+                                    <constraint firstItem="d9b-CI-bpU" firstAttribute="top" secondItem="23A-Ev-01i" secondAttribute="top" id="xU8-ub-j9a"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="23A-Ev-01i" firstAttribute="width" secondItem="VVH-mJ-Nem" secondAttribute="width" multiplier="0.9" id="GZO-nz-MdF"/>
                             <constraint firstItem="4V6-Ta-VlI" firstAttribute="top" secondItem="23A-Ev-01i" secondAttribute="bottom" constant="-9" id="Sls-tJ-3R6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="23A-Ev-01i" secondAttribute="trailing" constant="20" id="T47-uM-1FA"/>
-                            <constraint firstItem="23A-Ev-01i" firstAttribute="leading" secondItem="VVH-mJ-Nem" secondAttribute="leadingMargin" constant="20" id="upf-OC-7P7"/>
+                            <constraint firstItem="23A-Ev-01i" firstAttribute="centerX" secondItem="VVH-mJ-Nem" secondAttribute="centerX" id="aAt-nT-l4k"/>
                             <constraint firstItem="23A-Ev-01i" firstAttribute="top" secondItem="9OR-6g-uXz" secondAttribute="bottom" constant="-24" id="x61-a7-1UQ"/>
                         </constraints>
                     </view>
@@ -1989,20 +2029,37 @@ E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-nY-Bc5">
-                            <rect key="frame" x="60" y="60" width="480" height="480"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-nY-Bc5">
+                            <rect key="frame" x="30" y="30" width="540" height="540"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <string key="text">The Track-O-Bot companion app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/issues. Bla</string>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <attributedString key="attributedText">
+                                <fragment>
+                                    <string key="content">App Source Code 
+The Track-O-Bot for iOS app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.   Attributions
+
+The app includes the source code of the Charts library by Daniel Cohen Gindi &amp; Philipp Jahoda, which was acquired under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0) from https://github.com/danielgindi/Charts.
+
+The icons used in the app’s tab bar are part of the Themify Icon set, which was acquired under the OFL license (http://scripts.sil.org/OFL) from http://themify.me/themify-icons.
+
+Copyright Notice - Hearthstone
+
+Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are displayed in this app for non-commercial purposes only (http://eu.blizzard.com/de-de/company/about/legal-faq.html). 
+ ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of Warcraft is a trademark, and Hearthstone is a registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other countries.</string>
+                                    <attributes>
+                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="width" secondItem="U7U-Fn-t03" secondAttribute="width" multiplier="0.8" id="Ak3-os-acg"/>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="width" secondItem="U7U-Fn-t03" secondAttribute="width" multiplier="0.9" id="Ak3-os-acg"/>
                         <constraint firstItem="sxL-nY-Bc5" firstAttribute="centerX" secondItem="U7U-Fn-t03" secondAttribute="centerX" id="JFg-b7-Ub8"/>
                         <constraint firstItem="sxL-nY-Bc5" firstAttribute="centerY" secondItem="U7U-Fn-t03" secondAttribute="centerY" id="u9O-WU-YQ3"/>
-                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="height" secondItem="U7U-Fn-t03" secondAttribute="height" multiplier="0.8" id="zC2-tA-U5d"/>
+                        <constraint firstItem="sxL-nY-Bc5" firstAttribute="height" secondItem="U7U-Fn-t03" secondAttribute="height" multiplier="0.9" id="zC2-tA-U5d"/>
                     </constraints>
                 </view>
             </objects>
@@ -2014,11 +2071,11 @@ E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-
         <image name="barChart" width="25" height="25"/>
         <image name="list" width="25" height="25"/>
         <image name="logo-golden" width="334" height="334"/>
-        <image name="more" width="25" height="25"/>
+        <image name="more" width="25" height="22"/>
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U9A-7S-IQs"/>
+        <segue reference="LfB-NZ-Ouo"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.51764705879999995" green="0.34901960780000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
 </document>

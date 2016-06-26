@@ -52,6 +52,13 @@ class MoreViewController: UITableViewController {
             alertController.addAction(cancelAction)
             let OKAction = UIAlertAction(title: "Logout", style: .Destructive) { (action) in self.logout() }
             alertController.addAction(OKAction)
+            if let popoverController = alertController.popoverPresentationController {
+                guard let cellView = tableView.cellForRowAtIndexPath(indexPath) else {
+                    return
+                }
+                popoverController.sourceView = cellView
+                popoverController.sourceRect = cellView.bounds
+            }
             self.presentViewController(alertController, animated: true) { }
             break
         default:

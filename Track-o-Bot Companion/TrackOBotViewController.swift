@@ -39,16 +39,22 @@ class TrackOBotViewController: UIViewController, UIPopoverPresentationController
                     let url = NSURL(string: u)
                     UIApplication.sharedApplication().openURL(url!)
                 } else {
-                    print("error: \(dict)")
+                    self.alert("Error", message: "Received invalid login url data from trackobot.com: \(dict)")
                 }
             case .Failure(let err):
-                print("error: \(err)")
-                // TODO: open Alert window
+                self.alert("Error", message: "Error receiving login url data from trackobot.com: \(err)")
             }
         })
 
     }
-    
+
+    func alert(title: String, message:String) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     func newCredentialsAdded(user:User) {
         
     }

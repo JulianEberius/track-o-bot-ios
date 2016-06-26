@@ -105,10 +105,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                 break
             case .Failure(let err):
                 switch err {
-                case .CredentialsMissing, .LoginFaild(_):
+                case .CredentialsMissing, .LoginFailed(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("error: \(err)")
+                    self.alert("Error", message: "Error retrieving statistics: \(err)")
                 }
             }
         }
@@ -239,10 +239,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                 break
             case .Failure(let err):
                 switch err {
-                case .CredentialsMissing, .LoginFaild(_):
+                case .CredentialsMissing, .LoginFailed(_):
                     self.performSegueWithIdentifier("to_login", sender: self)
                 default:
-                    print("error: \(err)")
+                    self.alert("Error", message: "Error retrieving statistics: \(err)")
                 }
             }
         }

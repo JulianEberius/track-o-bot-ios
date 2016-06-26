@@ -81,23 +81,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .Failure(let err):
                 switch err {
                 case .NetworkError(_):
-                    let alert = UIAlertController.init(title: "Login failed", message: "Could not connect to TrackOBot.com", preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                    alert.addAction(okAction)
-                    viewController.presentViewController(alert, animated: true, completion: nil)
+                    self.alert(viewController, title: "Login failed", message: "Could not connect to TrackOBot.com. Check your internet connection, and whether https://trackobot.com is available.")
                     break
-                case .LoginFaild(let errMsg):
-                    let alert = UIAlertController.init(title: "Login failed", message: "Login failed: \(errMsg)", preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                    alert.addAction(okAction)
-                    viewController.presentViewController(alert, animated: true, completion: nil)
+                case .LoginFailed(let errMsg):
+                    self.alert(viewController, title: "Login failed", message: "Sorry, the login failed. Check if you used a valid credential file. Error: \(errMsg)")
                     break
                 default:
-                    print("Unexpected error: \(err)" )
+                    self.alert(viewController, title: "Login error", message: "Sorry, the login failed for mysterious reasons. If the error persists, please contact trackobot.ios@gmail.com.")
                 }
             }
         })
         return true
+    }
+
+    func alert(viewController: TrackOBotViewController, title: String, message:String) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+        alert.addAction(okAction)
+        viewController.presentViewController(alert, animated: true, completion: nil)
     }
     
 }
