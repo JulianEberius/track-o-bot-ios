@@ -25,7 +25,7 @@ import UIKit
 import Charts
 
 class StatsViewController: TrackOBotViewController, ChartViewDelegate {
-    
+
     @IBOutlet weak var mainChartLabel: UILabel!
     @IBOutlet weak var mainChart: BarChartView!
     @IBOutlet weak var detailChartLabel: UILabel!
@@ -45,7 +45,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     var barColors: [UIColor] = []
 
     var selectedIndexMainChart: Int? = nil
-    
+
     let heroColors = [
         UIColor(red: 167/255.0, green: 57.0/255.0, blue: 45.0/255.0, alpha: 1.0),
         UIColor(red: 48/255.0, green: 60.0/255.0, blue: 108.0/255.0, alpha: 1.0),
@@ -57,7 +57,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         UIColor(red: 45/255.0, green: 83.0/255.0, blue: 125.0/255.0, alpha: 1.0),
         UIColor(red: 250/255.0, green: 244/255.0, blue: 220.0/255.0, alpha: 1.0)
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mainChart.noDataText = "Loading data ..."
@@ -118,7 +118,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     @IBAction func statTypeSegmentControlValueChanged(sender: UISegmentedControl) {
         resetCharts()
     }
-    
+
     func createHeroBarChartData(stats: [ByClassStats]) -> BarChartData {
         self.barColors = self.heroColors
         self.yNames = HEROES
@@ -136,7 +136,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         ds.setColors(self.barColors, alpha: 0.95)
         ds.highlightAlpha = 0.0
         ds.highlightLineWidth = 5.0
-        
+
         ds.drawValuesEnabled = false
         let d = BarChartData(xVals: HEROES, dataSet: ds)
 
@@ -184,7 +184,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         } else {
             chart.xAxis.labelRotationAngle = 0
         }
-        
+
         chart.xAxis.labelPosition = ChartXAxis.LabelPosition.Bottom
         chart.xAxis.setLabelsToSkip(0)
         chart.xAxis.spaceBetweenLabels = 0
@@ -204,13 +204,13 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         chart.descriptionText = ""
         chart.delegate = self
         chart.drawHighlightArrowEnabled = true
-    
+
         chart.marker = CustomChartMarker(chart: chart, stats: stats)
 
         chart.data = data
         chart.animate(yAxisDuration: 0.75)
     }
-    
+
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         if (chartView == self.detailChart) {
             return
@@ -247,11 +247,11 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             }
         }
     }
-    
+
     func chartValueNothingSelected(chartView: ChartViewBase) {
-        
+
     }
-    
+
     func updateDescriptionLabel() {
         guard let idx = self.selectedIndexMainChart else {
             self.detailChartLabel.text = "Win rates as ..."
@@ -264,9 +264,9 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         attrString.appendAttributedString(labelString)
         self.detailChartLabel.attributedText = attrString
     }
-    
+
     @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
-        
+
     }
 }
 
@@ -274,18 +274,18 @@ class CustomChartMarker: ChartMarker
 {
     let stats: [Stats]!
     let chart: ChartViewBase!
-    
+
     var strVal: String = ""
     var markerSize: CGSize = CGSize(width: 100, height: 15)
-    
+
     init(chart:ChartViewBase, stats:[Stats])
     {
         self.chart = chart
         self.stats = stats
         super.init()
     }
-    
-    
+
+
     /// Draws the ChartMarker on the given position on the given context
     override func draw(context context: CGContext, point: CGPoint)
     {
@@ -294,21 +294,21 @@ class CustomChartMarker: ChartMarker
         let str = NSAttributedString(string: strVal, attributes: attrsDictionary)
         let rectSize = str.boundingRectWithSize(CGSize(width: 300, height: 20), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
         markerSize = rectSize.size
-        
+
         var offset = CGPoint(x: 22, y: -19.0)
         if let width = chart.viewPortHandler?.chartWidth {
             if (point.x + rectSize.width + offset.x > width) {
                 offset = CGPoint(x: -1.0 * rectSize.width, y: 0)
             }
-            
+
         }
-        
+
         if (point.y + offset.y < 0) {
             offset = CGPoint(x: 0, y: 0 )
         }
-        
+
         let rect = CGRect(x: point.x + offset.x, y: point.y + offset.y, width: rectSize.width + 6, height: rectSize.height + 4)
-        
+
         UIGraphicsPushContext(context)
         CGContextSetLineWidth(context, 1.0)
         CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
@@ -318,7 +318,7 @@ class CustomChartMarker: ChartMarker
         UIGraphicsPopContext()
         NSString(string: strVal).drawInRect(rect.offsetBy(dx: 3, dy: 2), withAttributes: attrsDictionary)
     }
-    
+
     /// This method enables a custom ChartMarker to update it's content everytime the MarkerView is redrawn according to the data entry it points to.
     ///
     /// - parameter highlight: the highlight object contains information about the highlighted value such as it's dataset-index, the selected range or stack-index (only stacked bar entries).
@@ -328,7 +328,7 @@ class CustomChartMarker: ChartMarker
         let percentStr = String(format: "%.1f", entry.value)
         strVal = "\(percentStr)% (W: \(s.wins) / L: \(s.losses))"
     }
-    
+
     override var size: CGSize {
         get { return markerSize }
     }

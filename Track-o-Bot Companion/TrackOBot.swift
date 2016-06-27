@@ -29,7 +29,7 @@ class DateFormattingModel {
         formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSZ"
         return formatter
     }
-    
+
     static var outputDateFormatter:NSDateFormatter {
         let formatter = NSDateFormatter()
         formatter.timeStyle = NSDateFormatterStyle.MediumStyle
@@ -209,7 +209,7 @@ class User : NSObject, NSCoding {
 class Stats {
     let wins: Int!
     let losses: Int!
-    
+
     init(wins: Int?, losses: Int?) {
         self.wins = wins
         self.losses = losses
@@ -218,7 +218,7 @@ class Stats {
 
 class ByClassStats : Stats {
     let hero: String!
-    
+
     init(hero: String?, wins: Int?, losses: Int?) {
         self.hero = hero
         super.init(wins: wins, losses: losses)
@@ -229,7 +229,7 @@ class ByDeckStats : Stats {
     let deck: String!
     let deckId: Int?
     let heroId: Int?
-    
+
     init(deckName: String?, deckId: Int?, heroId: Int?, wins: Int?, losses: Int?) {
         self.deck = deckName
         self.deckId = deckId
@@ -279,18 +279,18 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     let TOKEN = "token"
 
     let defaults = NSUserDefaults.standardUserDefaults()
-    
+
     let createUserUrl = "https://\(DOMAIN)/users"
     let resultsUrl = "https://\(DOMAIN)/profile/results.json"
     let resultDeleteUrl = "https://\(DOMAIN)/profile/results"
     let profileUrl = "https://\(DOMAIN)/profile.json"
     let decksUrl = "https://\(DOMAIN)/profile/settings/decks.json"
     let oneTimeAuthTokenUrl = "https://\(DOMAIN)/one_time_auth.json"
-    
+
     let byClassResultsUrl = "https://\(DOMAIN)/profile/stats/classes.json"
     let byDeckResultsUrl = "https://\(DOMAIN)/profile/stats/decks.json"
 
-    
+
     func storeUser(user:User) -> Void {
         let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
         defaults.setObject(userData, forKey: USER)
@@ -327,7 +327,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         if let legend = game.legend {
             gameData["legend"] = legend
         }
-        
+
         let data = ["result": gameData]
         guard let json = try? NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.init(rawValue: 0)) else {
             onComplete(Result.Failure(TrackOBotAPIError.JsonFormattingFailed))
@@ -335,7 +335,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         }
         postRequest(resultsUrl, data: json, onComplete: onComplete)
     }
-    
+
     func getResults(page: Int, onComplete: (Result<HistoryPage, TrackOBotAPIError>) -> Void) -> Void {
         let url = profileUrl + "?page=\(page)" // 1-based indices in API
         getRequest(url, onComplete: {
@@ -353,7 +353,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     return
                 }
                 let historyPage = HistoryPage(games: games, dict: meta)
-                
+
                 onComplete(Result.Success(historyPage))
                 break
             case .Failure(let err):
@@ -394,7 +394,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             }
         })
     }
-    
+
     func getByClassStats(onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byClassResultsUrl, onComplete: {
             (result) -> Void in
@@ -408,7 +408,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     let heroStats = stats[hero] as! NSDictionary
                     return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
                 }
-                
+
                 onComplete(Result.Success(byClassStats))
                 break
             case .Failure(let err):
@@ -417,7 +417,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             }
         })
     }
-    
+
     func getVsClassStats(asClass: String, onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest("\(byClassResultsUrl)?as_hero=\(asClass.lowercaseString)", onComplete: {
             (result) -> Void in
@@ -431,7 +431,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     let heroStats = stats[hero] as! NSDictionary
                     return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
                 }
-                
+
                 onComplete(Result.Success(byClassStats))
                 break
             case .Failure(let err):
@@ -494,17 +494,17 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
 
     func createUser(onComplete: (Result<User, TrackOBotAPIError>) -> Void) -> Void {
-        
+
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let urlRequest = NSMutableURLRequest(URL: NSURL(string: createUserUrl)!)
         urlRequest.HTTPMethod = "POST"
 
         let session = NSURLSession(configuration: config,
             delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
-        
+
         let task = session.dataTaskWithRequest(urlRequest){
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            
+
             let result = self.checkErrors(data, error: error)
             switch result {
             case .Success(let dict):
@@ -521,7 +521,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                 break
             }
         }
-        
+
         task.resume()
     }
 
@@ -529,15 +529,15 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         guard error == nil else {
             return Result.Failure(TrackOBotAPIError.NetworkError(error: error!))
         }
-        
+
         guard let result = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) else {
             return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
         }
-        
+
         guard let dict = result as? NSDictionary else {
             return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
         }
-        
+
         if let apiError = dict["error"] as? String {
             if apiError == "You need to sign in or sign up before continuing." {
                 return Result.Failure(TrackOBotAPIError.LoginFailed(error: apiError))
@@ -548,7 +548,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         }
         return Result.Success(dict)
     }
-    
+
     private func postRequest(url: String, data: NSData?, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
@@ -581,7 +581,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         }
         task.resume()
     }
-    
+
     private func getRequest(url: String, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
@@ -591,10 +591,10 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             onComplete(Result.Failure(TrackOBotAPIError.InternalError))
             return
         }
-        
+
         let task = session.dataTaskWithRequest(urlRequest){
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            
+
             let result = self.checkErrors(data, error: error)
             switch result {
             case .Success(let dict):
@@ -608,7 +608,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         task.resume()
 
     }
-    
+
     private func deleteRequest(url: String, onComplete: (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
             onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
@@ -619,22 +619,22 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             onComplete(Result.Failure(TrackOBotAPIError.InternalError))
             return
         }
-        
+
         urlRequest.HTTPMethod = "DELETE"
-        
+
         let task = session.dataTaskWithRequest(urlRequest){
             (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            
+
             guard error == nil else {
                 onComplete(Result.Failure(TrackOBotAPIError.NetworkError(error: error!)))
                 return
             }
-            
+
             onComplete(Result.Success(true))
         }
         task.resume()
     }
-    
+
     private func configureAuthenticatedSessionAndRequest(user:User, urlString:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest)? {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let userPasswordString = "\(user.username):\(user.password)"
@@ -656,7 +656,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
 
         return (session, urlRequest)
     }
-    
+
     func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest!) -> Void) {
         completionHandler(nil)
     }
@@ -682,7 +682,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return nil
         }
     }
-    
+
     func writeTrackOBotAccountDataFile(user:User) -> NSData {
         let md = NSMutableData()
         writeString(user.username, data: md)
@@ -720,16 +720,16 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         let str = NSString(bytes: &strBuf, length: (len / 2)*sizeof(UInt16), encoding: NSUTF16BigEndianStringEncoding) as! String
         return (str, newPos)
     }
-    
-    
-    
+
+
+
     private func writeString(str: String, data: NSMutableData) {
         let numBytes = str.utf16.count * 2
         let lenBytes = [UInt32(bigEndian: UInt32(numBytes))]
         data.appendData(NSData(bytes: lenBytes, length: 4))
-        
+
         let strBytes = str.utf16.map { s in UInt16(bigEndian: s) }
         data.appendData(NSData(bytes: strBytes, length: numBytes))
-        
+
     }
 }

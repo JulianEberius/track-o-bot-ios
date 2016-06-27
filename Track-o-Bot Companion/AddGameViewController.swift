@@ -22,7 +22,7 @@
 
 import UIKit
 
-    
+
 let HERO_PICKER = 0
 let DECK_PICKER = 1
 
@@ -31,31 +31,31 @@ let SELECTED_DECK = "selected_deck"
 let SELECTED_OPPONENTS_HERO = "selected_opponents_hero"
 let SELECTED_OPPONENTS_DECK = "selected_opponents_deck"
 let SELECTED_RANK = "selected_rank"
-    
+
 let DEFAULT_HERO = "Hunter" // its the center one, i'm sorry
- 
+
 enum Player {
     case You
     case Opponent
 }
-    
+
 class HeroAndDeckPickerViewController {
-    
+
     let viewController: AddGameViewController
     let defaults: NSUserDefaults
-    
+
     let pickerView: UIPickerView
     let player: Player
     let heroKey: String
     let deckKey: String
-    
+
     init(viewController: AddGameViewController, pickerView: UIPickerView, player:Player) {
         self.viewController = viewController
         self.defaults = viewController.defaults
-        
+
         self.pickerView = pickerView
         self.player = player
-        
+
         switch self.player {
         case .You:
             heroKey = SELECTED_HERO
@@ -67,20 +67,20 @@ class HeroAndDeckPickerViewController {
             break
         }
     }
-    
+
     func selectedHero() -> String {
         return HEROES[pickerView.selectedRowInComponent(HERO_PICKER)]
     }
-    
+
     func didSelectRow(row: Int, inComponent component: Int) {
         if component == 0 {
             let hero = HEROES[row]
             pickerView.reloadComponent(DECK_PICKER)
             var selectedDeck: String? = nil
-            
+
             defaults.setObject(hero, forKey: heroKey)
             selectedDeck = defaults.stringForKey(deckKey+"_"+hero)
-            
+
             let deckRow = deckRowFor(selectedDeck, andHeroRow: row)
             if let i = deckRow {
                 pickerView.selectRow(i, inComponent: DECK_PICKER, animated: true)
@@ -93,34 +93,34 @@ class HeroAndDeckPickerViewController {
             defaults.setObject(deck, forKey: deckKey+"_"+hero)
         }
     }
-    
+
     func update() {
         let selectedHero = defaults.stringForKey(heroKey) ?? DEFAULT_HERO
         let selectedDeck = defaults.stringForKey(deckKey+"_"+selectedHero) ?? nil
-        
+
         let selectedHeroRow = HEROES.indexOf(selectedHero) ?? HEROES.count / 2
         let selectedDeckRow = deckRowFor(selectedDeck, andHeroRow: selectedHeroRow)
-        
+
         pickerView.selectRow(selectedHeroRow, inComponent: HERO_PICKER, animated: false)
         pickerView.reloadComponent(DECK_PICKER)
         if let x = selectedDeckRow {
             pickerView.selectRow(x, inComponent: DECK_PICKER, animated: false)
         }
     }
-    
+
     private func selectedDeck(pickerView: UIPickerView) -> (String, String)? {
         let selectedHeroRow = pickerView.selectedRowInComponent(HERO_PICKER)
         let selectedDeckRow = pickerView.selectedRowInComponent(DECK_PICKER)
-        
+
         let hero = HEROES[selectedHeroRow]
         let decks = viewController.deckNames[selectedHeroRow]
         if decks.count == 0 || selectedDeckRow == 0 {
             return nil
         }
-        
+
         return (hero, decks[selectedDeckRow - 1])
     }
-    
+
     private func deckRowFor(selectedDeck: String?, andHeroRow heroRow: Int) -> Int? {
         guard let d = selectedDeck else {
             return nil
@@ -130,49 +130,49 @@ class HeroAndDeckPickerViewController {
         }
         return nil
     }
-    
+
 }
-    
+
 class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
 
     @IBOutlet weak var heroPicker: UIPickerView!
     @IBOutlet weak var opponentPicker: UIPickerView!
-    
+
     @IBOutlet weak var literalRankLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var rankStepper: UIStepper!
-    
+
     @IBOutlet weak var modeSwitch: UISegmentedControl!
     @IBOutlet weak var coinSwitch: UISwitch!
-    
+
     @IBOutlet weak var wonGameButton: UIButton!
     @IBOutlet weak var lostGameButton: UIButton!
 
     @IBOutlet weak var wonSucessCheckmark: UILabel!
     @IBOutlet weak var lostSucessCheckmark: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
-    
+
     @IBOutlet weak var youLabel: UILabel!
     @IBOutlet weak var opponentLabel: UILabel!
 
     private var lastCommittedGame: (Game, NSDate)? = nil
-    
+
     // TODO: move to TrackOBot class
     var decks = Array(count: HEROES.count, repeatedValue: [Deck]())
     var deckNames = Array(count: HEROES.count, repeatedValue: [String]())
 
     var controllers = [UIPickerView: HeroAndDeckPickerViewController]()
-    
+
     override func viewDidLayoutSubviews()
     {
         wonGameButton.layer.cornerRadius = 5
         wonGameButton.layer.borderWidth = 1
         wonGameButton.layer.borderColor = UIColor.brownColor().CGColor
-        
+
         lostGameButton.layer.cornerRadius = 5
         lostGameButton.layer.borderWidth = 1
         lostGameButton.layer.borderColor = UIColor.brownColor().CGColor
@@ -186,7 +186,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     @IBAction func lostGameButtonTouchUp(sender: UIButton) {
         saveGame(false);
     }
-    
+
 
     @IBAction func modeChanged(sender: UISegmentedControl) {
         switch (sender.selectedSegmentIndex) {
@@ -204,7 +204,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
             break;
         }
     }
-    
+
     func saveGame(won: Bool) {
         let yourHeroIdx = self.heroPicker.selectedRowInComponent(HERO_PICKER)
         let yourHero = HEROES[yourHeroIdx]
@@ -227,7 +227,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let game = Game(id: nil, hero: yourHero, opponentsHero: opponentsHero, deck: nil, deckId: yourDeckId, opponentsDeck: nil, opponentsDeckId:  opponentsDeckId, won: won, coin: coin, mode: mode, rank: rank, legend: legend)
 
         if let (lastGame, lastGameTime) = self.lastCommittedGame where
-            game == lastGame && NSDate().timeIntervalSinceDate(lastGameTime) < NSTimeInterval(7) {
+            game == lastGame && NSDate().timeIntervalSinceDate(lastGameTime) < NSTimeInterval(120) {
 
             let alert = UIAlertController.init(title: "Possible duplicate game", message: "You saved the same result less than two minutes ago. Continue anyway?", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default) { (action) in
@@ -333,7 +333,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
             }
         }
     }
-    
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         controllers[pickerView]?.didSelectRow(row, inComponent: component)
 
@@ -346,10 +346,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         } else {
             rankLabel.text = "\(val)"
         }
-        
+
         defaults.setInteger(val, forKey: SELECTED_RANK)
     }
-    
+
     @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
 
     }
@@ -359,13 +359,13 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 
         self.wonSucessCheckmark.alpha = 0
         self.lostSucessCheckmark.alpha = 0
-        
+
 //        self.youLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
 //        self.opponentLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
 
         controllers[heroPicker] = HeroAndDeckPickerViewController(viewController: self, pickerView: heroPicker, player: Player.You)
         controllers[opponentPicker] = HeroAndDeckPickerViewController(viewController: self, pickerView: opponentPicker, player: Player.Opponent)
-        
+
         let selectedRank = defaults.hasKey(SELECTED_RANK) ? defaults.integerForKey(SELECTED_RANK) : 25
         rankStepper.value = Double(selectedRank)
         rankStepperValueChanged(rankStepper)
@@ -393,7 +393,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
             self.updateUI()
         })
     }
-    
+
     private func updateUI() {
         controllers[heroPicker]?.update()
         controllers[opponentPicker]?.update()
@@ -404,7 +404,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         // Dispose of any resources that can be recreated.
     }
 }
-    
+
 extension NSUserDefaults {
     func hasKey(key: String) -> Bool {
         return objectForKey(key) != nil

@@ -46,7 +46,7 @@ class LoginViewController: TrackOBotViewController, UIAlertViewDelegate {
     override func viewWillAppear(animated: Bool) {
         self.errorLabel.alpha = 0
     }
-    
+
     override func newCredentialsAdded(user:User) {
         self.performSegueWithIdentifier("back_from_login", sender: self)
     }

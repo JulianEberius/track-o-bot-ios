@@ -23,16 +23,16 @@
 import UIKit
 
 class HeroPickerItem: UIView {
-    
+
     let label: UILabel!
     let imageView: UIImageView!
-    
+
     override init(frame: CGRect) {
         imageView = UIImageView(frame: CGRectMake(0, 0, 32, 32))
         label = UILabel(frame: CGRectMake(32, 0, frame.width-32, 32))
-        
+
         super.init(frame: frame)
-        
+
         self.addSubview(imageView)
         self.addSubview(label)
     }

@@ -30,7 +30,7 @@ class ResultTableViewCell: UITableViewCell {
     @IBOutlet weak var opponentsHeroLabel: UILabel!
     @IBOutlet weak var winLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

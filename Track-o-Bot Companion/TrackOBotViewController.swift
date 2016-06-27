@@ -30,7 +30,7 @@ class TrackOBotViewController: UIViewController, UIPopoverPresentationController
     }
 
     @IBAction func openProfileTouchUp(sender: UIBarButtonItem) {
-        
+
         TrackOBot.instance.getOneTimeAuthToken({
             (result) -> Void in
             switch result {
@@ -56,6 +56,6 @@ class TrackOBotViewController: UIViewController, UIPopoverPresentationController
     }
 
     func newCredentialsAdded(user:User) {
-        
+
     }
 }

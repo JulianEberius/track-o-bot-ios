@@ -3,8 +3,8 @@
 //  Track-o-Bot Companion
 //
 //  Created by Julian Eberius on 07.09.15.
-//  Copyright (c) 2015 Julian Eberius. 
-//  
+//  Copyright (c) 2015 Julian Eberius.
+//
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
+
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         guard let user = TrackOBot.instance.readTrackOBotAccountDataFile(url) else {
             let viewController = app.topViewController() as! TrackOBotViewController
@@ -68,9 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 nil)
             return false
         }
-        
+
         TrackOBot.instance.storeUser(user)
-        
+
         TrackOBot.instance.getResults(0, onComplete: {
             (result) -> Void in
             let viewController = app.topViewController() as! TrackOBotViewController
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         alert.addAction(okAction)
         viewController.presentViewController(alert, animated: true, completion: nil)
     }
-    
+
 }
 
 extension UIApplication {

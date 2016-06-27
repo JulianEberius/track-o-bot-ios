@@ -40,27 +40,27 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         resetView()
     }
-    
+
     @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
-        
+
     }
-    
+
     func resetView() {
         self.historyTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
-        
+
         self.games = [Game]()
         self.total_count = 0
         self.retrieved_pages = 0
         self.max_requested_idx = 0
         self.retrieving = false
-        
+
         retrievePage(1)
     }
-    
+
     func retrieveNextPage() {
         retrievePage(self.retrieved_pages + 1)
     }
@@ -85,7 +85,7 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         })
     }
 
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -107,7 +107,7 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
                     self.retrieveNextPage()
                 }
             }
-            
+
             // "loading" cell
             cell.heroImageView.image = nil
             cell.opponentsHeroImageView.image = nil
@@ -143,11 +143,11 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
             return cell
         }
     }
-    
+
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true;
     }
-    
+
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
