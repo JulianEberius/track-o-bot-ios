@@ -10,9 +10,9 @@ This project is nearing beta, so it's not complete. However, some features are a
 
 - Import account data file (Track-o-Bot profile credentials)
 - Add games with information about heroes, decks, coin, mode, rank and game results
-- Basic History view
+- Basic History view, allows to delete games
 - Basic win rate graphs for classes and decks
-- Open web profile
+- Open the trackobot.com web profile, export the profile credentials
 
 That's it ;-) Obviously, it comes with no warranties, use at your own risk. However, if it uploads wrong game data, you can always delete games on your Track-o-Bot profile.
 
@@ -22,4 +22,6 @@ This project is released under the GNU General Public License (LGPL) Version 2.
 
 See [LICENSE](LICENSE)
 
-This project further includes a copy of Daniel Cohen Gindi & Philipp Jahoda's project "Charts" (previously "iOS-Charts") from [https://github.com/danielgindi/Charts](https://github.com/danielgindi/Charts), which is released under the Apache License 2.0 (see [Charts](Charts)).
+This project further includes the source code of the Charts (previously "iOS-Charts") library by Daniel Cohen Gindi & Philipp Jahoda, which was acquired under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0) from https://github.com/danielgindi/Charts.
+
+The icons used in the app’s tab bar are part of the Themify Icon set, which was acquired under the OFL license (http://scripts.sil.org/OFL) from http://themify.me/themify-icons.
