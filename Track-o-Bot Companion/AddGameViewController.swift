@@ -72,6 +72,56 @@ class HeroAndDeckPickerViewController {
         return HEROES[pickerView.selectedRowInComponent(HERO_PICKER)]
     }
 
+    func numberOfRowsInComponent(component: Int) -> Int {
+        if component == HERO_PICKER {
+            return 9
+        }
+        else {
+            let selectedHero = defaults.stringForKey(heroKey) ?? DEFAULT_HERO
+            let selectedHeroRow = HEROES.indexOf(selectedHero) ?? HEROES.count / 2
+
+            let decks = viewController.deckNames[selectedHeroRow]
+            let deckCount = decks.count
+            if (deckCount == 0)
+            {
+                return 1 // for the "generic deck" label
+            }
+            else
+            {
+                return deckCount + 1
+            }
+        }
+    }
+    func viewForRow(row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        if (component == HERO_PICKER) {
+            let hero = HEROES[row]
+            if let v = view as? HeroPickerItem {
+                v.imageView.image = UIImage(named:hero)
+                return v
+            } else {
+                let v = HeroPickerItem(frame: CGRectMake(0, 0, 120, 32))
+                v.label.text = hero
+                v.imageView.image = UIImage(named:hero)
+                return v
+            }
+        }
+        else
+        {
+            let heroRow = pickerView.selectedRowInComponent(HERO_PICKER)
+            let heroName = HEROES[heroRow]
+            let deckNames = viewController.deckNames[heroRow]
+            let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Other \(heroName)"
+            if let v = view as? UILabel {
+                v.text = deckName
+                return v
+            } else {
+                let v = UILabel(frame: CGRectMake(0, 0, 120, 32))
+                v.text = deckName
+                return v
+            }
+        }
+    }
+
     func didSelectRow(row: Int, inComponent component: Int) {
         if component == 0 {
             let hero = HEROES[row]
@@ -279,20 +329,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     }
 
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == HERO_PICKER {
-            return 9
+        guard let result = controllers[pickerView]?.numberOfRowsInComponent(component) else {
+            return 1
         }
-        else {
-            let deckCount = self.decks[pickerView.selectedRowInComponent(HERO_PICKER)].count
-            if (deckCount == 0)
-            {
-              return 1 // for the "generic deck" label
-            }
-            else
-            {
-              return deckCount + 1
-            }
-        }
+        return result;
     }
 
 // TODO: customize height and width for size classes
@@ -305,38 +345,11 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 //    }
 
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        if (component == HERO_PICKER) {
-            let hero = HEROES[row]
-            if let v = view as? HeroPickerItem {
-                v.imageView.image = UIImage(named:hero)
-                return v
-            } else {
-                let v = HeroPickerItem(frame: CGRectMake(0, 0, 120, 32))
-                v.label.text = hero
-                v.imageView.image = UIImage(named:hero)
-                return v
-            }
-        }
-        else
-        {
-            let heroRow = pickerView.selectedRowInComponent(HERO_PICKER)
-            let heroName = HEROES[heroRow]
-            let deckNames = self.deckNames[heroRow]
-            let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Other \(heroName)"
-            if let v = view as? UILabel {
-                v.text = deckName
-                return v
-            } else {
-                let v = UILabel(frame: CGRectMake(0, 0, 120, 32))
-                v.text = deckName
-                return v
-            }
-        }
+        return controllers[pickerView]!.viewForRow(row, forComponent: component, reusingView: view)
     }
 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         controllers[pickerView]?.didSelectRow(row, inComponent: component)
-
     }
 
     @IBAction func rankStepperValueChanged(sender: UIStepper) {
