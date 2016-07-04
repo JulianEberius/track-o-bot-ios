@@ -382,10 +382,7 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let selectedRank = defaults.hasKey(SELECTED_RANK) ? defaults.integerForKey(SELECTED_RANK) : 25
         rankStepper.value = Double(selectedRank)
         rankStepperValueChanged(rankStepper)
-    }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         // check login
         TrackOBot.instance.getDecks({
             (result) -> Void in
@@ -405,6 +402,10 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
 
             self.updateUI()
         })
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     private func updateUI() {
