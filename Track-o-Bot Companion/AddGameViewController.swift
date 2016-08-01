@@ -77,7 +77,8 @@ class HeroAndDeckPickerViewController {
             return 9
         }
         else {
-            let selectedHero = defaults.stringForKey(heroKey) ?? DEFAULT_HERO
+            let heroRow = pickerView.selectedRowInComponent(HERO_PICKER)
+            let selectedHero = HEROES[heroRow]
             let selectedHeroRow = HEROES.indexOf(selectedHero) ?? HEROES.count / 2
 
             let decks = viewController.deckNames[selectedHeroRow]
@@ -110,6 +111,15 @@ class HeroAndDeckPickerViewController {
             let heroRow = pickerView.selectedRowInComponent(HERO_PICKER)
             let heroName = HEROES[heroRow]
             let deckNames = viewController.deckNames[heroRow]
+            if (row > deckNames.count) {
+                // there is a subtle timing issue on device rotation where this
+                // method is called with a "row" for an recent hero, while the
+                // "heroRow" has already changed to another hero. Crudely forcing
+                // a reload of this picker component solves this problem for now.
+                pickerView.reloadComponent(DECK_PICKER)
+                return UILabel(frame: CGRectMake(0, 0, 120, 32))
+            }
+
             let deckName = ((deckNames.count > 0) && (row > 0)) ? deckNames[row - 1] : "Other \(heroName)"
             if let v = view as? UILabel {
                 v.text = deckName
@@ -165,7 +175,7 @@ class HeroAndDeckPickerViewController {
         let hero = HEROES[selectedHeroRow]
         let decks = viewController.deckNames[selectedHeroRow]
         if decks.count == 0 || selectedDeckRow == 0 {
-            return nil
+            return (hero, "Other \(hero)")
         }
 
         return (hero, decks[selectedDeckRow - 1])
@@ -174,6 +184,9 @@ class HeroAndDeckPickerViewController {
     private func deckRowFor(selectedDeck: String?, andHeroRow heroRow: Int) -> Int? {
         guard let d = selectedDeck else {
             return nil
+        }
+        if d == "Other \(HEROES[heroRow])" {
+            return 0
         }
         if let idx = viewController.deckNames[heroRow].indexOf(d) {
             return idx + 1
