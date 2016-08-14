@@ -173,13 +173,19 @@ class HeroAndDeckPickerViewController {
         let selectedDeckRow = pickerView.selectedRowInComponent(DECK_PICKER)
 
         let hero = HEROES[selectedHeroRow]
-        // TODO: fix potential out of bounds exception
         let decks = viewController.deckNames[selectedHeroRow]
         if decks.count == 0 || selectedDeckRow == 0 {
             return (hero, "Other \(hero)")
         }
 
-        // TODO: fix array out of bounds exception
+        if (selectedDeckRow > decks.count) {
+            // there is a subtle timing issue on device rotation where this
+            // method is called with a "row" for an recent hero, while the
+            // "heroRow" has already changed to another hero. Crudely forcing
+            // a reload of this picker component solves this problem for now.
+            pickerView.reloadComponent(DECK_PICKER)
+            return nil
+        }
         return (hero, decks[selectedDeckRow - 1])
     }
 
@@ -276,13 +282,15 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     func saveGame(won: Bool) {
         let yourHeroIdx = self.heroPicker.selectedRowInComponent(HERO_PICKER)
         let yourHero = HEROES[yourHeroIdx]
+        let yourHeroDecks = self.decks[yourHeroIdx]
         let opponentsHeroIdx = self.opponentPicker.selectedRowInComponent(HERO_PICKER)
         let opponentsHero = HEROES[opponentsHeroIdx]
+        let opponentsHeroDecks = self.decks[opponentsHeroIdx]
 
         let deckIdx = self.heroPicker.selectedRowInComponent(DECK_PICKER)
-        let yourDeckId:Int? = deckIdx > 0 ? self.decks[yourHeroIdx][deckIdx-1].id : nil
+        let yourDeckId:Int? = (deckIdx > 0 && deckIdx < yourHeroDecks.count) ? yourHeroDecks[deckIdx-1].id : nil
         let opponentsDeckIdx = self.opponentPicker.selectedRowInComponent(DECK_PICKER)
-        let opponentsDeckId:Int? = opponentsDeckIdx > 0 ? self.decks[opponentsHeroIdx][opponentsDeckIdx-1].id : nil
+        let opponentsDeckId:Int? = (opponentsDeckIdx > 0 && opponentsDeckIdx < opponentsHeroDecks.count) ? opponentsHeroDecks[opponentsDeckIdx-1].id : nil
 
         let coin = self.coinSwitch.on
         let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
