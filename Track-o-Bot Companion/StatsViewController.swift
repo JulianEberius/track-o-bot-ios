@@ -218,6 +218,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         if (self.selectedIndexMainChart != entry.xIndex) {
             self.selectedIndexMainChart = entry.xIndex
             if (self.statTypeSegmentControl.selectedSegmentIndex == 0) {
+                // TODO: fix bug in "as deck vs deck": always same stats
                 TrackOBot.instance.getVsClassStats(self.yNames[entry.xIndex], onComplete: getVsStatsCallback(self.createHeroBarChartData))
             } else {
                 let deckName = self.yNames[entry.xIndex]

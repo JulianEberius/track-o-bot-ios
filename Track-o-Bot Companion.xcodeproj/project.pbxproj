@@ -19,11 +19,11 @@
 		046B82701D1B275800130621 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B826F1D1B275800130621 /* MoreViewController.swift */; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
-		04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
 		04C862611D18B1840048D44E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; };
 		04C862621D18B1840048D44E /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04FE34AD1D5CCE2A007F34F3 /* iosbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FE34AC1D5CCE2A007F34F3 /* iosbot.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,10 +72,10 @@
 		046B826F1D1B275800130621 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		049826EC1C775E4900591C68 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
-		04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo-golden.png"; path = "Images.xcassets/logo-golden.imageset/logo-golden.png"; sourceTree = "<group>"; };
 		04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		04C41A011BA2E87600A01261 /* HeroPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPickerItem.swift; sourceTree = "<group>"; };
+		04FE34AC1D5CCE2A007F34F3 /* iosbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iosbot.png; path = "Images.xcassets/logo-red.imageset/iosbot.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +143,7 @@
 		045096411B9E0E140059BB7A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				04A4A9CB1BEC0D56009FFBF2 /* logo-golden.png */,
+				04FE34AC1D5CCE2A007F34F3 /* iosbot.png */,
 				045096421B9E0E150059BB7A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -249,7 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */,
-				04A4A9CC1BEC0D56009FFBF2 /* logo-golden.png in Resources */,
+				04FE34AD1D5CCE2A007F34F3 /* iosbot.png in Resources */,
 				0446F0741BA1B26C00B73014 /* LaunchScreen.storyboard in Resources */,
 				0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */,
 			);

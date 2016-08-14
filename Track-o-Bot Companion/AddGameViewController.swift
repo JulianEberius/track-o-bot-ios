@@ -173,11 +173,13 @@ class HeroAndDeckPickerViewController {
         let selectedDeckRow = pickerView.selectedRowInComponent(DECK_PICKER)
 
         let hero = HEROES[selectedHeroRow]
+        // TODO: fix potential out of bounds exception
         let decks = viewController.deckNames[selectedHeroRow]
         if decks.count == 0 || selectedDeckRow == 0 {
             return (hero, "Other \(hero)")
         }
 
+        // TODO: fix array out of bounds exception
         return (hero, decks[selectedDeckRow - 1])
     }
 
@@ -234,12 +236,15 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
     {
         wonGameButton.layer.cornerRadius = 5
         wonGameButton.layer.borderWidth = 1
-        wonGameButton.layer.borderColor = UIColor.brownColor().CGColor
+//        wonGameButton.layer.borderColor = UIColor.brownColor().CGColor
+        wonGameButton.layer.borderColor = UIColor(colorLiteralRed: 0.882, green: 0.169, blue: 0.337, alpha: 1.0).CGColor
 
         lostGameButton.layer.cornerRadius = 5
         lostGameButton.layer.borderWidth = 1
-        lostGameButton.layer.borderColor = UIColor.brownColor().CGColor
+//        lostGameButton.layer.borderColor = UIColor.brownColor().CGColor
+        lostGameButton.layer.borderColor = UIColor(colorLiteralRed: 0.882, green: 0.169, blue: 0.337, alpha: 1.0).CGColor
     }
+
 
 
     @IBAction func wonGameButtonTouchUp(sender: UIButton) {

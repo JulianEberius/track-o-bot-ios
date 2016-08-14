@@ -88,9 +88,9 @@
 			<key>UTTypeIdentifier</key>
 			<string>com.trackobot.accountdata</string>
 			<key>UTTypeSize320IconFile</key>
-			<string>logo-golden</string>
+			<string>iosbot</string>
 			<key>UTTypeSize64IconFile</key>
-			<string>logo-golden</string>
+			<string>iosbot</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
