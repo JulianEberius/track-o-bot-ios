@@ -10,7 +10,7 @@
         <!--Track Games-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="AddGameViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="AddGameViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j41-Ux-ngS"/>
                         <viewControllerLayoutGuide type="bottom" id="ueQ-13-3c2"/>
@@ -430,7 +430,7 @@
         <!--Account Settings-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8rJ-Kc-sve" userLabel="Account Settings" customClass="AccountViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8rJ-Kc-sve" userLabel="Account Settings" customClass="AccountViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -474,7 +474,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device. When asked about which app to open the file with, choose Track-O-Bot companion (you may have to scroll through various other apps).
+                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device. When asked about which app to open the file with, choose Track-O-Botty (you may have to scroll through various other apps).
 </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -484,7 +484,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with Track-O-Bot companion from the respective app. Note, that in some Apps such as Dropbox, you may have to use a "Share" button and then choose "Open with" to open the file in Track-O-Bot.   </string>
+                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with Track-O-Botty from the respective app. Note, that in some Apps such as Dropbox, you may have to use a "Share" button and then choose "Open with" to open the file in Track-O-Bot.  </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
@@ -553,13 +553,13 @@
         <!--History-->
         <scene sceneID="omW-7a-fb6">
             <objects>
-                <tableViewController title="History" id="K1g-di-RFl" customClass="HistoryViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="History" id="K1g-di-RFl" customClass="HistoryViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oQd-H7-qjz" userLabel="TableView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="matchCell" id="70H-J5-zAY" customClass="ResultTableViewCell" customModule="Track_o_Bot_Companion" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="matchCell" id="70H-J5-zAY" customClass="ResultTableViewCell" customModule="Track_o_Botty" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="70H-J5-zAY" id="nVm-Nh-Kg0">
@@ -679,7 +679,7 @@
         <!--Stats-->
         <scene sceneID="gZj-dB-RcR">
             <objects>
-                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tud-ph-Z5d"/>
                         <viewControllerLayoutGuide type="bottom" id="cEM-Ca-fck"/>
@@ -777,7 +777,7 @@
         <!--Login-->
         <scene sceneID="f1D-hK-RU9">
             <objects>
-                <viewController id="mwB-rf-D4M" userLabel="Login" customClass="LoginViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mwB-rf-D4M" userLabel="Login" customClass="LoginViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b8P-Rs-Rpm"/>
                         <viewControllerLayoutGuide type="bottom" id="9Ef-Av-FrC"/>
@@ -786,14 +786,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the Track-o-Bot iOS companion!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpZ-FM-IeY">
-                                <rect key="frame" x="172" y="130" width="256" height="47"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Track-o-Botty!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpZ-FM-IeY">
+                                <rect key="frame" x="236" y="120" width="129" height="47"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smT-6W-z3g">
-                                <rect key="frame" x="167" y="353" width="268" height="30"/>
+                                <rect key="frame" x="167" y="361" width="268" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="268" id="hmO-zw-MgK"/>
                                 </constraints>
@@ -806,25 +806,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will be asked for your Track-o-Bot account details." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFJ-il-o2G">
-                                <rect key="frame" x="20" y="391" width="562" height="17"/>
+                                <rect key="frame" x="20" y="395" width="562" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-red" translatesAutoresizingMaskIntoConstraints="NO" id="cvN-NY-IPG">
-                                <rect key="frame" x="218" y="185" width="165" height="150"/>
+                                <rect key="frame" x="218" y="175" width="165" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cvN-NY-IPG" secondAttribute="height" multiplier="11:10" id="jeP-Nc-EmH"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No email or social network login required! Track-o-Bot will automatically create a fresh profile for you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhr-YS-i9q">
-                                <rect key="frame" x="20" y="454" width="562" height="33"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duA-Wm-c44">
-                                <rect key="frame" x="167" y="416" width="268" height="30"/>
+                                <rect key="frame" x="167" y="420" width="268" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="268" id="x7Y-jl-hgH"/>
                                 </constraints>
@@ -845,6 +839,12 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No email or social network login required! Track-o-Bot will automatically create a fresh profile for you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhr-YS-i9q">
+                                <rect key="frame" x="20" y="454" width="562" height="33"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -858,10 +858,10 @@
                             <constraint firstItem="duA-Wm-c44" firstAttribute="top" secondItem="OFJ-il-o2G" secondAttribute="bottom" constant="8" symbolic="YES" id="SS2-Uf-n8P"/>
                             <constraint firstItem="Uhr-YS-i9q" firstAttribute="leading" secondItem="NFI-bt-Ao7" secondAttribute="leadingMargin" id="Tcy-sd-BIV"/>
                             <constraint firstItem="duA-Wm-c44" firstAttribute="centerX" secondItem="OFJ-il-o2G" secondAttribute="centerX" id="Vgu-rU-xRZ"/>
-                            <constraint firstItem="OFJ-il-o2G" firstAttribute="top" secondItem="smT-6W-z3g" secondAttribute="bottom" constant="8" symbolic="YES" id="X83-yT-Tis"/>
-                            <constraint firstItem="cvN-NY-IPG" firstAttribute="centerY" secondItem="NFI-bt-Ao7" secondAttribute="centerY" constant="-40" id="YJ1-VN-vx2"/>
-                            <constraint firstItem="Uhr-YS-i9q" firstAttribute="top" secondItem="duA-Wm-c44" secondAttribute="bottom" constant="8" symbolic="YES" id="gwh-Kg-8NG"/>
-                            <constraint firstItem="smT-6W-z3g" firstAttribute="top" secondItem="cvN-NY-IPG" secondAttribute="bottom" constant="18" id="hKK-9R-OXE"/>
+                            <constraint firstItem="OFJ-il-o2G" firstAttribute="top" secondItem="smT-6W-z3g" secondAttribute="bottom" constant="4" id="X83-yT-Tis"/>
+                            <constraint firstItem="cvN-NY-IPG" firstAttribute="centerY" secondItem="NFI-bt-Ao7" secondAttribute="centerY" constant="-50" id="YJ1-VN-vx2"/>
+                            <constraint firstItem="Uhr-YS-i9q" firstAttribute="top" secondItem="duA-Wm-c44" secondAttribute="bottom" constant="4" id="gwh-Kg-8NG"/>
+                            <constraint firstItem="smT-6W-z3g" firstAttribute="top" secondItem="cvN-NY-IPG" secondAttribute="bottom" constant="36" id="hKK-9R-OXE"/>
                             <constraint firstItem="cvN-NY-IPG" firstAttribute="top" secondItem="KpZ-FM-IeY" secondAttribute="bottom" constant="8" symbolic="YES" id="hYN-te-dPb"/>
                             <constraint firstItem="jfr-mf-5ym" firstAttribute="top" secondItem="Uhr-YS-i9q" secondAttribute="bottom" constant="8" symbolic="YES" id="hax-DL-iLW"/>
                             <constraint firstItem="OFJ-il-o2G" firstAttribute="leading" secondItem="NFI-bt-Ao7" secondAttribute="leadingMargin" id="rEi-dS-biv"/>
@@ -939,7 +939,7 @@
         <!--More View Controller-->
         <scene sceneID="GdG-IE-FsA">
             <objects>
-                <tableViewController title="More View Controller" id="X8B-GB-rCh" customClass="MoreViewController" customModule="Track_o_Bot_Companion" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="More View Controller" id="X8B-GB-rCh" customClass="MoreViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Nk1-6H-Zc3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1097,7 +1097,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">The Track-o-Bot iOS companion does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted (by logging out) in the "More" tab. The game results are not stored on the device, but are sent directly to the trackobot.com API.  The user data retrieved from this API, such as result history and result statistics, are only used for the purpose of display in this app, and are never stored or used in any other context.  Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, and is only using its API to store and retrieve user data from https://trackobot.com.</string>
+                                        <string key="content">Track-o-Botty does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted (by logging out) in the "More" tab. The game results are not stored on the device, but are sent directly to the trackobot.com API.  The user data retrieved from this API, such as result history and result statistics, are only used for the purpose of display in this app, and are never stored or used in any other context.  Note that Track-o-Botty is developed independently of the original Track-o-Bot, and is only using its API to store and retrieve user data from https://trackobot.com.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
@@ -1169,7 +1169,7 @@
                                             </fragment>
                                             <fragment>
                                                 <string key="content"> 
-The Track-O-Bot for iOS app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.   </string>
+The Track-O-Botty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  </string>
                                                 <attributes>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
@@ -1271,7 +1271,7 @@ Please note that the Hearthstone artwork and terms used in this app are Blizzard
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content">). 
+                                                <string key="content">).
  ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of Warcraft is a trademark, and Hearthstone is a registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other countries.</string>
                                                 <attributes>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
@@ -1330,7 +1330,7 @@ Please note that the Hearthstone artwork and terms used in this app are Blizzard
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content"> 
+                                        <string key="content">
 Information according to § 5 TMG
 
 Julian Eberius
@@ -1349,7 +1349,7 @@ Pestitzer Str. 11
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have concerning this app. Note that Track-o-Bot for iOS is developed independently of the original Track-o-Bot, so direct any questions, remarks and feedback about Track-o-Bot in general to trackobot.com or https://reddit.com/r/trackobot.</string>
+E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have concerning this app. Note that Track-o-Botty is developed independently of the original Track-o-Bot, so direct any questions, remarks and feedback about Track-o-Bot in general to trackobot.com or https://reddit.com/r/trackobot.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -1381,7 +1381,7 @@ E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">App Source Code 
-The Track-O-Bot for iOS app's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.   Attributions
+The Track-O-Botty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  Attributions
 
 The app includes the source code of the Charts library by Daniel Cohen Gindi &amp; Philipp Jahoda, which was acquired under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0) from https://github.com/danielgindi/Charts.
 
@@ -1389,7 +1389,7 @@ The icons used in the app’s tab bar are part of the Themify Icon set, which wa
 
 Copyright Notice - Hearthstone
 
-Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are displayed in this app for non-commercial purposes only (http://eu.blizzard.com/de-de/company/about/legal-faq.html). 
+Please note that the Hearthstone artwork and terms used in this app are Blizzard Entertainment® copyrights/trademarks, and are displayed in this app for non-commercial purposes only (http://eu.blizzard.com/de-de/company/about/legal-faq.html).
  ©2014 Blizzard Entertainment, Inc. All rights reserved. Heroes of Warcraft is a trademark, and Hearthstone is a registered trademark of Blizzard Entertainment, Inc. in the U.S. and/or other countries.</string>
                                     <attributes>
                                         <font key="NSFont" size="14" name="HelveticaNeue"/>
@@ -1421,7 +1421,7 @@ Please note that the Hearthstone artwork and terms used in this app are Blizzard
         <image name="trackOBotAccountSettings" width="322" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LfB-NZ-Ouo"/>
+        <segue reference="U9A-7S-IQs"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.88235294117647056" green="0.16862745098039217" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
 </document>
