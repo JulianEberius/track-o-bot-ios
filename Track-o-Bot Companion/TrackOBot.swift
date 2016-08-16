@@ -301,6 +301,8 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             return nil
         }
 
+        // needs to be set to read data storerd in early beta, when the app's name was still Track-o-Bot-Companion
+        NSKeyedUnarchiver.setClass(User.self, forClassName: "Track_o_Bot_Companion.User")
         guard let user = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User else {
             return nil
         }
