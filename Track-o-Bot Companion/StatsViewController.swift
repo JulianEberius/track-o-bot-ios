@@ -61,7 +61,9 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mainChart.noDataText = "Loading data ..."
+        self.mainChart.infoTextColor = UIColor(colorLiteralRed: 0.882, green: 0.169, blue: 0.337, alpha: 1.0)
         self.detailChart.noDataText = "Select a class ..."
+        self.detailChart.infoTextColor = UIColor(colorLiteralRed: 0.882, green: 0.169, blue: 0.337, alpha: 1.0)
     }
 
 
@@ -204,6 +206,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         chart.descriptionText = ""
         chart.delegate = self
         chart.drawHighlightArrowEnabled = true
+        chart.infoTextColor = UIColor(colorLiteralRed: 0.882, green: 0.169, blue: 0.337, alpha: 1.0)
 
         chart.marker = CustomChartMarker(chart: chart, stats: stats)
 
