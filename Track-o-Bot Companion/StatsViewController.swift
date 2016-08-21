@@ -47,15 +47,15 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     var selectedIndexMainChart: Int? = nil
 
     let heroColors = [
-        UIColor(red: 167/255.0, green: 57.0/255.0, blue: 45.0/255.0, alpha: 1.0),
-        UIColor(red: 48/255.0, green: 60.0/255.0, blue: 108.0/255.0, alpha: 1.0),
-        UIColor(red: 37/255.0, green: 32.0/255.0, blue: 24.0/255.0, alpha: 1.0),
-        UIColor(red: 235/255.0, green: 154.0/255.0, blue: 68.0/255.0, alpha: 1.0),
-        UIColor(red: 35.0/255.0, green: 70.0/255.0, blue: 30.0/255.0, alpha: 1.0),
-        UIColor(red: 108/255.0, green: 68.0/255.0, blue: 30.0/255.0, alpha: 1.0),
-        UIColor(red: 88/255.0, green: 50.0/255.0, blue: 68.0/255.0, alpha: 1.0),
-        UIColor(red: 45/255.0, green: 83.0/255.0, blue: 125.0/255.0, alpha: 1.0),
-        UIColor(red: 250/255.0, green: 244/255.0, blue: 220.0/255.0, alpha: 1.0)
+        UIColor(hue: 0.013, saturation: 0.73, brightness: 1.0, alpha: 1.0),
+        UIColor(hue: 0.5806, saturation: 1, brightness: 0.86, alpha: 1.0),
+        UIColor(hue: 0.0, saturation: 0.0, brightness: 0.3, alpha: 1.0),
+        UIColor(hue: 0.1556, saturation: 0.57, brightness: 1, alpha: 1.0),
+        UIColor(hue: 0.3111, saturation: 0.57, brightness: 0.84, alpha: 1.0),
+        UIColor(hue: 0.0806, saturation: 0.72, brightness: 0.83, alpha: 1.0),
+        UIColor(hue: 0.9222, saturation: 0.43, brightness: 0.82, alpha: 1.0),
+        UIColor(hue: 0.5444, saturation: 0.56, brightness: 0.94, alpha: 1.0),
+        UIColor(hue: 0.1333, saturation: 0.11, brightness: 1, alpha: 1.0)
     ]
 
     override func viewDidLoad() {
@@ -226,6 +226,8 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             } else {
                 let deckName = self.yNames[entry.xIndex]
                 guard let deckId = self.decks.filter({ d in d.fullName == deckName }).first?.id else {
+                    self.detailChart.clear()
+                    self.detailChart.noDataText = "No statistics available for \"\(deckName)\""
                     // "Other xyz" has no id, and no stats can be retrieved from TrackOBot.com AFAIK
                     return
                 }
