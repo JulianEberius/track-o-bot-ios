@@ -225,8 +225,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                 TrackOBot.instance.getVsClassStats(self.yNames[entry.xIndex], onComplete: getVsStatsCallback(self.createHeroBarChartData))
             } else {
                 let deckName = self.yNames[entry.xIndex]
-                let deckId = self.decks.filter { d in d.name == deckName }.first?.id
-                // deckId may be nil now, this is ok and represents "Other" in the API
+                guard let deckId = self.decks.filter({ d in d.fullName == deckName }).first?.id else {
+                    // "Other xyz" has no id, and no stats can be retrieved from TrackOBot.com AFAIK
+                    return
+                }
                 TrackOBot.instance.getVsDeckStats(deckId, onComplete: getVsStatsCallback(self.createDeckBarChartData))
             }
         }

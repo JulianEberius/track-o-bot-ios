@@ -148,14 +148,17 @@ func ==(lhs:Game, rhs:Game) -> Bool {
 
 class Deck : DateFormattingModel {
 
+    // TODO: remove the use of "!" on data classes
     let id: Int!
     let hero: String!
     let name: String!
+    let fullName: String
 
     init(id: Int?, hero: String?, name: String?) {
         self.id = id
         self.hero = hero
         self.name = name
+        self.fullName = "\(self.name) \(self.hero)"
     }
 
     /**
@@ -466,7 +469,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
         })
     }
 
-    func getVsDeckStats(asDeck: Int?, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+    func getVsDeckStats(asDeck: Int, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest("\(byDeckResultsUrl)?as_deck=\(asDeck)", onComplete: {
             (result) -> Void in
             switch result {
