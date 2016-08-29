@@ -71,6 +71,10 @@ p, ul, ol, table, pre, dl {
   margin:0 0 20px;
 }
 
+p {
+  text-align: justify;
+}
+
 h1, h2, h3 {
   line-height:1.1;
 }
@@ -224,7 +228,7 @@ header ul a strong {
 }
 
 section {
-  width:500px;
+  width:550px;
   float:right;
   padding-bottom:50px;
 }
