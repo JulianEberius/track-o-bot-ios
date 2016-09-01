@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:20;stroke-linecap:square;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:square;stroke-miterlimit:10;}
+	.st4{fill:url(#SVGID_2_);}
+</style>
+<path class="st0" d="M864,1024H160C71.6,1024,0,952.4,0,864V160C0,71.6,71.6,0,160,0h704c88.4,0,160,71.6,160,160v704
+	C1024,952.4,952.4,1024,864,1024z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="512" y1="-19168" x2="512" y2="-18144" gradientTransform="matrix(1 0 0 -1 0 -18144)">
+	<stop  offset="0" style="stop-color:#F54567;stop-opacity:0.85"/>
+	<stop  offset="1" style="stop-color:#F73358"/>
+</linearGradient>
+<rect class="st1" width="1024" height="1024"/>
+<g>
+	<g>
+		<polyline class="st2" points="457.3,218.8 433.6,162.8 422.7,137 		"/>
+		<line class="st2" x1="561.6" y1="212.6" x2="594.5" y2="138.9"/>
+		<polyline class="st3" points="578,177.6 543.6,151.4 507.8,178.6 469.2,154 437.6,172 		"/>
+		<g>
+			<path class="st0" d="M512,243.2l182,58.1V403v35h35h24v173h-24h-35v35v118h-46h-35v35v53h-41v-53v-35h-35h-40h-35v35v53h-51v-53
+				v-35h-35h-46V646v-35h-35h-24V437h24h35v-35V301.3L512,243.2 M512,206.5l-217,69.3V402h-59v244h59v153h81v88h121v-88h40v88h111
+				v-88h81V646h59V403h-59V275.8L512,206.5L512,206.5z"/>
+		</g>
+		<g>
+			<g>
+				<polyline class="st0" points="512.5,440.8 514.2,379.6 554.9,398.3 				"/>
+			</g>
+			<polygon class="st0" points="513.8,450 453.8,434.5 402.8,511 467.4,637 517.2,620.3 565,638.2 621.2,561.3 580.2,511 
+				610.2,460.6 563.9,432.4 			"/>
+		</g>
+	</g>
+</g>
+<path class="st0" d="M2017.5,1024h-627c-109.6,0-198.5-88.9-198.5-198.5v-627C1192,88.9,1280.9,0,1390.5,0h627
+	C2127.1,0,2216,88.9,2216,198.5v627C2216,935.1,2127.1,1024,2017.5,1024z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="1704" y1="-19168" x2="1704" y2="-18144" gradientTransform="matrix(1 0 0 -1 0 -18144)">
+	<stop  offset="0" style="stop-color:#F54567;stop-opacity:0.85"/>
+	<stop  offset="1" style="stop-color:#F73358"/>
+</linearGradient>
+<path class="st4" d="M2017.5,1024h-627c-109.6,0-198.5-88.9-198.5-198.5v-627C1192,88.9,1280.9,0,1390.5,0h627
+	C2127.1,0,2216,88.9,2216,198.5v627C2216,935.1,2127.1,1024,2017.5,1024z"/>
+<g>
+	<g>
+		<polyline class="st2" points="1649.3,218.8 1625.6,162.8 1614.7,137 		"/>
+		<line class="st2" x1="1753.6" y1="212.6" x2="1786.5" y2="138.9"/>
+		<polyline class="st3" points="1770,177.6 1735.6,151.4 1699.8,178.6 1661.2,154 1629.6,172 		"/>
+		<g>
+			<path class="st0" d="M1704,243.2l182,58.1V403v35h35h24v173h-24h-35v35v118h-46h-35v35v53h-41v-53v-35h-35h-40h-35v35v53h-51v-53
+				v-35h-35h-46V646v-35h-35h-24V437h24h35v-35V301.3L1704,243.2 M1704,206.5l-217,69.3V402h-59v244h59v153h81v88h121v-88h40v88h111
+				v-88h81V646h59V403h-59V275.8L1704,206.5L1704,206.5z"/>
+		</g>
+		<g>
+			<g>
+				<polyline class="st0" points="1704.5,440.8 1706.2,379.6 1746.9,398.3 				"/>
+			</g>
+			<polygon class="st0" points="1705.8,450 1645.8,434.5 1594.8,511 1659.4,637 1709.2,620.3 1757,638.2 1813.2,561.3 1772.2,511 
+				1802.2,460.6 1755.9,432.4 			"/>
+		</g>
+	</g>
+</g>
+</svg>
