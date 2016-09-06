@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -10,7 +10,7 @@
         <!--Track Games-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="AddGameViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="AddGameViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j41-Ux-ngS"/>
                         <viewControllerLayoutGuide type="bottom" id="ueQ-13-3c2"/>
@@ -430,7 +430,7 @@
         <!--Account Settings-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8rJ-Kc-sve" userLabel="Account Settings" customClass="AccountViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8rJ-Kc-sve" userLabel="Account Settings" customClass="AccountViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -474,7 +474,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device. When asked about which app to open the file with, choose Track-O-Botty (you may have to scroll through various other apps).
+                                                <string key="content"> • Send the file to yourself via email or a messaging service, and open the attachment on your iOS device. When asked about which app to open the file with, choose TrackOBotty (you may have to scroll through various other apps).
 </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
@@ -484,7 +484,7 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
-                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with Track-O-Botty from the respective app. Note, that in some Apps such as Dropbox, you may have to use a "Share" button and then choose "Open with" to open the file in Track-O-Bot.  </string>
+                                                <string key="content"> • Put the file into your Dropbox or similar cloud service, and then open it with TrackOBotty from the respective app. Note, that in some Apps such as Dropbox, you may have to use a "Share" button and then choose "Open with" to open the file in Track-O-Bot.  </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="15" name="HelveticaNeue"/>
@@ -553,13 +553,13 @@
         <!--History-->
         <scene sceneID="omW-7a-fb6">
             <objects>
-                <tableViewController title="History" id="K1g-di-RFl" customClass="HistoryViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="History" id="K1g-di-RFl" customClass="HistoryViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oQd-H7-qjz" userLabel="TableView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="matchCell" id="70H-J5-zAY" customClass="ResultTableViewCell" customModule="Track_o_Botty" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="matchCell" id="70H-J5-zAY" customClass="ResultTableViewCell" customModule="TrackOBotty" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="70H-J5-zAY" id="nVm-Nh-Kg0">
@@ -679,7 +679,7 @@
         <!--Stats-->
         <scene sceneID="gZj-dB-RcR">
             <objects>
-                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="ba2-k2-aum" customClass="StatsViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Stats" automaticallyAdjustsScrollViewInsets="NO" id="ba2-k2-aum" customClass="StatsViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tud-ph-Z5d"/>
                         <viewControllerLayoutGuide type="bottom" id="cEM-Ca-fck"/>
@@ -777,7 +777,7 @@
         <!--Login-->
         <scene sceneID="f1D-hK-RU9">
             <objects>
-                <viewController id="mwB-rf-D4M" userLabel="Login" customClass="LoginViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mwB-rf-D4M" userLabel="Login" customClass="LoginViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b8P-Rs-Rpm"/>
                         <viewControllerLayoutGuide type="bottom" id="9Ef-Av-FrC"/>
@@ -786,7 +786,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Track-o-Botty!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpZ-FM-IeY">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to TrackOBotty!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpZ-FM-IeY">
                                 <rect key="frame" x="236" y="120" width="129" height="47"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -939,7 +939,7 @@
         <!--More View Controller-->
         <scene sceneID="GdG-IE-FsA">
             <objects>
-                <tableViewController title="More View Controller" id="X8B-GB-rCh" customClass="MoreViewController" customModule="Track_o_Botty" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="More View Controller" id="X8B-GB-rCh" customClass="MoreViewController" customModule="TrackOBotty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Nk1-6H-Zc3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1097,7 +1097,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">Track-o-Botty does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted (by logging out) in the "More" tab. The game results are not stored on the device, but are sent directly to the trackobot.com API.  The user data retrieved from this API, such as result history and result statistics, are only used for the purpose of display in this app, and are never stored or used in any other context.  Note that Track-o-Botty is developed independently of the original Track-o-Bot, and is only using its API to store and retrieve user data from https://trackobot.com.</string>
+                                        <string key="content">TrackOBotty does not collect any user data, except for the game results and login credentials entered manually by the user. The login data is stored on the device only for the purpose of authenticating with the trackobot.com API, and can be exported and deleted (by logging out) in the "More" tab. The game results are not stored on the device, but are sent directly to the trackobot.com API.  The user data retrieved from this API, such as result history and result statistics, are only used for the purpose of display in this app, and are never stored or used in any other context.  Note that TrackOBotty is developed independently of the original Track-o-Bot, and is only using its API to store and retrieve user data from https://trackobot.com.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
@@ -1169,7 +1169,7 @@
                                             </fragment>
                                             <fragment>
                                                 <string key="content"> 
-The Track-O-Botty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  </string>
+The TrackOBotty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  </string>
                                                 <attributes>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
@@ -1349,7 +1349,7 @@ Pestitzer Str. 11
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have concerning this app. Note that Track-o-Botty is developed independently of the original Track-o-Bot, so direct any questions, remarks and feedback about Track-o-Bot in general to trackobot.com or https://reddit.com/r/trackobot.</string>
+E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-bot-ios  If possible, use the above Github page to report any issues you encounter, and any improvement ideas or feature requests that you have concerning this app. Note that TrackOBotty is developed independently of the original Track-o-Bot, so direct any questions, remarks and feedback about Track-o-Bot in general to trackobot.com or https://reddit.com/r/trackobot.</string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -1381,7 +1381,7 @@ E-Mail: trackobot.ios@gmail.com Web: https://github.com/JulianEberius/track-o-
                             <attributedString key="attributedText">
                                 <fragment>
                                     <string key="content">App Source Code 
-The Track-O-Botty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  Attributions
+The TrackOBotty's source code can be acquired as free software on https://github.com/JulianEberius/track-o-bot-ios/.  Attributions
 
 The app includes the source code of the Charts library by Daniel Cohen Gindi &amp; Philipp Jahoda, which was acquired under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0) from https://github.com/danielgindi/Charts.
 

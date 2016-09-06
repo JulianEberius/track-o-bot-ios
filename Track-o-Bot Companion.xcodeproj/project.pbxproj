@@ -61,7 +61,7 @@
 		0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBotViewController.swift; sourceTree = "<group>"; };
 		0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 		0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0450963E1B9E0E140059BB7A /* Track-o-Botty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Track-o-Botty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0450963E1B9E0E140059BB7A /* TrackOBotty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackOBotty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045096421B9E0E150059BB7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		045096431B9E0E150059BB7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045096451B9E0E150059BB7A /* AddGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGameViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		0450963F1B9E0E140059BB7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0450963E1B9E0E140059BB7A /* Track-o-Botty.app */,
+				0450963E1B9E0E140059BB7A /* TrackOBotty.app */,
 			);
 			name = Products;
 			path = ..;
@@ -174,9 +174,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0450963D1B9E0E140059BB7A /* Track-o-Botty */ = {
+		0450963D1B9E0E140059BB7A /* TrackOBotty */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0450965F1B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "Track-o-Botty" */;
+			buildConfigurationList = 0450965F1B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "TrackOBotty" */;
 			buildPhases = (
 				0450963A1B9E0E140059BB7A /* Sources */,
 				0450963B1B9E0E140059BB7A /* Frameworks */,
@@ -188,9 +188,9 @@
 			dependencies = (
 				04C862641D18B1840048D44E /* PBXTargetDependency */,
 			);
-			name = "Track-o-Botty";
+			name = TrackOBotty;
 			productName = "Track-o-Bot Companion";
-			productReference = 0450963E1B9E0E140059BB7A /* Track-o-Botty.app */;
+			productReference = 0450963E1B9E0E140059BB7A /* TrackOBotty.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -228,7 +228,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				0450963D1B9E0E140059BB7A /* Track-o-Botty */,
+				0450963D1B9E0E140059BB7A /* TrackOBotty */,
 			);
 		};
 /* End PBXProject section */
@@ -428,7 +428,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0450965F1B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "Track-o-Botty" */ = {
+		0450965F1B9E0E150059BB7A /* Build configuration list for PBXNativeTarget "TrackOBotty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				045096601B9E0E150059BB7A /* Debug */,
