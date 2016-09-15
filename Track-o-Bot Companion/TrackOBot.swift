@@ -24,16 +24,16 @@ import Foundation
 
 class DateFormattingModel {
 
-    static var inputDateFormatter:NSDateFormatter {
-        let formatter = NSDateFormatter()
+    static var inputDateFormatter:DateFormatter {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSZ"
         return formatter
     }
 
-    static var outputDateFormatter:NSDateFormatter {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = NSDateFormatterStyle.MediumStyle
-        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    static var outputDateFormatter:DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeStyle = DateFormatter.Style.medium
+        formatter.dateStyle = DateFormatter.Style.medium
         formatter.doesRelativeDateFormatting = true
         return formatter
     }
@@ -89,7 +89,7 @@ class Game : DateFormattingModel, Equatable {
         }
     }
 
-    init(id: Int?, hero: String, opponentsHero: String, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool, coin:Bool?, added:NSDate? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
+    init(id: Int?, hero: String, opponentsHero: String, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool, coin:Bool?, added:Date? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
         self.opponentsHero = opponentsHero
@@ -103,7 +103,7 @@ class Game : DateFormattingModel, Equatable {
         self.rank = rank
         self.legend = legend
         if let d = added {
-            self.timeLabel = Game.outputDateFormatter.stringFromDate(d)
+            self.timeLabel = Game.outputDateFormatter.string(from: d)
         } else {
             self.timeLabel = nil
         }
@@ -115,8 +115,8 @@ class Game : DateFormattingModel, Equatable {
     */
     convenience init?(dict:NSDictionary) {
         guard let id = dict["id"] as? Int,
-            hero = dict["hero"] as? String,
-            opponentsHero = dict["opponent"] as? String
+            let hero = dict["hero"] as? String,
+            let opponentsHero = dict["opponent"] as? String
             else {
                 return nil
         }
@@ -124,9 +124,9 @@ class Game : DateFormattingModel, Equatable {
         let deck = dict["hero_deck"] as? String
         let opponentsDeck = dict["opponent_deck"] as? String
         let coin = dict["coin"] as? Bool
-        var added: NSDate? = nil
+        var added: Date? = nil
         if let ds = dict["added"] as? String {
-            added = Game.inputDateFormatter.dateFromString(ds)
+            added = Game.inputDateFormatter.date(from: ds)
         }
 
         self.init(id: id, hero: hero, opponentsHero: opponentsHero, deck: deck, deckId: nil,
@@ -196,15 +196,15 @@ class User : NSObject, NSCoding {
 
     required init(coder decoder: NSCoder) {
         //Error here "missing argument for parameter name in call
-        self.username = decoder.decodeObjectForKey("username") as! String
-        self.password = decoder.decodeObjectForKey("password") as! String
-        self.domain = decoder.decodeObjectForKey("domain") as! String
+        self.username = decoder.decodeObject(forKey: "username") as! String
+        self.password = decoder.decodeObject(forKey: "password") as! String
+        self.domain = decoder.decodeObject(forKey: "domain") as! String
     }
 
-    func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.username, forKey: "username")
-        coder.encodeObject(self.password, forKey: "password")
-        coder.encodeObject(self.domain, forKey: "domain")
+    func encode(with coder: NSCoder) {
+        coder.encode(self.username, forKey: "username")
+        coder.encode(self.password, forKey: "password")
+        coder.encode(self.domain, forKey: "domain")
     }
 
 }
@@ -242,19 +242,20 @@ class ByDeckStats : Stats {
 }
 
 
-enum Result<T: Any, U: ErrorType> {
-    case Success(T)
-    case Failure(U)
+enum Result<T: Any, U: Error> {
+    case success(T)
+    case failure(U)
 }
 
-enum TrackOBotAPIError : ErrorType {
-    case CredentialsMissing
-    case JsonFormattingFailed
-    case JsonParsingFailed
-    case NetworkError(error:NSError)
-    case LoginFailed(error:String)
-    case RequestFailed(error:String)
-    case InternalError
+enum TrackOBotAPIError : Error {
+    case credentialsMissing
+    case jsonFormattingFailed
+    case jsonParsingFailed
+    case networkError(error:Error)
+    case loginFailed(error:String)
+    case requestFailed(error:String)
+    case malformedUrl
+    case internalError
 }
 
 let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
@@ -272,7 +273,7 @@ let HEROES_BY_TRACKOBOT_ID = [
 let RANK_UNKNOWN = 0 // as defined in the original TrackOBot
 let LEGEND_UNKNOWN = 0 // as defined in the original TrackOBot
 
-class TrackOBot : NSObject, NSURLSessionDelegate {
+class TrackOBot : NSObject, URLSessionDelegate {
     static let instance = TrackOBot()
     static let DOMAIN = "trackobot.com"
     //static let DOMAIN = "localhost:3001"
@@ -281,7 +282,7 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     let USERNAME = "username"
     let TOKEN = "token"
 
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
 
     let createUserUrl = "https://\(DOMAIN)/users"
     let resultsUrl = "https://\(DOMAIN)/profile/results.json"
@@ -294,92 +295,92 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
     let byDeckResultsUrl = "https://\(DOMAIN)/profile/stats/decks.json"
 
 
-    func storeUser(user:User) -> Void {
-        let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
-        defaults.setObject(userData, forKey: USER)
+    func storeUser(_ user:User) -> Void {
+        let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+        defaults.set(userData, forKey: USER)
     }
 
     func loadUser() -> User? {
-        guard let data = defaults.dataForKey(USER) else {
+        guard let data = defaults.data(forKey: USER) else {
             return nil
         }
 
         // needs to be set to read data storerd in early beta, when the app's name was still Track-o-Bot-Companion
         NSKeyedUnarchiver.setClass(User.self, forClassName: "Track_o_Bot_Companion.User")
-        guard let user = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User else {
+        guard let user = NSKeyedUnarchiver.unarchiveObject(with: data) as? User else {
             return nil
         }
         return user
     }
 
 
-    func postResult(game:Game, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
-        var gameData = ["hero": game.hero, "opponent": game.opponentsHero,
-                        "win": game.won,
-                        "mode": game.mode.rawValue] as [String: AnyObject]
+    func postResult(_ game:Game, onComplete: @escaping (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+        var gameData = ["hero": game.hero as AnyObject, "opponent": game.opponentsHero as AnyObject,
+                        "win": game.won as AnyObject,
+                        "mode": game.mode.rawValue as AnyObject] as [String: AnyObject]
         if let coin = game.coin {
-            gameData["coin"] = coin
+            gameData["coin"] = coin as AnyObject?
         }
         if let deck = game.deckId {
-            gameData["deck_id"] = deck
+            gameData["deck_id"] = deck as AnyObject?
         }
         if let opponentsDeck = game.opponentsDeckId {
-            gameData["opponent_deck_id"] = opponentsDeck
+            gameData["opponent_deck_id"] = opponentsDeck as AnyObject?
         }
         if let rnk = game.rank {
-            gameData["rank"] = rnk
+            gameData["rank"] = rnk as AnyObject?
         }
         if let legend = game.legend {
-            gameData["legend"] = legend
+            gameData["legend"] = legend as AnyObject?
         }
 
         let data = ["result": gameData]
-        guard let json = try? NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions.init(rawValue: 0)) else {
-            onComplete(Result.Failure(TrackOBotAPIError.JsonFormattingFailed))
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.init(rawValue: 0)) else {
+            onComplete(Result.failure(TrackOBotAPIError.jsonFormattingFailed))
             return
         }
         postRequest(resultsUrl, data: json, onComplete: onComplete)
     }
 
-    func getResults(page: Int, onComplete: (Result<HistoryPage, TrackOBotAPIError>) -> Void) -> Void {
+    func getResults(_ page: Int, onComplete: @escaping (Result<HistoryPage, TrackOBotAPIError>) -> Void) -> Void {
         let url = profileUrl + "?page=\(page)" // 1-based indices in API
         getRequest(url, onComplete: {
             (result) -> Void in
             switch result {
-            case .Success(let dict):
+            case .success(let dict):
                 guard let history = dict["history"] as? [NSDictionary] else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let games = history.flatMap { d in Game(dict:d) }
 
                 guard let meta = dict["meta"] as? NSDictionary else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let historyPage = HistoryPage(games: games, dict: meta)
 
-                onComplete(Result.Success(historyPage))
+                onComplete(Result.success(historyPage))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
-    func deleteResult(id: Int, onComplete: (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
+    func deleteResult(_ id: Int, onComplete: @escaping (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
         let url = "\(resultDeleteUrl)/\(id)"
         deleteRequest(url, onComplete: onComplete)
     }
 
-    func getDecks(onComplete: (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
+    func getDecks(_ onComplete: @escaping (Result<[[Deck]], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(decksUrl, onComplete: {
         (result) -> Void in
             switch result {
-            case .Success(let dict):
+            case .success(let dict):
                 guard let decksDicts = dict["decks"] as? [NSDictionary] else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let decks  = HEROES.map {
@@ -391,22 +392,23 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     }
                 }
 
-                onComplete(Result.Success(decks))
+                onComplete(Result.success(decks))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
-    func getByClassStats(onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
+    func getByClassStats(_ onComplete: @escaping (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byClassResultsUrl, onComplete: {
             (result) -> Void in
             switch result {
-            case .Success(let dict):
-                guard let stats = dict["stats"]?["as_class"] as? NSDictionary else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+            case .success(let dict):
+                guard let statsDict = dict["stats"] as? NSDictionary,
+                          let stats = statsDict["as_class"] as? NSDictionary else {
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let byClassStats = HEROES.map { (hero) -> ByClassStats in
@@ -414,22 +416,23 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
                 }
 
-                onComplete(Result.Success(byClassStats))
+                onComplete(Result.success(byClassStats))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
-    func getVsClassStats(asClass: String, onComplete: (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
-        getRequest("\(byClassResultsUrl)?as_hero=\(asClass.lowercaseString)", onComplete: {
+    func getVsClassStats(_ asClass: String, onComplete: @escaping (Result<[ByClassStats], TrackOBotAPIError>) -> Void) -> Void {
+        getRequest("\(byClassResultsUrl)?as_hero=\(asClass.lowercased())", onComplete: {
             (result) -> Void in
             switch result {
-            case .Success(let dict):
-                guard let stats = dict["stats"]?["vs_class"] as? NSDictionary else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+            case .success(let dict):
+                guard let statsDict = dict["stats"] as? NSDictionary,
+                          let stats = statsDict["vs_class"] as? NSDictionary else {
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let byClassStats = HEROES.map { (hero) -> ByClassStats in
@@ -437,45 +440,47 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                     return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
                 }
 
-                onComplete(Result.Success(byClassStats))
+                onComplete(Result.success(byClassStats))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
     // TODO: abstract deck vs class stat functions (are basically copy-pasta now)
-    func getByDeckStats(onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+    func getByDeckStats(_ onComplete: @escaping (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest(byDeckResultsUrl, onComplete: {
             (result) -> Void in
             switch result {
-            case .Success(let dict):
-                guard let stats = dict["stats"]?["as_deck"] as? [String: NSDictionary] else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+            case .success(let dict):
+                guard let statsDict = dict["stats"] as? NSDictionary,
+                          let stats = statsDict["as_deck"] as? [String: NSDictionary] else {
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
                     deckName: d, deckId: deckStats["deck_id"] as? Int, heroId: deckStats["hero_id"] as? Int,
                     wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
 
-                onComplete(Result.Success(byDeckStats))
+                onComplete(Result.success(byDeckStats))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
-    func getVsDeckStats(asDeck: Int, onComplete: (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
+    func getVsDeckStats(_ asDeck: Int, onComplete: @escaping (Result<[ByDeckStats], TrackOBotAPIError>) -> Void) -> Void {
         getRequest("\(byDeckResultsUrl)?as_deck=\(asDeck)", onComplete: {
             (result) -> Void in
             switch result {
-            case .Success(let dict):
-                guard let stats = dict["stats"]?["vs_deck"] as? [String: NSDictionary]  else {
-                    onComplete(Result.Failure(TrackOBotAPIError.JsonParsingFailed))
+            case .success(let dict):
+                guard let statsDict = dict["stats"] as? NSDictionary,
+                          let stats = statsDict["vs_deck"] as? [String: NSDictionary] else {
+                    onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
                 let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
@@ -483,194 +488,194 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
                         wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int)
                 }
 
-                onComplete(Result.Success(byDeckStats))
+                onComplete(Result.success(byDeckStats))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
         })
     }
 
 
-    func getOneTimeAuthToken(onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+    func getOneTimeAuthToken(_ onComplete: @escaping (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         postRequest(oneTimeAuthTokenUrl, data: nil, onComplete: onComplete)
     }
 
 
-    func createUser(onComplete: (Result<User, TrackOBotAPIError>) -> Void) -> Void {
+    func createUser(_ onComplete: @escaping (Result<User, TrackOBotAPIError>) -> Void) -> Void {
+        let config = URLSessionConfiguration.default
+        guard let url = URL(string: createUserUrl) else {
+            onComplete(Result.failure(TrackOBotAPIError.malformedUrl))
+            return
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
 
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let urlRequest = NSMutableURLRequest(URL: NSURL(string: createUserUrl)!)
-        urlRequest.HTTPMethod = "POST"
+        let session = Foundation.URLSession(configuration: config,
+            delegate: nil, delegateQueue: OperationQueue.main)
 
-        let session = NSURLSession(configuration: config,
-            delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
-
-        let task = session.dataTaskWithRequest(urlRequest){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
 
             let result = self.checkErrors(data, error: error)
             switch result {
-            case .Success(let dict):
-                guard let username = dict["username"] as? String, password = dict["password"] as? String else {
-                    onComplete(Result.Failure(TrackOBotAPIError.RequestFailed(error: "Unexpected response to create user call: \(result)")))
+            case .success(let dict):
+                guard let username = dict["username"] as? String, let password = dict["password"] as? String else {
+                    onComplete(Result.failure(TrackOBotAPIError.requestFailed(error: "Unexpected response to create user call: \(result)")))
                     return
                 }
                 let user = User(username: username, password: password, domain: TrackOBot.DOMAIN)
-                onComplete(Result.Success(user))
+                onComplete(Result.success(user))
 
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
-        }
+        })
 
         task.resume()
     }
 
-    private func checkErrors(data: NSData?, error: NSError?) -> Result<NSDictionary, TrackOBotAPIError> {
+    fileprivate func checkErrors(_ data: Data?, error: Error?) -> Result<NSDictionary, TrackOBotAPIError> {
         guard error == nil else {
-            return Result.Failure(TrackOBotAPIError.NetworkError(error: error!))
+            return Result.failure(TrackOBotAPIError.networkError(error: error!))
         }
 
-        guard let result = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) else {
-            return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
+        guard let result = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) else {
+            return Result.failure(TrackOBotAPIError.jsonParsingFailed)
         }
 
         guard let dict = result as? NSDictionary else {
-            return Result.Failure(TrackOBotAPIError.JsonParsingFailed)
+            return Result.failure(TrackOBotAPIError.jsonParsingFailed)
         }
 
         if let apiError = dict["error"] as? String {
             if apiError == "You need to sign in or sign up before continuing." {
-                return Result.Failure(TrackOBotAPIError.LoginFailed(error: apiError))
+                return Result.failure(TrackOBotAPIError.loginFailed(error: apiError))
             }
             else {
-                return Result.Failure(TrackOBotAPIError.RequestFailed(error: apiError))
+                return Result.failure(TrackOBotAPIError.requestFailed(error: apiError))
             }
         }
-        return Result.Success(dict)
+        return Result.success(dict)
     }
 
-    private func postRequest(url: String, data: NSData?, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+    fileprivate func postRequest(_ url: String, data: Data?, onComplete: @escaping (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
-            onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
+            onComplete(Result.failure(TrackOBotAPIError.credentialsMissing))
             return
         }
 
-        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
-            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
+        guard var (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
+            onComplete(Result.failure(TrackOBotAPIError.internalError))
             return
         }
 
-        urlRequest.HTTPMethod = "POST"
+        urlRequest.httpMethod = "POST"
         if let d = data {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.HTTPBody = d
+            urlRequest.httpBody = d
         }
 
-        let task = session.dataTaskWithRequest(urlRequest){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
 
             let result = self.checkErrors(data, error: error)
             switch result {
-            case .Success(let dict):
-                onComplete(Result.Success(dict))
+            case .success(let dict):
+                onComplete(Result.success(dict))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
-        }
+        })
         task.resume()
     }
 
-    private func getRequest(url: String, onComplete: (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
+    fileprivate func getRequest(_ url: String, onComplete: @escaping (Result<NSDictionary, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
-            onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
+            onComplete(Result.failure(TrackOBotAPIError.credentialsMissing))
             return
         }
         guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url) else {
-            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
+            onComplete(Result.failure(TrackOBotAPIError.internalError))
             return
         }
 
-        let task = session.dataTaskWithRequest(urlRequest){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
 
             let result = self.checkErrors(data, error: error)
             switch result {
-            case .Success(let dict):
-                onComplete(Result.Success(dict))
+            case .success(let dict):
+                onComplete(Result.success(dict))
                 break
-            case .Failure(let err):
-                onComplete(Result.Failure(err))
+            case .failure(let err):
+                onComplete(Result.failure(err))
                 break
             }
-        }
+        })
         task.resume()
 
     }
 
-    private func deleteRequest(url: String, onComplete: (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
+    fileprivate func deleteRequest(_ url: String, onComplete: @escaping (Result<Bool, TrackOBotAPIError>) -> Void) -> Void {
         guard let user = self.loadUser() else {
-            onComplete(Result.Failure(TrackOBotAPIError.CredentialsMissing))
+            onComplete(Result.failure(TrackOBotAPIError.credentialsMissing))
             return
         }
         // set delegate to prevent following redirects
-        guard let (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url, delegate: self) else {
-            onComplete(Result.Failure(TrackOBotAPIError.InternalError))
+        guard var (session, urlRequest) = self.configureAuthenticatedSessionAndRequest(user, urlString: url, delegate: self) else {
+            onComplete(Result.failure(TrackOBotAPIError.internalError))
             return
         }
 
-        urlRequest.HTTPMethod = "DELETE"
+        urlRequest.httpMethod = "DELETE"
 
-        let task = session.dataTaskWithRequest(urlRequest){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
 
             guard error == nil else {
-                onComplete(Result.Failure(TrackOBotAPIError.NetworkError(error: error!)))
+                onComplete(Result.failure(TrackOBotAPIError.networkError(error: error!)))
                 return
             }
 
-            onComplete(Result.Success(true))
-        }
+            onComplete(Result.success(true))
+        })
         task.resume()
     }
 
-    private func configureAuthenticatedSessionAndRequest(user:User, urlString:String, delegate: NSURLSessionDelegate? = nil) -> (NSURLSession, NSMutableURLRequest)? {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+    fileprivate func configureAuthenticatedSessionAndRequest(_ user:User, urlString:String, delegate: URLSessionDelegate? = nil) -> (Foundation.URLSession, URLRequest)? {
+        let config = URLSessionConfiguration.default
         let userPasswordString = "\(user.username):\(user.password)"
-        let userPasswordData = userPasswordString.dataUsingEncoding(NSUTF8StringEncoding)
-        let base64EncodedCredential = userPasswordData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        let userPasswordData = userPasswordString.data(using: String.Encoding.utf8)
+        let base64EncodedCredential = userPasswordData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
         let authString = "Basic \(base64EncodedCredential)"
-        config.HTTPAdditionalHeaders = ["Authorization" : authString]
+        config.httpAdditionalHeaders = ["Authorization" : authString]
 
-        let urlComponents = NSURLComponents.init(string: urlString)
-        guard let url = urlComponents?.URL else {
+        let urlComponents = URLComponents.init(string: urlString)
+        guard let url = urlComponents?.url else {
             return nil
         }
-        let urlRequest = NSMutableURLRequest(URL: url)
-        urlRequest.HTTPMethod = "GET"
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        let session = NSURLSession(configuration: config,
-            delegate: delegate, delegateQueue: NSOperationQueue.mainQueue())
+        let session = Foundation.URLSession(configuration: config,
+            delegate: delegate, delegateQueue: OperationQueue.main)
 
         return (session, urlRequest)
     }
 
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest!) -> Void) {
+    func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest!) -> Void) {
         completionHandler(nil)
     }
 
-    func readTrackOBotAccountDataFile(url:NSURL) -> User? {
-        guard let path = url.path else {
-            return nil
-        }
-        guard let data = NSFileManager.defaultManager().contentsAtPath(path) else {
+    func readTrackOBotAccountDataFile(_ url:URL) -> User? {
+        guard let data = FileManager.default.contents(atPath: url.path) else {
             return nil
         }
 
@@ -681,60 +686,63 @@ class TrackOBot : NSObject, NSURLSessionDelegate {
             (password, pos) = try TrackOBot.instance.readString(data, pos: pos)
             (domain, pos) = try TrackOBot.instance.readString(data, pos: pos)
             return User(username: username, password: password, domain: domain)
-        } catch TrackOBotError.DecodeError {
+        } catch TrackOBotError.decodeError {
             return nil
         } catch {
             return nil
         }
     }
 
-    func writeTrackOBotAccountDataFile(user:User) -> NSData {
+    func writeTrackOBotAccountDataFile(_ user:User) -> Data {
         let md = NSMutableData()
         writeString(user.username, data: md)
         writeString(user.password, data: md)
         writeString("https://trackobot.com", data: md)
-        return md
+        return md as Data
     }
 
-    enum TrackOBotError : ErrorType {
-        case DecodeError
+    enum TrackOBotError : Error {
+        case decodeError
     }
 
     /* reads a Swift String from a NSData object that was written by a QDataStream*/
-    private func readString(data: NSData, pos: Int) throws -> (String, Int) {
+    fileprivate func readString(_ data: Data, pos: Int) throws -> (String, Int) {
         // read length of String (32bit)
-        var i = [UInt32](count: 1, repeatedValue:0)
-        if (pos + 4 > data.length) {
-            throw TrackOBotError.DecodeError
+        var i = [UInt32](repeating: 0, count: 1)
+        if (pos + 4 > data.count) {
+            throw TrackOBotError.decodeError
         }
 
-        data.getBytes(&i, range: NSRange(location: pos, length: 4))
+        (data as NSData).getBytes(&i, range: NSRange(location: pos, length: 4))
         let len = Int(i[0].bigEndian) // in byte
 
         // fill string buffer, each character is 16 bit
-        var strBuf = [UInt16](count: len / 2, repeatedValue:0)
-        if (pos + 4 + len > data.length) {
-            throw TrackOBotError.DecodeError
+        var strBuf = [UInt16](repeating: 0, count: len / 2)
+        if (pos + 4 + len > data.count) {
+            throw TrackOBotError.decodeError
         }
 
-        data.getBytes(&strBuf, range: NSRange(location: pos + 4, length: len))
+        (data as NSData).getBytes(&strBuf, range: NSRange(location: pos + 4, length: len))
 
         // update position
         let newPos = pos + 4 + len
         // convert to String
-        let str = NSString(bytes: &strBuf, length: (len / 2)*sizeof(UInt16), encoding: NSUTF16BigEndianStringEncoding) as! String
+        let str = NSString(bytes: &strBuf, length: (len / 2)*MemoryLayout<UInt16>.size, encoding: String.Encoding.utf16BigEndian.rawValue) as! String
         return (str, newPos)
     }
 
 
 
-    private func writeString(str: String, data: NSMutableData) {
+    fileprivate func writeString(_ str: String, data: NSMutableData) {
         let numBytes = str.utf16.count * 2
         let lenBytes = [UInt32(bigEndian: UInt32(numBytes))]
-        data.appendData(NSData(bytes: lenBytes, length: 4))
+        UnsafePointer<UInt32>(lenBytes).withMemoryRebound(to: UInt8.self, capacity: 4) {
+            data.append(Data(bytes: $0, count: 4))
+        }
 
         let strBytes = str.utf16.map { s in UInt16(bigEndian: s) }
-        data.appendData(NSData(bytes: strBytes, length: numBytes))
-
+        UnsafePointer<UInt16>(strBytes).withMemoryRebound(to: UInt8.self, capacity: numBytes) {
+            data.append(Data(bytes: $0, count: numBytes))
+        }
     }
 }

@@ -41,11 +41,11 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         super.viewDidLoad()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         resetView()
     }
 
-    @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindFromLogin(_ unwindSegue: UIStoryboardSegue) {
 
     }
 
@@ -65,13 +65,13 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         retrievePage(self.retrieved_pages + 1)
     }
 
-    func retrievePage(page: Int) {
+    func retrievePage(_ page: Int) {
         retrieving = true
         TrackOBot.instance.getResults(page, onComplete: {
             (result) -> Void in
             self.retrieving = false
             switch result {
-            case .Success(let historyPage):
+            case .success(let historyPage):
                 if (historyPage.page == self.retrieved_pages+1) {
                     self.games += historyPage.games
                     self.retrieved_pages = historyPage.page;
@@ -79,7 +79,7 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
                 self.total_count = historyPage.totalCount
                 self.historyTableView.reloadData()
                 self.historyTableView.flashScrollIndicators()
-            case .Failure(let err):
+            case .failure(let err):
                 self.alert("Error", message: "Error retrieving game results: \(err)")
             }
         })
@@ -90,20 +90,20 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         super.didReceiveMemoryWarning()
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.total_count;
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("matchCell", forIndexPath: indexPath) as! ResultTableViewCell
-        if (indexPath.item >= self.games.count) {
-            if (indexPath.item > max_requested_idx) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "matchCell", for: indexPath) as! ResultTableViewCell
+        if ((indexPath as NSIndexPath).item >= self.games.count) {
+            if ((indexPath as NSIndexPath).item > max_requested_idx) {
                 if (!retrieving) {
-                    max_requested_idx = indexPath.item
+                    max_requested_idx = (indexPath as NSIndexPath).item
                     self.retrieveNextPage()
                 }
             }
@@ -119,7 +119,7 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         }
         else
         {
-            let match = self.games[indexPath.item]
+            let match = self.games[(indexPath as NSIndexPath).item]
             cell.heroImageView.image = UIImage(named: "\(match.hero)")
             cell.opponentsHeroImageView.image = UIImage(named: "\(match.opponentsHero)")
             if let deckName = match.deck {
@@ -144,50 +144,50 @@ class HistoryViewController: TrackOBotViewController, UITableViewDataSource, UIT
         }
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-        case .Delete:
-            let game = self.games[indexPath.row]
+        case .delete:
+            let game = self.games[(indexPath as NSIndexPath).row]
             guard let gameId = game.id,
-                    timeLabel = game.timeLabel else {
+                    let timeLabel = game.timeLabel else {
                 return
             }
 
             let wonLost = game.won == true ? "won" : "lost"
-            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \"\(game.deckName)\" against \"\(game.opponentsDeckName)\" at \(timeLabel)?", preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: "Do you really want to delete the game you \(wonLost) with \"\(game.deckName)\" against \"\(game.opponentsDeckName)\" at \(timeLabel)?", preferredStyle: .actionSheet)
 
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             alertController.addAction(cancelAction)
 
-            let OKAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+            let OKAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
                 TrackOBot.instance.deleteResult(gameId, onComplete: {
                     (result) -> Void in
                     switch result {
-                    case .Success:
-                        self.games.removeAtIndex(indexPath.row)
+                    case .success:
+                        self.games.remove(at: (indexPath as NSIndexPath).row)
                         self.total_count -= 1
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                    case .Failure(let err):
+                        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    case .failure(let err):
                         self.alert("Error", message: "Deleting game failed: \(err)")
                     }
                 })
             }
 
             if let popoverController = alertController.popoverPresentationController {
-                guard let cellView = tableView.cellForRowAtIndexPath(indexPath) else {
+                guard let cellView = tableView.cellForRow(at: indexPath) else {
                     return
                 }
                 popoverController.sourceView = cellView
                 popoverController.sourceRect = cellView.bounds
             }
             alertController.addAction(OKAction)
-            self.presentViewController(alertController, animated: true) { }
+            self.present(alertController, animated: true) { }
         default:
             break
         }

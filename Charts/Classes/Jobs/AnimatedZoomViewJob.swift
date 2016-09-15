@@ -12,7 +12,7 @@
 import Foundation
 import CoreGraphics
 
-public class AnimatedZoomChartViewJob: AnimatedViewPortJob
+open class AnimatedZoomChartViewJob: AnimatedViewPortJob
 {
     internal var yAxis: ChartYAxis?
     internal var xValCount: Int = 0
@@ -37,7 +37,7 @@ public class AnimatedZoomChartViewJob: AnimatedViewPortJob
         zoomCenterY: CGFloat,
         zoomOriginX: CGFloat,
         zoomOriginY: CGFloat,
-        duration: NSTimeInterval,
+        duration: TimeInterval,
         easing: ChartEasingFunctionBlock?)
     {
         super.init(viewPortHandler: viewPortHandler,
@@ -62,11 +62,10 @@ public class AnimatedZoomChartViewJob: AnimatedViewPortJob
     
     internal override func animationUpdate()
     {
-        guard let
-            viewPortHandler = viewPortHandler,
-            transformer = transformer,
-            view = view
-            else { return }
+        guard let viewPortHandler = viewPortHandler,
+              let transformer = transformer,
+              let view = view
+        else { return }
         
         let scaleX = xOrigin + (self.scaleX - xOrigin) * phase
         let scaleY = yOrigin + (self.scaleY - yOrigin) * phase
@@ -77,10 +76,9 @@ public class AnimatedZoomChartViewJob: AnimatedViewPortJob
         let valsInView = CGFloat(yAxis?.axisRange ?? 0.0) / viewPortHandler.scaleY
         let xsInView = CGFloat(xValCount) / viewPortHandler.scaleX
         
-        var pt = CGPoint(
-            x: zoomOriginX + ((zoomCenterX - xsInView / 2.0) - zoomOriginX) * phase,
-            y: zoomOriginY + ((zoomCenterY + valsInView / 2.0) - zoomOriginY) * phase
-        )
+        let x = zoomOriginX + ((zoomCenterX - xsInView / 2.0) - zoomOriginX) * phase
+        let y = zoomOriginY + ((zoomCenterY + valsInView / 2.0) - zoomOriginY) * phase
+        var pt = CGPoint(x: x, y: y)
         
         transformer.pointValueToPixel(&pt)
         

@@ -28,44 +28,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        application.windows.first
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
         // Override point for customization after application launch.
 //        self.window?.tintColor = UIColor(red:0.52, green:0.35, blue:0.28, alpha:1.0)
         self.window?.tintColor = UIColor(red:1.00, green:0.0, blue:0.0, alpha:1.0)
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         guard let user = TrackOBot.instance.readTrackOBotAccountDataFile(url) else {
             let viewController = app.topViewController() as! TrackOBotViewController
 
-            let alert = UIAlertController.init(title: "Importing credentials failed", message: "The selected credentials file could not be imported.", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            let alert = UIAlertController.init(title: "Importing credentials failed", message: "The selected credentials file could not be imported.", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
             alert.addAction(okAction)
-            viewController.presentViewController(alert, animated: true, completion:
+            viewController.present(alert, animated: true, completion:
                 nil)
             return false
         }
@@ -76,15 +76,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             (result) -> Void in
             let viewController = app.topViewController() as! TrackOBotViewController
             switch result {
-            case .Success(_):
+            case .success(_):
                 viewController.newCredentialsAdded(user)
                 break
-            case .Failure(let err):
+            case .failure(let err):
                 switch err {
-                case .NetworkError(_):
+                case .networkError(_):
                     self.alert(viewController, title: "Login failed", message: "Could not connect to TrackOBot.com. Check your internet connection, and whether https://trackobot.com is available.")
                     break
-                case .LoginFailed(let errMsg):
+                case .loginFailed(let errMsg):
                     self.alert(viewController, title: "Login failed", message: "Sorry, the login failed. Check if you used a valid credential file. Error: \(errMsg)")
                     break
                 default:
@@ -95,17 +95,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func alert(viewController: TrackOBotViewController, title: String, message:String) {
-        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+    func alert(_ viewController: TrackOBotViewController, title: String, message:String) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.default, handler:nil)
         alert.addAction(okAction)
-        viewController.presentViewController(alert, animated: true, completion: nil)
+        viewController.present(alert, animated: true, completion: nil)
     }
 
 }
 
 extension UIApplication {
-    func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+    func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(nav.visibleViewController)
         }

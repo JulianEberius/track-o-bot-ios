@@ -25,7 +25,7 @@ import UIKit
 
 class MoreViewController: UITableViewController {
 
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
 
     @IBOutlet weak var profileLabel: UILabel!
 
@@ -33,24 +33,24 @@ class MoreViewController: UITableViewController {
         super.viewDidLoad()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         guard let user = TrackOBot.instance.loadUser() else {
             profileLabel.text = "Not logged in"
-            self.performSegueWithIdentifier("to_login", sender: self)
+            self.performSegue(withIdentifier: "to_login", sender: self)
             return
         }
         profileLabel.text = "Logged in as: \(user.username)"
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.section == 0 else {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard (indexPath as NSIndexPath).section == 0 else {
             return
         }
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 1:
-            guard let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0)) else {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) else {
                 return
             }
             exportProfile(cell)
@@ -61,49 +61,49 @@ class MoreViewController: UITableViewController {
                 logout()
                 return
             }
-            let alertController = UIAlertController(title: nil, message: "Do you really want to log out of the account \"\(user.username)\"?", preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+            let alertController = UIAlertController(title: nil, message: "Do you really want to log out of the account \"\(user.username)\"?", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
             alertController.addAction(cancelAction)
-            let OKAction = UIAlertAction(title: "Logout", style: .Destructive) { (action) in self.logout() }
+            let OKAction = UIAlertAction(title: "Logout", style: .destructive) { (action) in self.logout() }
             alertController.addAction(OKAction)
             if let popoverController = alertController.popoverPresentationController {
-                guard let cellView = tableView.cellForRowAtIndexPath(indexPath) else {
+                guard let cellView = tableView.cellForRow(at: indexPath) else {
                     return
                 }
                 popoverController.sourceView = cellView
                 popoverController.sourceRect = cellView.bounds
             }
-            self.presentViewController(alertController, animated: true) { }
+            self.present(alertController, animated: true) { }
             break
         default:
             break
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func logout() {
-        defaults.removeObjectForKey(TrackOBot.instance.USER)
-        self.performSegueWithIdentifier("to_login", sender: self)
+        defaults.removeObject(forKey: TrackOBot.instance.USER)
+        self.performSegue(withIdentifier: "to_login", sender: self)
     }
 
-    func exportProfile(sender: UITableViewCell) {
+    func exportProfile(_ sender: UITableViewCell) {
         guard let user = TrackOBot.instance.loadUser() else {
             return
         }
         let exportData = TrackOBot.instance.writeTrackOBotAccountDataFile(user)
 
-        let url = NSURL.fileURLWithPath(NSTemporaryDirectory().stringByAppendingString("accountData.track-o-bot"))
-        exportData.writeToURL(url, atomically: true);
+        let url = URL(fileURLWithPath: NSTemporaryDirectory() + "accountData.track-o-bot")
+        try? exportData.write(to: url, options: [.atomic]);
 
         let objectsToShare = [url]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
 //        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone)
         if let popoverController = activityVC.popoverPresentationController {
             popoverController.sourceView = sender;
-            popoverController.permittedArrowDirections = UIPopoverArrowDirection.Up
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
         }
 //        navigationController?.presentViewController(activityVC, animated: true, completion: nil)
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
 
 }

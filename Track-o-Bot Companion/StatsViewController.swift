@@ -67,7 +67,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resetCharts()
     }
@@ -86,10 +86,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             TrackOBot.instance.getDecks({
                 (result) in
                 switch (result) {
-                case .Success(let decks):
+                case .success(let decks):
                     self.decks = decks.flatMap { $0 }
                     break
-                case .Failure:
+                case .failure:
                     // TODO handle
                     return
                 }
@@ -98,17 +98,17 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
     }
 
-    private func statResultsCallback<T: Stats>(barChartMapper:([T]->BarChartData)) -> (Result<[T], TrackOBotAPIError> -> ()) {
+    fileprivate func statResultsCallback<T: Stats>(_ barChartMapper:@escaping (([T])->BarChartData)) -> ((Result<[T], TrackOBotAPIError>) -> ()) {
         return { (result:Result<[T], TrackOBotAPIError>) in
             switch result {
-            case .Success(let stats):
+            case .success(let stats):
                 let data = barChartMapper(stats)
                 self.updateChart(self.mainChart, data: data, stats: stats)
                 break
-            case .Failure(let err):
+            case .failure(let err):
                 switch err {
-                case .CredentialsMissing, .LoginFailed(_):
-                    self.performSegueWithIdentifier("to_login", sender: self)
+                case .credentialsMissing, .loginFailed(_):
+                    self.performSegue(withIdentifier: "to_login", sender: self)
                 default:
                     self.alert("Error", message: "Error retrieving statistics: \(err)")
                 }
@@ -117,21 +117,21 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     }
 
 
-    @IBAction func statTypeSegmentControlValueChanged(sender: UISegmentedControl) {
+    @IBAction func statTypeSegmentControlValueChanged(_ sender: UISegmentedControl) {
         resetCharts()
     }
 
-    func createHeroBarChartData(stats: [ByClassStats]) -> BarChartData {
+    func createHeroBarChartData(_ stats: [ByClassStats]) -> BarChartData {
         self.barColors = self.heroColors
         self.yNames = HEROES
 
         let data = stats.map { (d) -> BarChartDataEntry in
             let sum = d.wins + d.losses
             guard sum > 0 else {
-                return BarChartDataEntry(value: 0.0, xIndex: HEROES.indexOf(d.hero)!)
+                return BarChartDataEntry(value: 0.0, xIndex: HEROES.index(of: d.hero)!)
             }
             let val = Double(d.wins) / Double(sum) * 100.0
-            return BarChartDataEntry(value: val, xIndex: HEROES.indexOf(d.hero)!)
+            return BarChartDataEntry(value: val, xIndex: HEROES.index(of: d.hero)!)
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
 
@@ -146,13 +146,13 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         return d
     }
 
-    func createDeckBarChartData(stats: [ByDeckStats]) -> BarChartData {
+    func createDeckBarChartData(_ stats: [ByDeckStats]) -> BarChartData {
         let deckNames = stats.map { d in d.deck as String }
         self.yNames = deckNames
         self.barColors = stats.flatMap { (d) -> UIColor in
             guard let heroId = d.heroId,
-                heroName = HEROES_BY_TRACKOBOT_ID[heroId],
-                heroIdx = HEROES.indexOf(heroName) else {
+                let heroName = HEROES_BY_TRACKOBOT_ID[heroId],
+                let heroIdx = HEROES.index(of:heroName) else {
                 return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
             }
             return self.heroColors[heroIdx]
@@ -161,10 +161,10 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         let data = stats.map { (d) -> BarChartDataEntry in
             let sum = d.wins + d.losses
             guard sum > 0 else {
-                return BarChartDataEntry(value: 0.0, xIndex: deckNames.indexOf(d.deck)!)
+                return BarChartDataEntry(value: 0.0, xIndex: deckNames.index(of: d.deck)!)
             }
             let val = Double(d.wins) / Double(sum) * 100.0
-            return BarChartDataEntry(value: val, xIndex: deckNames.indexOf(d.deck)!)
+            return BarChartDataEntry(value: val, xIndex: deckNames.index(of: d.deck)!)
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
 
@@ -179,15 +179,15 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         return d
     }
 
-    func updateChart(chart: BarChartView, data: ChartData, stats: [Stats]) {
-        if (self.view.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.Compact
+    func updateChart(_ chart: BarChartView, data: ChartData, stats: [Stats]) {
+        if (self.view.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.compact
             || stats.count > 9) {
             chart.xAxis.labelRotationAngle = 90
         } else {
             chart.xAxis.labelRotationAngle = 0
         }
 
-        chart.xAxis.labelPosition = ChartXAxis.LabelPosition.Bottom
+        chart.xAxis.labelPosition = ChartXAxis.LabelPosition.bottom
         chart.xAxis.setLabelsToSkip(0)
         chart.xAxis.spaceBetweenLabels = 0
 
@@ -198,9 +198,9 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         chart.leftAxis.forceLabelsEnabled = true
         chart.legend.enabled = false
         //chart.legend.position = ChartLegend.Position.AboveChartLeft
-        chart.legend.horizontalAlignment = .Left
-        chart.legend.verticalAlignment = .Top
-        chart.legend.orientation = .Horizontal
+        chart.legend.horizontalAlignment = .left
+        chart.legend.verticalAlignment = .top
+        chart.legend.orientation = .horizontal
         chart.setScaleEnabled(false)
         chart.dragEnabled = false
         chart.descriptionText = ""
@@ -214,7 +214,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         chart.animate(yAxisDuration: 0.75)
     }
 
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         if (chartView == self.detailChart) {
             return
         }
@@ -236,19 +236,19 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
     }
 
-    func getVsStatsCallback<T : Stats>(barChartMapper:([T]->BarChartData)) -> (Result<[T], TrackOBotAPIError>) -> () {
+    func getVsStatsCallback<T : Stats>(_ barChartMapper:@escaping (([T])->BarChartData)) -> (Result<[T], TrackOBotAPIError>) -> () {
         return {
             (result: Result<[T], TrackOBotAPIError>) -> Void in
             switch result {
-            case .Success(let stats):
+            case .success(let stats):
                 let data = barChartMapper(stats)
                 self.updateChart(self.detailChart, data: data, stats: stats)
                 self.updateDescriptionLabel()
                 break
-            case .Failure(let err):
+            case .failure(let err):
                 switch err {
-                case .CredentialsMissing, .LoginFailed(_):
-                    self.performSegueWithIdentifier("to_login", sender: self)
+                case .credentialsMissing, .loginFailed(_):
+                    self.performSegue(withIdentifier: "to_login", sender: self)
                 default:
                     self.alert("Error", message: "Error retrieving statistics: \(err)")
                 }
@@ -256,7 +256,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
     }
 
-    func chartValueNothingSelected(chartView: ChartViewBase) {
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
 
     }
 
@@ -268,12 +268,12 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         let attrString = NSMutableAttributedString(string: "Win rates as ")
         let labelString = NSAttributedString(string: "\(self.yNames[idx])",
                                             attributes: [NSForegroundColorAttributeName: self.barColors[idx],
-                                                NSFontAttributeName: UIFont.boldSystemFontOfSize(self.detailChartLabel.font.pointSize)])
-        attrString.appendAttributedString(labelString)
+                                                NSFontAttributeName: UIFont.boldSystemFont(ofSize: self.detailChartLabel.font.pointSize)])
+        attrString.append(labelString)
         self.detailChartLabel.attributedText = attrString
     }
 
-    @IBAction func unwindFromLogin(unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindFromLogin(_ unwindSegue: UIStoryboardSegue) {
 
     }
 }
@@ -295,12 +295,12 @@ class CustomChartMarker: ChartMarker
 
 
     /// Draws the ChartMarker on the given position on the given context
-    override func draw(context context: CGContext, point: CGPoint)
+    override func draw(context: CGContext, point: CGPoint)
     {
-        let font = UIFont.systemFontOfSize(UIFont.systemFontSize())
+        let font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         let attrsDictionary = [NSFontAttributeName:font] as [String : AnyObject]
         let str = NSAttributedString(string: strVal, attributes: attrsDictionary)
-        let rectSize = str.boundingRectWithSize(CGSize(width: 300, height: 20), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+        let rectSize = str.boundingRect(with: CGSize(width: 300, height: 20), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
         markerSize = rectSize.size
 
         var offset = CGPoint(x: 22, y: -19.0)
@@ -318,19 +318,19 @@ class CustomChartMarker: ChartMarker
         let rect = CGRect(x: point.x + offset.x, y: point.y + offset.y, width: rectSize.width + 6, height: rectSize.height + 4)
 
         UIGraphicsPushContext(context)
-        CGContextSetLineWidth(context, 1.0)
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
-        CGContextSetFillColor(context, CGColorGetComponents(UIColor.whiteColor().CGColor))
-        CGContextFillRect(context, rect)
-        CGContextStrokeRect(context, rect)
+        context.setLineWidth(1.0)
+        context.setStrokeColor(UIColor.black.cgColor)
+        context.setFillColor(UIColor.white.cgColor.components!)
+        context.fill(rect)
+        context.stroke(rect)
         UIGraphicsPopContext()
-        NSString(string: strVal).drawInRect(rect.offsetBy(dx: 3, dy: 2), withAttributes: attrsDictionary)
+        NSString(string: strVal).draw(in: rect.offsetBy(dx: 3, dy: 2), withAttributes: attrsDictionary)
     }
 
     /// This method enables a custom ChartMarker to update it's content everytime the MarkerView is redrawn according to the data entry it points to.
     ///
     /// - parameter highlight: the highlight object contains information about the highlighted value such as it's dataset-index, the selected range or stack-index (only stacked bar entries).
-    override func refreshContent(entry entry: ChartDataEntry, highlight: ChartHighlight)
+    override func refreshContent(entry: ChartDataEntry, highlight: ChartHighlight)
     {
         let s = stats[entry.xIndex]
         let percentStr = String(format: "%.1f", entry.value)

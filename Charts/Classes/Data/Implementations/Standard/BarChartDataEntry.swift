@@ -13,7 +13,7 @@
 
 import Foundation
 
-public class BarChartDataEntry: ChartDataEntry
+open class BarChartDataEntry: ChartDataEntry
 {
     /// the values the stacked barchart holds
     private var _values: [Double]?
@@ -51,12 +51,12 @@ public class BarChartDataEntry: ChartDataEntry
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(value: Double, xIndex: Int, data: AnyObject?)
+    public override init(value: Double, xIndex: Int, data: Any?)
     {
         super.init(value: value, xIndex: xIndex, data: data)
     }
     
-    public func getBelowSum(stackIndex :Int) -> Double
+    open func getBelowSum(_ stackIndex :Int) -> Double
     {
         if (values == nil)
         {
@@ -76,18 +76,18 @@ public class BarChartDataEntry: ChartDataEntry
     }
     
     /// - returns: the sum of all negative values this entry (if stacked) contains. (this is a positive number)
-    public var negativeSum: Double
+    open var negativeSum: Double
     {
         return _negativeSum
     }
     
     /// - returns: the sum of all positive values this entry (if stacked) contains.
-    public var positiveSum: Double
+    open var positiveSum: Double
     {
         return _positiveSum
     }
 
-    public func calcPosNegSum()
+    open func calcPosNegSum()
     {
         if _values == nil
         {
@@ -118,10 +118,10 @@ public class BarChartDataEntry: ChartDataEntry
     // MARK: Accessors
     
     /// the values the stacked barchart holds
-    public var isStacked: Bool { return _values != nil }
+    open var isStacked: Bool { return _values != nil }
     
     /// the values the stacked barchart holds
-    public var values: [Double]?
+    open var values: [Double]?
     {
         get { return self._values }
         set
@@ -134,7 +134,7 @@ public class BarChartDataEntry: ChartDataEntry
     
     // MARK: NSCopying
     
-    public override func copyWithZone(zone: NSZone) -> AnyObject
+    open override func copyWithZone(_ zone: NSZone?) -> Any
     {
         let copy = super.copyWithZone(zone) as! BarChartDataEntry
         copy._values = _values
@@ -147,7 +147,7 @@ public class BarChartDataEntry: ChartDataEntry
     ///
     /// - parameter vals:
     /// - returns:
-    private static func calcSum(vals: [Double]?) -> Double
+    private static func calcSum(_ vals: [Double]?) -> Double
     {
         if vals == nil
         {

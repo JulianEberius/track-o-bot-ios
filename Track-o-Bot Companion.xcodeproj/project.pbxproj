@@ -19,26 +19,17 @@
 		046B82701D1B275800130621 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B826F1D1B275800130621 /* MoreViewController.swift */; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
+		04A2FFBA1D8A7106005D7CE3 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0421F0F11D8A6FA800F0FB76 /* Charts.framework */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
-		04C862611D18B1840048D44E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; };
-		04C862621D18B1840048D44E /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04BCEBB31D1877DF007558CE /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		04FE34AD1D5CCE2A007F34F3 /* iosbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FE34AC1D5CCE2A007F34F3 /* iosbot.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		04BCEBB21D1877DF007558CE /* PBXContainerItemProxy */ = {
+		0421F0F01D8A6FA800F0FB76 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
+			containerPortal = 0421F0E91D8A6FA800F0FB76 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
-			remoteInfo = "Charts-iOS";
-		};
-		04C862631D18B1840048D44E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
 		};
 /* End PBXContainerItemProxy section */
@@ -50,7 +41,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				04C862621D18B1840048D44E /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +50,7 @@
 /* Begin PBXFileReference section */
 		0401D4B41BE2D90A007B5F39 /* TrackOBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackOBotViewController.swift; sourceTree = "<group>"; };
 		0416A05D1BA1780800F930FC /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		0421F0E91D8A6FA800F0FB76 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		0446F0731BA1B26C00B73014 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0450963E1B9E0E140059BB7A /* TrackOBotty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackOBotty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045096421B9E0E150059BB7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,7 +64,6 @@
 		0493A8C71BE03417006A5281 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		049826EC1C775E4900591C68 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		04C41A011BA2E87600A01261 /* HeroPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPickerItem.swift; sourceTree = "<group>"; };
 		04FE34AC1D5CCE2A007F34F3 /* iosbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iosbot.png; path = "Images.xcassets/logo-red.imageset/iosbot.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,13 +73,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04C862611D18B1840048D44E /* Charts.framework in Frameworks */,
+				04A2FFBA1D8A7106005D7CE3 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0421F0EA1D8A6FA800F0FB76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0421F0F11D8A6FA800F0FB76 /* Charts.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		042931691C84F8D0005E2236 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +108,7 @@
 		045096351B9E0E140059BB7A = {
 			isa = PBXGroup;
 			children = (
-				04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */,
+				0421F0E91D8A6FA800F0FB76 /* Charts.xcodeproj */,
 				045096401B9E0E140059BB7A /* Track-o-Bot Companion */,
 			);
 			sourceTree = "<group>";
@@ -163,14 +161,6 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
-		04BCEBAC1D1877DF007558CE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				04BCEBB31D1877DF007558CE /* Charts.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,7 +176,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				04C862641D18B1840048D44E /* PBXTargetDependency */,
 			);
 			name = TrackOBotty;
 			productName = "Track-o-Bot Companion";
@@ -200,12 +189,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Julian Eberius";
 				TargetAttributes = {
 					0450963D1B9E0E140059BB7A = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = F9QMYGXL5S;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -222,8 +212,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 04BCEBAC1D1877DF007558CE /* Products */;
-					ProjectRef = 04BCEBAB1D1877DF007558CE /* Charts.xcodeproj */;
+					ProductGroup = 0421F0EA1D8A6FA800F0FB76 /* Products */;
+					ProjectRef = 0421F0E91D8A6FA800F0FB76 /* Charts.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -234,11 +224,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		04BCEBB31D1877DF007558CE /* Charts.framework */ = {
+		0421F0F11D8A6FA800F0FB76 /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 04BCEBB21D1877DF007558CE /* PBXContainerItemProxy */;
+			remoteRef = 0421F0F01D8A6FA800F0FB76 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -249,7 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0450964B1B9E0E150059BB7A /* Main.storyboard in Resources */,
-				04FE34AD1D5CCE2A007F34F3 /* iosbot.png in Resources */,
 				0446F0741BA1B26C00B73014 /* LaunchScreen.storyboard in Resources */,
 				0450964D1B9E0E150059BB7A /* Images.xcassets in Resources */,
 			);
@@ -278,14 +267,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		04C862641D18B1840048D44E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Charts-iOS";
-			targetProxy = 04C862631D18B1840048D44E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		045096491B9E0E150059BB7A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -311,8 +292,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -358,8 +341,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -379,6 +364,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -387,32 +373,34 @@
 		045096601B9E0E150059BB7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.julianeberius.trackobotcompanion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		045096611B9E0E150059BB7A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Julian Eberius (F9QMYGXL5S)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Julian Eberius (F9QMYGXL5S)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.julianeberius.trackobotcompanion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f71cd7b3-0e52-4306-9ed9-5f4ffc34bb47";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -27,28 +27,28 @@ class LoginViewController: TrackOBotViewController, UIAlertViewDelegate {
 
     @IBOutlet weak var errorLabel: UILabel!
 
-    @IBAction func accountCreateButtonTouchUp(sender: AnyObject) {
+    @IBAction func accountCreateButtonTouchUp(_ sender: AnyObject) {
         TrackOBot.instance.createUser {
             (result) -> Void in
             switch result {
-            case .Success(let user):
+            case .success(let user):
                 TrackOBot.instance.storeUser(user)
-                self.performSegueWithIdentifier("back_from_login", sender: self)
-            case .Failure(let err):
+                self.performSegue(withIdentifier: "back_from_login", sender: self)
+            case .failure(let err):
                 self.errorLabel.text = "Error creating user: \(err)"
-                UIView.animateWithDuration(0.25, delay: 0.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
+                UIView.animate(withDuration: 0.25, delay: 0.0, options:UIViewAnimationOptions.curveEaseIn, animations: {
                     self.errorLabel.alpha = 1.0
                     }, completion:nil)
             }
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.errorLabel.alpha = 0
     }
 
-    override func newCredentialsAdded(user:User) {
-        self.performSegueWithIdentifier("back_from_login", sender: self)
+    override func newCredentialsAdded(_ user:User) {
+        self.performSegue(withIdentifier: "back_from_login", sender: self)
     }
 
     override func viewDidLoad() {

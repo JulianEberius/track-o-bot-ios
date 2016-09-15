@@ -28,8 +28,8 @@ class HeroPickerItem: UIView {
     let imageView: UIImageView!
 
     override init(frame: CGRect) {
-        imageView = UIImageView(frame: CGRectMake(0, 0, 32, 32))
-        label = UILabel(frame: CGRectMake(32, 0, frame.width-32, 32))
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        label = UILabel(frame: CGRect(x: 32, y: 0, width: frame.width-32, height: 32))
 
         super.init(frame: frame)
 

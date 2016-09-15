@@ -16,16 +16,16 @@ import CoreGraphics
     import UIKit
 #endif
 
-public class AnimatedViewPortJob: ChartViewPortJob
+open class AnimatedViewPortJob: ChartViewPortJob
 {
     internal var phase: CGFloat = 1.0
     internal var xOrigin: CGFloat = 0.0
     internal var yOrigin: CGFloat = 0.0
     
-    private var _startTime: NSTimeInterval = 0.0
+    private var _startTime: TimeInterval = 0.0
     private var _displayLink: NSUIDisplayLink!
-    private var _duration: NSTimeInterval = 0.0
-    private var _endTime: NSTimeInterval = 0.0
+    private var _duration: TimeInterval = 0.0
+    private var _endTime: TimeInterval = 0.0
     
     private var _easing: ChartEasingFunctionBlock?
     
@@ -37,7 +37,7 @@ public class AnimatedViewPortJob: ChartViewPortJob
         view: ChartViewBase,
         xOrigin: CGFloat,
         yOrigin: CGFloat,
-        duration: NSTimeInterval,
+        duration: TimeInterval,
         easing: ChartEasingFunctionBlock?)
     {
         super.init(viewPortHandler: viewPortHandler,
@@ -57,12 +57,12 @@ public class AnimatedViewPortJob: ChartViewPortJob
         stop(finish: false)
     }
     
-    public override func doJob()
+    open override func doJob()
     {
         start()
     }
     
-    public func start()
+    open func start()
     {
         _startTime = CACurrentMediaTime()
         _endTime = _startTime + _duration
@@ -71,14 +71,14 @@ public class AnimatedViewPortJob: ChartViewPortJob
         updateAnimationPhase(_startTime)
         
         _displayLink = NSUIDisplayLink(target: self, selector: #selector(AnimatedViewPortJob.animationLoop))
-        _displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        _displayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
     }
     
-    public func stop(finish finish: Bool)
+    open func stop(finish: Bool)
     {
         if (_displayLink != nil)
         {
-            _displayLink.removeFromRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+            _displayLink.remove(from: RunLoop.main, forMode: RunLoopMode.commonModes)
             _displayLink = nil
             
             if finish
@@ -96,11 +96,11 @@ public class AnimatedViewPortJob: ChartViewPortJob
         }
     }
     
-    private func updateAnimationPhase(currentTime: NSTimeInterval)
+    private func updateAnimationPhase(_ currentTime: TimeInterval)
     {
-        let elapsedTime: NSTimeInterval = currentTime - _startTime
-        let duration: NSTimeInterval = _duration
-        var elapsed: NSTimeInterval = elapsedTime
+        let elapsedTime: TimeInterval = currentTime - _startTime
+        let duration: TimeInterval = _duration
+        var elapsed: TimeInterval = elapsedTime
         if elapsed > duration
         {
             elapsed = duration
@@ -108,7 +108,7 @@ public class AnimatedViewPortJob: ChartViewPortJob
         
         if _easing != nil
         {
-            phase = _easing!(elapsed: elapsed, duration: duration)
+            phase = _easing!(elapsed, duration)
         }
         else
         {
@@ -118,7 +118,7 @@ public class AnimatedViewPortJob: ChartViewPortJob
     
     @objc private func animationLoop()
     {
-        let currentTime: NSTimeInterval = CACurrentMediaTime()
+        let currentTime: TimeInterval = CACurrentMediaTime()
         
         updateAnimationPhase(currentTime)
         

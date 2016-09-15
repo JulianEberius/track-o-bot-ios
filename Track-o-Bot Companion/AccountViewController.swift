@@ -24,8 +24,8 @@ import UIKit
 
 class AccountViewController: TrackOBotViewController, UITextFieldDelegate {
 
-    override func newCredentialsAdded(user:User) {
-        self.performSegueWithIdentifier("back_from_login", sender: self)
+    override func newCredentialsAdded(_ user:User) {
+        self.performSegue(withIdentifier: "back_from_login", sender: self)
     }
 
     override func viewDidLoad() {

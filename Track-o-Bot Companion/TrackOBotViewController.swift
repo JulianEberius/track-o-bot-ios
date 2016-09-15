@@ -23,39 +23,39 @@
 import UIKit
 
 class TrackOBotViewController: UIViewController, UIPopoverPresentationControllerDelegate  {
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
 
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 
-    @IBAction func openProfileTouchUp(sender: UIBarButtonItem) {
+    @IBAction func openProfileTouchUp(_ sender: UIBarButtonItem) {
 
         TrackOBot.instance.getOneTimeAuthToken({
             (result) -> Void in
             switch result {
-            case .Success(let dict):
+            case .success(let dict):
                 if let u = dict["url"] as? String {
-                    let url = NSURL(string: u)
-                    UIApplication.sharedApplication().openURL(url!)
+                    let url = URL(string: u)
+                    UIApplication.shared.openURL(url!)
                 } else {
                     self.alert("Error", message: "Received invalid login url data from trackobot.com: \(dict)")
                 }
-            case .Failure(let err):
+            case .failure(let err):
                 self.alert("Error", message: "Error receiving login url data from trackobot.com: \(err)")
             }
         })
 
     }
 
-    func alert(title: String, message:String) {
-        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.Default, handler:nil)
+    func alert(_ title: String, message:String) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction.init(title: "Ok", style: UIAlertActionStyle.default, handler:nil)
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
-    func newCredentialsAdded(user:User) {
+    func newCredentialsAdded(_ user:User) {
 
     }
 }
