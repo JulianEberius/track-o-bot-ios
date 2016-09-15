@@ -125,14 +125,15 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         self.barColors = self.heroColors
         self.yNames = HEROES
 
-        let data = stats.map { (d) -> BarChartDataEntry in
-            let sum = d.wins + d.losses
-            guard sum > 0 else {
-                return BarChartDataEntry(value: 0.0, xIndex: HEROES.index(of: d.hero)!)
+        let data = HEROES.map { hero -> BarChartDataEntry in
+            guard let d = stats.first(where: { st in st.hero == hero}), d.wins + d.losses > 0 else {
+                return BarChartDataEntry(value: 0.0, xIndex: HEROES.index(of: hero)!)
             }
+            let sum = d.wins + d.losses
             let val = Double(d.wins) / Double(sum) * 100.0
             return BarChartDataEntry(value: val, xIndex: HEROES.index(of: d.hero)!)
         }
+
         let ds = BarChartDataSet(yVals: data, label: "Win %")
 
         ds.setColors(self.barColors, alpha: 0.95)
@@ -150,8 +151,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         let deckNames = stats.map { d in d.deck as String }
         self.yNames = deckNames
         self.barColors = stats.flatMap { (d) -> UIColor in
-            guard let heroId = d.heroId,
-                let heroName = HEROES_BY_TRACKOBOT_ID[heroId],
+            guard let heroName = HEROES_BY_TRACKOBOT_ID[d.heroId],
                 let heroIdx = HEROES.index(of:heroName) else {
                 return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
             }

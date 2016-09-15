@@ -148,13 +148,12 @@ func ==(lhs:Game, rhs:Game) -> Bool {
 
 class Deck : DateFormattingModel {
 
-    // TODO: remove the use of "!" on data classes
-    let id: Int!
-    let hero: String!
-    let name: String!
+    let id: Int
+    let hero: String
+    let name: String
     let fullName: String
 
-    init(id: Int?, hero: String?, name: String?) {
+    init(id: Int, hero: String, name: String) {
         self.id = id
         self.hero = hero
         self.name = name
@@ -165,18 +164,20 @@ class Deck : DateFormattingModel {
      - parameters:
      - dict: as returned by parsing the Track-O-Bot API response using NSJSONSerialization
      */
-    convenience init(dict:NSDictionary) {
-        let id = dict["id"] as? Int
-        let name = dict["name"] as? String
-        let hero = dict["hero"] as? String
+    convenience init?(dict:NSDictionary) {
+        guard let id = dict["id"] as? Int,
+            let name = dict["name"] as? String,
+            let hero = dict["hero"] as? String else {
+                return nil
+        }
         self.init(id: id, hero: hero, name: name)
     }
 }
 
 class User : NSObject, NSCoding {
-    let username: String!
-    let password: String!
-    let domain: String!
+    let username: String
+    let password: String
+    let domain: String
 
     init(username: String, password: String, domain: String = "https://trackobot.com") {
         self.username = username
@@ -210,30 +211,30 @@ class User : NSObject, NSCoding {
 }
 
 class Stats {
-    let wins: Int!
-    let losses: Int!
+    let wins: Int
+    let losses: Int
 
-    init(wins: Int?, losses: Int?) {
+    init(wins: Int, losses: Int) {
         self.wins = wins
         self.losses = losses
     }
 }
 
 class ByClassStats : Stats {
-    let hero: String!
+    let hero: String
 
-    init(hero: String?, wins: Int?, losses: Int?) {
+    init(hero: String, wins: Int, losses: Int) {
         self.hero = hero
         super.init(wins: wins, losses: losses)
     }
 }
 
 class ByDeckStats : Stats {
-    let deck: String!
-    let deckId: Int?
-    let heroId: Int?
+    let deck: String
+    let deckId: Int
+    let heroId: Int
 
-    init(deckName: String?, deckId: Int?, heroId: Int?, wins: Int?, losses: Int?) {
+    init(deckName: String, deckId: Int, heroId: Int, wins: Int, losses: Int) {
         self.deck = deckName
         self.deckId = deckId
         self.heroId = heroId
@@ -383,13 +384,10 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let decks  = HEROES.map {
-                    (hero) in
-                    decksDicts.filter { (d) in
+                let decks  = HEROES.map { (hero) -> [Deck] in
+                    return decksDicts.filter { (d) -> Bool in
                         d["hero"] as? String == hero
-                    }.map { (d) in
-                        Deck(id: d["id"] as? Int, hero: d["hero"] as? String, name: d["name"] as? String)
-                    }
+                        }.flatMap { Deck(dict:$0) }
                 }
 
                 onComplete(Result.success(decks))
@@ -411,9 +409,13 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byClassStats = HEROES.map { (hero) -> ByClassStats in
-                    let heroStats = stats[hero] as! NSDictionary
-                    return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
+                let byClassStats = HEROES.flatMap { (hero) -> ByClassStats? in
+                    guard let heroStats = stats[hero] as? NSDictionary,
+                     let wins = heroStats["wins"] as? Int,
+                        let losses = heroStats["losses"] as? Int else {
+                            return nil
+                    }
+                    return ByClassStats(hero: hero, wins: wins, losses: losses)
                 }
 
                 onComplete(Result.success(byClassStats))
@@ -435,9 +437,13 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byClassStats = HEROES.map { (hero) -> ByClassStats in
-                    let heroStats = stats[hero] as! NSDictionary
-                    return ByClassStats(hero: hero, wins: heroStats["wins"] as? Int, losses: heroStats["losses"] as? Int)
+                let byClassStats = HEROES.flatMap { (hero) -> ByClassStats? in
+                    guard let heroStats = stats[hero] as? NSDictionary,
+                           let wins = heroStats["wins"] as? Int,
+                        let losses = heroStats["losses"] as? Int else {
+                            return nil
+                    }
+                    return ByClassStats(hero: hero, wins: wins, losses: losses)
                 }
 
                 onComplete(Result.success(byClassStats))
@@ -460,9 +466,14 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
-                    deckName: d, deckId: deckStats["deck_id"] as? Int, heroId: deckStats["hero_id"] as? Int,
-                    wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int) }
+                let byDeckStats = stats.flatMap { (d: String, deckStats: NSDictionary) -> ByDeckStats? in
+                    guard let deckId = deckStats["deck_id"] as? Int, let heroId = deckStats["hero_id"] as? Int,
+                        let wins = deckStats["wins"] as? Int, let losses = deckStats["losses"] as? Int else {
+                            return nil
+                    }
+                    return ByDeckStats(deckName: d, deckId: deckId, heroId: heroId, wins: wins, losses: losses)
+                }
+
 
                 onComplete(Result.success(byDeckStats))
                 break
@@ -483,9 +494,16 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byDeckStats = stats.map { (d: String, deckStats: NSDictionary) in ByDeckStats(
-                        deckName: d, deckId: deckStats["deck_id"] as? Int, heroId: deckStats["hero_id"] as? Int,
-                        wins: deckStats["wins"] as? Int, losses: deckStats["losses"] as? Int)
+                let byDeckStats = stats.flatMap { (d: String, deckStats: NSDictionary) -> ByDeckStats? in
+                    guard let deckId = deckStats["deck_id"] as? Int,
+                        let heroId = deckStats["hero_id"] as? Int,
+                        let wins = deckStats["wins"] as? Int,
+                        let losses = deckStats["losses"] as? Int else {
+                            return nil
+                    }
+                    return ByDeckStats(
+                        deckName: d, deckId: deckId, heroId: heroId,
+                        wins: wins, losses: losses)
                 }
 
                 onComplete(Result.success(byDeckStats))
