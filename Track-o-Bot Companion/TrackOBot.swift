@@ -411,8 +411,8 @@ class TrackOBot : NSObject, URLSessionDelegate {
                 }
                 let byClassStats = HEROES.flatMap { (hero) -> ByClassStats? in
                     guard let heroStats = stats[hero] as? NSDictionary,
-                     let wins = heroStats["wins"] as? Int,
-                        let losses = heroStats["losses"] as? Int else {
+                          let wins = heroStats["wins"] as? Int,
+                          let losses = heroStats["losses"] as? Int else {
                             return nil
                     }
                     return ByClassStats(hero: hero, wins: wins, losses: losses)

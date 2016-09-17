@@ -19,9 +19,10 @@
 		046B82701D1B275800130621 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046B826F1D1B275800130621 /* MoreViewController.swift */; };
 		0493A8C81BE03417006A5281 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A8C71BE03417006A5281 /* LoginViewController.swift */; };
 		049826ED1C775E4900591C68 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049826EC1C775E4900591C68 /* StatsViewController.swift */; };
-		04A2FFBA1D8A7106005D7CE3 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0421F0F11D8A6FA800F0FB76 /* Charts.framework */; };
 		04B5E9C31B9F2A2300F99321 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E9C21B9F2A2300F99321 /* HistoryViewController.swift */; };
 		04C41A021BA2E87600A01261 /* HeroPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C41A011BA2E87600A01261 /* HeroPickerItem.swift */; };
+		04E211421D8C92060057EDA2 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0421F0F11D8A6FA800F0FB76 /* Charts.framework */; };
+		04E211431D8C92060057EDA2 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0421F0F11D8A6FA800F0FB76 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,15 +33,23 @@
 			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
 		};
+		04E211441D8C92060057EDA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0421F0E91D8A6FA800F0FB76 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0462BE551C84F4C000D0F3C4 /* Embed Frameworks */ = {
+		04E211461D8C92060057EDA2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04E211431D8C92060057EDA2 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A2FFBA1D8A7106005D7CE3 /* Charts.framework in Frameworks */,
+				04E211421D8C92060057EDA2 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,11 +180,12 @@
 				0450963A1B9E0E140059BB7A /* Sources */,
 				0450963B1B9E0E140059BB7A /* Frameworks */,
 				0450963C1B9E0E140059BB7A /* Resources */,
-				0462BE551C84F4C000D0F3C4 /* Embed Frameworks */,
+				04E211461D8C92060057EDA2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				04E211451D8C92060057EDA2 /* PBXTargetDependency */,
 			);
 			name = TrackOBotty;
 			productName = "Track-o-Bot Companion";
@@ -196,6 +206,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = F9QMYGXL5S;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -266,6 +277,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04E211451D8C92060057EDA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Charts-iOS";
+			targetProxy = 04E211441D8C92060057EDA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		045096491B9E0E150059BB7A /* Main.storyboard */ = {
@@ -393,13 +412,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Julian Eberius (F9QMYGXL5S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Julian Eberius (F9QMYGXL5S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Track-o-Bot Companion/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.julianeberius.trackobotcompanion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f71cd7b3-0e52-4306-9ed9-5f4ffc34bb47";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
