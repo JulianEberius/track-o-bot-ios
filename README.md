@@ -1,20 +1,21 @@
-# track-o-bot-ios
+# Track-o-Botty
 Simple companion iOS app for Track-o-Bot
 
-Universal iOS app that allows the user to manually upload games to Track-o-Bot.
-Can be used, for example, when playing Hearthstone on an iPad.
+## NEWS: Now free on the App Store: https://appsto.re/i6hW6zx
 
-To reuse your existing Track-o-Bot account, after installing this app, export your account data from your Desktop client ("Settings"->"Account"->"Export"), and then open the resulting file on your iOS device. This can be accomplished, for example, by sending the account data file via email to yourself, and opening the attachment on the iOS device. Another way would be using Dropbox or similar services.
+## More information: http://julianeberius.github.io/track-o-bot-ios
 
-This project is nearing beta, so it's not complete. However, some features are already in place:
+Track-o-Botty allows you to manually upload Hearthstone game results to your Track-o-Bot profile. It is ideal if you want to track your games and win rates when playing Hearthstone on an iPad or iPhone, especially if you are already using Track-O-Bot on your Windows PC or Mac. The app has the following features:
 
-- Import account data file (Track-o-Bot profile credentials)
-- Add games with information about heroes, decks, coin, mode, rank and game results
-- Basic History view, allows to delete games
-- Basic win rate graphs for classes and decks
-- Open the trackobot.com web profile, export the profile credentials
+- Connect to your existing Track-o-Bot account or create a new one in the app
+- Add game results with information about heroes, decks, coin, mode, rank and game results
+- Check a game history view, that also allows to delete games
+- See win rate graphs for classes and decks
+- Directly log into and open your trackobot.com web profile
 
-That's it ;-) Obviously, it comes with no warranties, use at your own risk. However, if it uploads wrong game data, you can always delete games on your Track-o-Bot profile.
+Tip: When playing on an iPad, you don't need to leave Hearthstone to use Track-o-Botty. Simply use the iPad's "Slide Over" function, as shown in the screenshot. Slide from the right edge of the screen towards the center, then choose Track-o-Botty to slide it over Hearthstone and quickly add a game result.
+
+Note that this is an independently developed companion app using the API offered by trackobot.com, not an official Track-O-Bot product. It is also open source, so everyone can contribute at https://github.com/JulianEberius/track-o-bot-ios. Thanks to Github user "ungesehn" for contributing the logo.
 
 ## License
 
