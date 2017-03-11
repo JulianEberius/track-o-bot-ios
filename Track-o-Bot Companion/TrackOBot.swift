@@ -92,9 +92,9 @@ class Game : DateFormattingModel, Equatable {
     init(id: Int?, hero: String, opponentsHero: String, deck: String?, deckId:Int?, opponentsDeck: String?, opponentsDeckId: Int?, won:Bool, coin:Bool?, added:Date? = nil, mode:GameMode = GameMode.Ranked, rank:Int? = nil, legend:Int? = nil) {
         self.id = id
         self.hero = hero
-        self.opponentsHero = opponentsHero
+        self.opponentsHero = opponentsHero.capitalized
         self.deck = deck
-        self.opponentsDeck = opponentsDeck
+        self.opponentsDeck = opponentsDeck?.capitalized
         self.deckId = deckId
         self.opponentsDeckId = opponentsDeckId
         self.won = won
@@ -155,7 +155,7 @@ class Deck : DateFormattingModel {
 
     init(id: Int, hero: String, name: String) {
         self.id = id
-        self.hero = hero
+        self.hero = hero.capitalized
         self.name = name
         self.fullName = "\(self.name) \(self.hero)"
     }
@@ -224,20 +224,20 @@ class ByClassStats : Stats {
     let hero: String
 
     init(hero: String, wins: Int, losses: Int) {
-        self.hero = hero
+        self.hero = hero.capitalized
         super.init(wins: wins, losses: losses)
     }
 }
 
 class ByDeckStats : Stats {
     let deck: String
-    let deckId: Int
-    let heroId: Int
+    let deckId: Int?
+    let hero: String
 
-    init(deckName: String, deckId: Int, heroId: Int, wins: Int, losses: Int) {
+    init(deckName: String, deckId: Int?, hero: String, wins: Int, losses: Int) {
         self.deck = deckName
         self.deckId = deckId
-        self.heroId = heroId
+        self.hero = hero.capitalized
         super.init(wins: wins, losses: losses)
     }
 }
@@ -260,6 +260,7 @@ enum TrackOBotAPIError : Error {
 }
 
 let HEROES = ["Warrior", "Shaman", "Rogue", "Paladin", "Hunter", "Druid", "Warlock", "Mage", "Priest"]
+
 let HEROES_BY_TRACKOBOT_ID = [
     1: "Priest",
     2: "Rogue",
@@ -384,8 +385,9 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
+                let activeDecks = decksDicts.filter { (d) in (d["active"] as? Bool) ?? true }
                 let decks  = HEROES.map { (hero) -> [Deck] in
-                    return decksDicts.filter { (d) -> Bool in
+                    return activeDecks.filter { (d) -> Bool in
                         d["hero"] as? String == hero
                         }.flatMap { Deck(dict:$0) }
                 }
@@ -409,10 +411,11 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byClassStats = HEROES.flatMap { (hero) -> ByClassStats? in
-                    guard let heroStats = stats[hero] as? NSDictionary,
-                          let wins = heroStats["wins"] as? Int,
-                          let losses = heroStats["losses"] as? Int else {
+                let byClassStats = stats.flatMap { (heroKey,heroStatsValue) -> ByClassStats? in
+                    guard let hero = heroKey as? String,
+                        let heroStats = heroStatsValue as? NSDictionary,
+                        let wins = heroStats["wins"] as? Int,
+                        let losses = heroStats["losses"] as? Int else {
                             return nil
                     }
                     return ByClassStats(hero: hero, wins: wins, losses: losses)
@@ -437,9 +440,10 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     onComplete(Result.failure(TrackOBotAPIError.jsonParsingFailed))
                     return
                 }
-                let byClassStats = HEROES.flatMap { (hero) -> ByClassStats? in
-                    guard let heroStats = stats[hero] as? NSDictionary,
-                           let wins = heroStats["wins"] as? Int,
+                let byClassStats = stats.flatMap { (heroKey,heroStatsValue) -> ByClassStats? in
+                    guard let hero = heroKey as? String,
+                        let heroStats = heroStatsValue as? NSDictionary,
+                        let wins = heroStats["wins"] as? Int,
                         let losses = heroStats["losses"] as? Int else {
                             return nil
                     }
@@ -467,11 +471,12 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     return
                 }
                 let byDeckStats = stats.flatMap { (d: String, deckStats: NSDictionary) -> ByDeckStats? in
-                    guard let deckId = deckStats["deck_id"] as? Int, let heroId = deckStats["hero_id"] as? Int,
+                    guard let hero = deckStats["hero"] as? String,
                         let wins = deckStats["wins"] as? Int, let losses = deckStats["losses"] as? Int else {
                             return nil
                     }
-                    return ByDeckStats(deckName: d, deckId: deckId, heroId: heroId, wins: wins, losses: losses)
+                    let deckId: Int? = deckStats["deck_id"] as? Int
+                    return ByDeckStats(deckName: d, deckId: deckId, hero: hero, wins: wins, losses: losses)
                 }
 
 
@@ -495,14 +500,14 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     return
                 }
                 let byDeckStats = stats.flatMap { (d: String, deckStats: NSDictionary) -> ByDeckStats? in
-                    guard let deckId = deckStats["deck_id"] as? Int,
-                        let heroId = deckStats["hero_id"] as? Int,
+                    guard let hero = deckStats["hero"] as? String,
                         let wins = deckStats["wins"] as? Int,
                         let losses = deckStats["losses"] as? Int else {
                             return nil
                     }
+                    let deckId = deckStats["deck_id"] as? Int
                     return ByDeckStats(
-                        deckName: d, deckId: deckId, heroId: heroId,
+                        deckName: d, deckId: deckId, hero: hero,
                         wins: wins, losses: losses)
                 }
 

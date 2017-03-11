@@ -151,8 +151,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         let deckNames = stats.map { d in d.deck as String }
         self.yNames = deckNames
         self.barColors = stats.flatMap { (d) -> UIColor in
-            guard let heroName = HEROES_BY_TRACKOBOT_ID[d.heroId],
-                let heroIdx = HEROES.index(of:heroName) else {
+            guard let heroIdx = HEROES.index(of:d.hero) else {
                 return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
             }
             return self.heroColors[heroIdx]
@@ -280,7 +279,7 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
 
 class CustomChartMarker: ChartMarker
 {
-    let stats: [Stats]!
+    let stats: [Stats]
     let chart: ChartViewBase!
 
     var strVal: String = ""
@@ -332,6 +331,10 @@ class CustomChartMarker: ChartMarker
     /// - parameter highlight: the highlight object contains information about the highlighted value such as it's dataset-index, the selected range or stack-index (only stacked bar entries).
     override func refreshContent(entry: ChartDataEntry, highlight: ChartHighlight)
     {
+        guard entry.xIndex < stats.endIndex else {
+            strVal = "No data"
+            return
+        }
         let s = stats[entry.xIndex]
         let percentStr = String(format: "%.1f", entry.value)
         strVal = "\(percentStr)% (W: \(s.wins) / L: \(s.losses))"
