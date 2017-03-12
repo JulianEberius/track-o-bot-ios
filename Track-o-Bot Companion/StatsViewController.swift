@@ -24,6 +24,7 @@
 import UIKit
 import Charts
 
+
 class StatsViewController: TrackOBotViewController, ChartViewDelegate {
 
     @IBOutlet weak var mainChartLabel: UILabel!
@@ -32,17 +33,12 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
     @IBOutlet weak var detailChart: BarChartView!
     @IBOutlet weak var statTypeSegmentControl: UISegmentedControl!
 
+    var decks: [Deck] = []
+
     var yNames: [String] = []
-    var decks: [Deck] = [] {
-        willSet {
-            decksById = [:]
-            for deck in newValue {
-                decksById[deck.id] = deck
-            }
-        }
-    }
-    var decksById: [Int: Deck] = [:]
     var barColors: [UIColor] = []
+    var detailYNames: [String] = []
+    var detailBarColors: [UIColor] = []
 
     var selectedIndexMainChart: Int? = nil
 
@@ -57,6 +53,13 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         UIColor(hue: 0.5444, saturation: 0.56, brightness: 0.94, alpha: 1.0),
         UIColor(hue: 0.1333, saturation: 0.11, brightness: 1, alpha: 1.0)
     ]
+
+    struct BarChartDataAndMetadata {
+        let barChartData: BarChartData
+        let colors: [UIColor]
+        let yNames: [String]
+        let filteredStats: [Stats]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +83,11 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
 
         if (statTypeSegmentControl.selectedSegmentIndex == 0) {
             self.detailChart.noDataText = "Select a class ..."
-            TrackOBot.instance.getByClassStats(statResultsCallback(self.createHeroBarChartData))
+            TrackOBot.instance.getByClassStats(statResultsCallback({ stats -> BarChartDataAndMetadata in
+                let chartData = self.createHeroBarChartData(stats)
+                self.updateMainChartState(colors: chartData.colors, yNames: chartData.yNames)
+                return chartData
+            }))
         } else {
             self.detailChart.noDataText = "Select a deck ..."
             TrackOBot.instance.getDecks({
@@ -94,16 +101,20 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
                     return
                 }
             })
-            TrackOBot.instance.getByDeckStats(statResultsCallback(self.createDeckBarChartData))
+            TrackOBot.instance.getByDeckStats(statResultsCallback({ stats -> BarChartDataAndMetadata in
+                let chartData = self.createDeckBarChartData(stats)
+                self.updateMainChartState(colors: chartData.colors, yNames: chartData.yNames)
+                return chartData
+            }))
         }
     }
 
-    fileprivate func statResultsCallback<T: Stats>(_ barChartMapper:@escaping (([T])->BarChartData)) -> ((Result<[T], TrackOBotAPIError>) -> ()) {
+    fileprivate func statResultsCallback<T: Stats>(_ barChartMapper:@escaping (([T])->BarChartDataAndMetadata)) -> ((Result<[T], TrackOBotAPIError>) -> ()) {
         return { (result:Result<[T], TrackOBotAPIError>) in
             switch result {
             case .success(let stats):
                 let data = barChartMapper(stats)
-                self.updateChart(self.mainChart, data: data, stats: stats)
+                self.updateChart(self.mainChart, data: data.barChartData, stats: data.filteredStats)
                 break
             case .failure(let err):
                 switch err {
@@ -121,9 +132,19 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         resetCharts()
     }
 
-    func createHeroBarChartData(_ stats: [ByClassStats]) -> BarChartData {
-        self.barColors = self.heroColors
-        self.yNames = HEROES
+    func updateMainChartState(colors: [UIColor], yNames: [String]) {
+        self.barColors = colors
+        self.yNames = yNames
+    }
+
+    func updateDetailChartState(colors: [UIColor], yNames: [String]) {
+        self.detailBarColors = colors
+        self.detailYNames = yNames
+    }
+
+    func createHeroBarChartData(_ stats: [ByClassStats]) -> BarChartDataAndMetadata {
+        let barColors = self.heroColors
+        let yNames = HEROES
 
         let data = HEROES.map { hero -> BarChartDataEntry in
             guard let d = stats.first(where: { st in st.hero == hero}), d.wins + d.losses > 0 else {
@@ -136,28 +157,29 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
 
         let ds = BarChartDataSet(yVals: data, label: "Win %")
 
-        ds.setColors(self.barColors, alpha: 0.95)
+        ds.setColors(barColors, alpha: 0.95)
         ds.highlightAlpha = 0.0
         ds.highlightLineWidth = 5.0
 
         ds.drawValuesEnabled = false
         let d = BarChartData(xVals: HEROES, dataSet: ds)
 
-
-        return d
+        return BarChartDataAndMetadata(barChartData: d, colors: barColors,
+                                       yNames: yNames, filteredStats: stats)
     }
 
-    func createDeckBarChartData(_ stats: [ByDeckStats]) -> BarChartData {
-        let deckNames = stats.map { d in d.deck as String }
-        self.yNames = deckNames
-        self.barColors = stats.flatMap { (d) -> UIColor in
+    func createDeckBarChartData(_ stats: [ByDeckStats]) -> BarChartDataAndMetadata {
+        let filteredStats = stats.filter { d in d.wins + d.losses > 0 }
+        let deckNames = filteredStats.map { d in d.deck as String }
+        let yNames = deckNames
+        let barColors = filteredStats.flatMap { (d) -> UIColor in
             guard let heroIdx = HEROES.index(of:d.hero) else {
                 return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
             }
             return self.heroColors[heroIdx]
         }
 
-        let data = stats.map { (d) -> BarChartDataEntry in
+        let data = filteredStats.map { (d) -> BarChartDataEntry in
             let sum = d.wins + d.losses
             guard sum > 0 else {
                 return BarChartDataEntry(value: 0.0, xIndex: deckNames.index(of: d.deck)!)
@@ -167,15 +189,15 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
         }
         let ds = BarChartDataSet(yVals: data, label: "Win %")
 
-        ds.setColors(self.barColors, alpha: 1.0)
+        ds.setColors(barColors, alpha: 1.0)
         ds.highlightAlpha = 0.0
         ds.highlightLineWidth = 5.0
 
         ds.drawValuesEnabled = false
         let d = BarChartData(xVals: deckNames, dataSet: ds)
 
-
-        return d
+        return BarChartDataAndMetadata(barChartData: d, colors: barColors,
+                                       yNames: yNames, filteredStats: filteredStats)
     }
 
     func updateChart(_ chart: BarChartView, data: ChartData, stats: [Stats]) {
@@ -221,27 +243,36 @@ class StatsViewController: TrackOBotViewController, ChartViewDelegate {
             self.selectedIndexMainChart = entry.xIndex
             if (self.statTypeSegmentControl.selectedSegmentIndex == 0) {
                 // TODO: fix bug in "as deck vs deck": always same stats
-                TrackOBot.instance.getVsClassStats(self.yNames[entry.xIndex], onComplete: getVsStatsCallback(self.createHeroBarChartData))
+                TrackOBot.instance.getVsClassStats(self.yNames[entry.xIndex], onComplete: getVsStatsCallback({ stats -> BarChartDataAndMetadata in
+                    let chartData = self.createHeroBarChartData(stats)
+                    self.updateDetailChartState(colors: chartData.colors, yNames: chartData.yNames)
+                    return chartData
+                }))
             } else {
                 let deckName = self.yNames[entry.xIndex]
                 guard let deckId = self.decks.filter({ d in d.fullName == deckName }).first?.id else {
                     self.detailChart.clear()
                     self.detailChart.noDataText = "No statistics available for \"\(deckName)\""
+                    self.updateDescriptionLabel()
                     // "Other xyz" has no id, and no stats can be retrieved from TrackOBot.com AFAIK
                     return
                 }
-                TrackOBot.instance.getVsDeckStats(deckId, onComplete: getVsStatsCallback(self.createDeckBarChartData))
+                TrackOBot.instance.getVsDeckStats(deckId, onComplete: getVsStatsCallback({stats -> BarChartDataAndMetadata in
+                    let chartData = self.createDeckBarChartData(stats)
+                    self.updateDetailChartState(colors: chartData.colors, yNames: chartData.yNames)
+                    return chartData
+                }))
             }
         }
     }
 
-    func getVsStatsCallback<T : Stats>(_ barChartMapper:@escaping (([T])->BarChartData)) -> (Result<[T], TrackOBotAPIError>) -> () {
+    func getVsStatsCallback<T : Stats>(_ barChartMapper:@escaping (([T])->BarChartDataAndMetadata)) -> (Result<[T], TrackOBotAPIError>) -> () {
         return {
             (result: Result<[T], TrackOBotAPIError>) -> Void in
             switch result {
             case .success(let stats):
                 let data = barChartMapper(stats)
-                self.updateChart(self.detailChart, data: data, stats: stats)
+                self.updateChart(self.detailChart, data: data.barChartData, stats: data.filteredStats)
                 self.updateDescriptionLabel()
                 break
             case .failure(let err):

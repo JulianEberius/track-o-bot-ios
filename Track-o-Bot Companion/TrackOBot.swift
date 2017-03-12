@@ -386,6 +386,7 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     return
                 }
                 let activeDecks = decksDicts.filter { (d) in (d["active"] as? Bool) ?? true }
+                // TODO depends on result casing of hero names
                 let decks  = HEROES.map { (hero) -> [Deck] in
                     return activeDecks.filter { (d) -> Bool in
                         d["hero"] as? String == hero
@@ -419,7 +420,10 @@ class TrackOBot : NSObject, URLSessionDelegate {
                             return nil
                     }
                     return ByClassStats(hero: hero, wins: wins, losses: losses)
-                }
+                    }.sorted() { (a,b) in
+                        HEROES.index(of: a.hero) ?? 0 < HEROES.index(of: b.hero) ?? 0
+                    }
+
 
                 onComplete(Result.success(byClassStats))
                 break
@@ -448,6 +452,8 @@ class TrackOBot : NSObject, URLSessionDelegate {
                             return nil
                     }
                     return ByClassStats(hero: hero, wins: wins, losses: losses)
+                }.sorted() { (a,b) in
+                    HEROES.index(of: a.hero) ?? 0 < HEROES.index(of: b.hero) ?? 0
                 }
 
                 onComplete(Result.success(byClassStats))
@@ -478,7 +484,6 @@ class TrackOBot : NSObject, URLSessionDelegate {
                     let deckId: Int? = deckStats["deck_id"] as? Int
                     return ByDeckStats(deckName: d, deckId: deckId, hero: hero, wins: wins, losses: losses)
                 }
-
 
                 onComplete(Result.success(byDeckStats))
                 break
