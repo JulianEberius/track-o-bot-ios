@@ -288,9 +288,9 @@ class AddGameViewController: TrackOBotViewController, UIPickerViewDelegate, UIPi
         let opponentsHeroDecks = self.decks[opponentsHeroIdx]
 
         let deckIdx = self.heroPicker.selectedRow(inComponent: DECK_PICKER)
-        let yourDeckId:Int? = (deckIdx > 0 && deckIdx < yourHeroDecks.count) ? yourHeroDecks[deckIdx-1].id : nil
+        let yourDeckId:Int? = (deckIdx > 0 && deckIdx < yourHeroDecks.count + 1) ? yourHeroDecks[deckIdx-1].id : nil
         let opponentsDeckIdx = self.opponentPicker.selectedRow(inComponent: DECK_PICKER)
-        let opponentsDeckId:Int? = (opponentsDeckIdx > 0 && opponentsDeckIdx < opponentsHeroDecks.count) ? opponentsHeroDecks[opponentsDeckIdx-1].id : nil
+        let opponentsDeckId:Int? = (opponentsDeckIdx > 0 && opponentsDeckIdx < opponentsHeroDecks.count + 1) ? opponentsHeroDecks[opponentsDeckIdx-1].id : nil
 
         let coin = self.coinSwitch.isOn
         let mode = (self.modeSwitch.selectedSegmentIndex == 0) ? GameMode.Ranked : (self.modeSwitch.selectedSegmentIndex == 1 ) ? GameMode.Casual : GameMode.Arena;
