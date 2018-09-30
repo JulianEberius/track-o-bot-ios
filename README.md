@@ -1,7 +1,7 @@
 # Track-o-Botty
 Simple companion iOS app for Track-o-Bot
 
-## NEWS: Now free on the App Store: https://appsto.re/i6hW6zx
+## NEWS: The App is not availble on the App Store anymore, on account of me not wanting to pay 99$ Apple Developer Program fees  to keep it available for just another year. Since it is open source, you can still compile and install to your device using XCode.
 
 ## More information: http://julianeberius.github.io/track-o-bot-ios
 
